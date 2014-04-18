@@ -1,0 +1,26 @@
+{
+  "name": "CukeManager",
+  "version": "0.0.0",
+  "description": "Manager for cucumber test scenarios",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/qbek/CukeManager.git"
+  },
+  "author": "Jakub Szewczyk",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "gitHead": "368a040d5c208f2f9c425440a2eb70c31662ddfa",
+  "devDependencies": {
+    "grunt": "~0.4.4",
+    "karma": "~0.12.9",
+    "grunt-karma": "~0.8.2",
+    "karma-phantomjs-launcher": "~0.1.4",
+    "karma-jasmine": "~0.1.5",
+    "requirejs": "~2.1.11",
+    "karma-requirejs": "~0.2.1"
+  }
+}
