@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Cucumber Manager</title>
+</head>
+<body>
+	<form>
+		<input type="file" name="file">
+	</form>
+
+	<script type="text/javascript" src="js/vendor/require.js"></script>
+  <script>
+      requirejs.config({
+        "baseUrl": "js",
+        paths: {
+          'jquery': 'vendor/jquery-2.1.1',
+        }
+      });
+
+      // Load the main app module to start the app
+      requirejs(['main']);
+    </script>
+
+</body>
+</html>
