@@ -1,33 +1,35 @@
-define(function () {
+define(['components/FeaturePrototype'], function (Feature) {
   'use strict';
-  var scenarios = [];
+  var featuresDataSet = [];
 
   function compileData (input) {
-    // console.log(input);
-    var data = $.parseJSON(input);
-    console.log(data);
 
+    var data = $.parseJSON(input);
     //loop through features
-    $.each(data, function (index, feature) {
-      var featureName = feature.name;
-      var featureTags = compileTags (feature.tags);
+    $.each(data, function (index, featureData) {
+      var tags = compileTags(featureData.tags);
+      var name = featureData.name;
+      var feature = Feature.create(name, tags);
       var background;
 
-      $.each(feature.elements, function (index, scenario) {
-        var compiledScn;
-        if(scenario.type === 'background') {
-          // background = compileBackground(scenario);
-        } else if (scenario.type === 'scenario') {
-          compiledScn = compileScenario(scenario);
-          compiledScn.tags = compiledScn.tags.concat(featureTags);
-          compiledScn.feature = featureName;
-          console.log(compiledScn);
+      $.each(featureData.elements, function (index, scenarioData) {
+        if(scenarioData.type === 'background') {
+          // background = compileBackground(scenarioData);
+        } else if (scenarioData.type === 'scenario') {
+          feature.addScenario(scenarioData);
         }
       });
+      featuresDataSet.push(feature);
     });
+    return featuresDataSet[0].exportToCVS();
+  }
 
-
-    // console.log(scenarios);
+  function compileTags (tags) {
+    var output = [];
+    $.each(tags, function (index, tag) {
+      output.push(tag.name);
+    });
+    return output;
   }
 
   function compileBackground (background) {
@@ -40,48 +42,27 @@ define(function () {
     return output;
   }
 
-  function compileScenario (scenario) {
-    return {
-      name: scenario.name,
-      description: scenario.description,
-      steps: compileSteps(scenario.steps),
-      tags: compileTags(scenario.tags)
-    };
-  }
 
-  function compileTags (tags) {
-    var output = [];
 
-    $.each(tags, function (index, tag) {
-      output.push(tag.name);
-    });
 
-    return output;
-  }
 
-  function compileSteps (steps) {
-    var output = [];
 
-    $.each(steps, function (index, step) {
-      output.push({
-        keyword: step.keyword,
-        name: step.name,
-        result: step.result
-      });
-    });
-
-    return output;
-  }
 
   var DataCompile = {
     readFile: function (file) {
+      var promise = $.Deferred();
       var fileReader = new FileReader();
       fileReader.onloadend = function (e) {
         console.log('file onloadend');
         var result = e.target.result;
-        compileData(result);
+        var cvs = compileData(result);
+        promise.resolve(cvs);
+
+
       };
       fileReader.readAsText(file);
+
+      return promise;
     }
   };
 

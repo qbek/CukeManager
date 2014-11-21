@@ -2,24 +2,28 @@
 <html>
 <head>
 	<title>Cucumber Manager</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 <body>
+
+
+
 	<form>
 		<input type="file" name="file">
 	</form>
-
+  <a href="">Download CVS</a>
 	<script type="text/javascript" src="js/vendor/require.js"></script>
   <script>
-      requirejs.config({
-        "baseUrl": "js",
-        paths: {
-          'jquery': 'vendor/jquery-2.1.1',
-        }
-      });
+    requirejs.config({
+      "baseUrl": "js",
+      paths: {
+        'jquery': 'vendor/jquery-2.1.1',
+      }
+    });
 
-      // Load the main app module to start the app
-      requirejs(['main']);
-    </script>
+    // Load the main app module to start the app
+    requirejs(['main']);
+  </script>
 
 </body>
 </html>
