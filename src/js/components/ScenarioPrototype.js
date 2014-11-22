@@ -1,40 +1,14 @@
 define([], function () {
   'use strict';
 
-  function Scenario (scenario) {
+  function Scenario (scnName, scnDescription, scnTags, scnSteps) {
 
-    function compileScenario(scenarioData) {
-        var stepsData = compileSteps(scenarioData.steps);
-        var tagsData = compileTags(scenarioData.tags);
-      return {
-        name: scenarioData.name,
-        description: scenarioData.description,
-        steps: stepsData,
-        tags: tagsData
-      };
-    }
-
-    function compileSteps (steps) {
-      var output = [];
-
-      $.each(steps, function (index, step) {
-        output.push({
-          keyword: step.keyword,
-          name: step.name,
-          result: step.result
-        });
-      });
-
-      return output;
-    }
-
-    function compileTags (tags) {
-      var output = [];
-      $.each(tags, function (index, tag) {
-        output.push(tag.name);
-      });
-      return output;
-    }
+    var scenario = {
+      name: scnName,
+      decription: scnDescription,
+      tags: scnTags,
+      steps: scnSteps
+    };
 
     return {
       exportToCVS: function () {
@@ -44,10 +18,9 @@ define([], function () {
     };
   }
 
-
   return {
-    create: function (scenarioData) {
-      return new Scenario(scenarioData);
+    create: function (scnName, scnDescription, scnTags, scnSteps) {
+      return new Scenario(scnName, scnDescription, scnTags, scnSteps);
     }
   };
 });

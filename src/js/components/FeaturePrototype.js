@@ -9,15 +9,14 @@ define(['components/ScenarioPrototype'], function (Scenario) {
     var scenarios = [];
 
     return {
-      addScenario: function (data) {
-        var newScenario = Scenario.create(data);
-        scenarios.push(newScenario);
+      addScenario: function (scenario) {
+        scenarios.push(scenario);
       },
 
       exportToCVS: function () {
         var featureCVS = String.concat(feature.name, ',', ',','\n');
 
-        $.each(scenarios, function (i, scenario) {
+        scenarios.forEach(function (scenario) {
           var scenarioCVS = scenario.exportToCVS();
           featureCVS = featureCVS.concat(scenarioCVS);
         });
