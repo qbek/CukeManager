@@ -4,23 +4,24 @@ define(['components/ScenarioPrototype'], function (Scenario) {
   function Feature (name, tagsData) {
     var feature = {
       name: name,
-      tags: tagsData
+      tags: tagsData,
+      scenarios: []
     };
-    var scenarios = [];
 
     return {
       addScenario: function (scenario) {
-        scenarios.push(scenario);
+        feature.scenarios.push(scenario);
       },
 
-      exportToCVS: function () {
-        var featureCVS = String.concat(feature.name, ',', ',','\n');
+      getInfo: function () {
+        return {
+          name: feature.name,
+          tags: feature.tags
+        };
+      },
 
-        scenarios.forEach(function (scenario) {
-          var scenarioCVS = scenario.exportToCVS();
-          featureCVS = featureCVS.concat(scenarioCVS);
-        });
-        return featureCVS;
+      getScenarios: function () {
+        return feature.scenarios;
       }
     };
   }
