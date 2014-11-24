@@ -31,23 +31,25 @@ define(['components/ScenarioPrototype', 'components/FeaturePrototype'], function
 
   function compileSteps (steps) {
     var output = [];
-
-    steps.forEach(function (step) {
-      output.push({
-        keyword: step.keyword,
-        name: step.name,
-        result: step.result
+    if(steps) {
+      steps.forEach(function (step) {
+        output.push({
+          keyword: step.keyword,
+          name: step.name,
+          result: step.result
+        });
       });
-    });
-
+    }
     return output;
   }
 
   function compileTags (tags) {
     var output = [];
-    tags.forEach(function (tag) {
-      output.push(tag.name);
-    });
+    if (tags) {
+      tags.forEach(function (tag) {
+        output.push(tag.name);
+      });
+    }
     return output;
   }
 

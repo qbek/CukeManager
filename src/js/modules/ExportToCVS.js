@@ -31,7 +31,10 @@ define(function () {
   return {
     getCVS: function (features) {
       var cvs = 'Feature name, Scenario name, Status, tags\n';
-      cvs += getFeatureCVS(features[0]);
+
+      features.forEach(function (feature) {
+        cvs += getFeatureCVS(feature);
+      });
       return cvs;
     }
   };

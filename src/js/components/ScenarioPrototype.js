@@ -3,11 +3,15 @@ define([], function () {
 
   function getStatus(steps) {
 
+    var result;
+    //check if we have any steps defined for scenario
     var lastStep = steps.length - 1;
-    var result = steps[lastStep].result.status;
+    if(lastStep >= 0) {
+      result = steps[lastStep].result.status;
 
-    if ( result == "Skip" ) {
-      result = "failed";
+      if ( result == "Skip" ) {
+        result = "failed";
+      }
     }
 
     return result;
