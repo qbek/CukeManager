@@ -5,19 +5,29 @@
   <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 <body>
-
-
-
 	<form>
 		<input type="file" name="file">
 	</form>
   <a href="">Download CVS</a>
+
+  <section id="feature-list">
+
+  </section>
+
+
 	<script type="text/javascript" src="js/vendor/require.js"></script>
   <script>
     requirejs.config({
       "baseUrl": "js",
       paths: {
         'jquery': 'vendor/jquery-2.1.1',
+        'mustache': 'vendor/mustache',
+        'text': 'vendor/text',
+        'tmpl': '../tmpl'
+      },
+
+      shim: {
+        jquery: { exports: '$' }
       }
     });
 

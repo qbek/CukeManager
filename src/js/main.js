@@ -1,5 +1,9 @@
-define(['jquery', 'modules/DataCompile', 'modules/ExportToCVS'], function ($, DataCompilation, ExportCVS) {
+define(['jquery', 'modules/DataCompile', 'modules/ExportToCVS', 'TestExecutionCtrl'], function ($, DataCompilation, ExportCVS, TestExecutionCtrl) {
   'use strict';
+
+  // Array.prototype.clone = function() {
+  //   return this.slice(0);
+  // };
 
   var features;
 
@@ -16,15 +20,13 @@ define(['jquery', 'modules/DataCompile', 'modules/ExportToCVS'], function ($, Da
     });
   }
 
-
-
-
 	$('input').on('change', function (e) {
 		var file = e.target.files[0];
 		DataCompilation.readFile(file)
       .done (function (compiled) {
         features = compiled;
         startEventHandlers();
+        TestExecutionCtrl.init(features);
       });
     // $a.trigger('click');
 	});
