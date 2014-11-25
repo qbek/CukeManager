@@ -2,27 +2,12 @@ define(['components/ScenarioPrototype'], function (Scenario) {
 
 
   function Feature (name, tagsData) {
-    var feature = {
-      name: name,
-      tags: tagsData,
-      scenarios: []
-    };
+    this.name = name;
+    this.tags = tagsData;
+    this.scenarios = [];
 
-    return {
-      addScenario: function (scenario) {
-        feature.scenarios.push(scenario);
-      },
-
-      getInfo: function () {
-        return {
-          name: feature.name,
-          tags: feature.tags
-        };
-      },
-
-      getScenarios: function () {
-        return feature.scenarios;
-      }
+    this.addScenario = function (scenario) {
+      this.scenarios.push(scenario);
     };
   }
 
@@ -32,3 +17,4 @@ define(['components/ScenarioPrototype'], function (Scenario) {
     }
   };
 });
+

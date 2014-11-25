@@ -1,23 +1,17 @@
 define(function () {
   'use strict';
 
-
   function getScenarioCVS (scenario) {
-    var scnInfo = scenario.getInfo();
-    // var scenarioResult = getScenarioStatus(scenario.steps);
-    var scenarioCVS = String.concat(',', scnInfo.name);
-    scenarioCVS += String.concat(',', scnInfo.status);
-    scenarioCVS += String.concat(',',  scnInfo.tags);
+    var scenarioCVS = String.concat(',', scenario.name);
+    scenarioCVS += String.concat(',', scenario.status);
+    scenarioCVS += String.concat(',',  scenario.tags);
     scenarioCVS += '\n';
     return scenarioCVS;
   }
 
-
   function getFeatureCVS (feature) {
-    var featInfo = feature.getInfo();
-    var featureCVS = String.concat(featInfo.name, ',', ',','\n');
-    var scenarios = feature.getScenarios();
-
+    var featureCVS = String.concat(feature.name, ',', ',','\n');
+    var scenarios = feature.scenarios;
 
     scenarios.forEach(function (scenario) {
       var scenarioCVS = getScenarioCVS(scenario);
@@ -26,7 +20,6 @@ define(function () {
 
     return featureCVS;
   }
-
 
   return {
     getCVS: function (features) {
