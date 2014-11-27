@@ -24,9 +24,9 @@ requirejs.config({
     'tmpl': '../tmpl'
   },
 
-  shim: {
-    jquery: { exports: '$' }
-  },
+  // shim: {
+  //   jquery: { exports: '$' }
+  // },
 
   // dynamically load all test files
   deps: allTestFiles,
