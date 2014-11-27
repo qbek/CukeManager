@@ -7,6 +7,7 @@ define([], function () {
     this.decription = scnDescription;
     this.tags = scnTags;
     this.steps = scnSteps;
+    this.visible = true;
 
     Object.defineProperty(this, "status",
       {
