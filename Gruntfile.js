@@ -5,17 +5,13 @@ module.exports = function(grunt) {
     karma: {
       options: {
         frameworks: ['jasmine', 'requirejs'],
-        files: ['js/vendor/jquery.min.js', 
-        				{pattern: 'js/data/*.js', included: false}, 
-        				{pattern: 'test/*.spec.js', included: false},
-        				'test/test-main.js'
-        				],
-        				
+        files: [{pattern: 'js/**', included: false},
+                {pattern: '../test/*.spec.js', included: false},
+                {pattern: 'tmpl/**', included: false},
+        				'../test/test-main.js'],
+
         browsers: ['PhantomJS'],
-      },
-      build: {
-        basePath: 'build/',
-        singleRun: true
+        proxies: {'/': '/base/'}
       },
       watch: {
         basePath: 'src/',

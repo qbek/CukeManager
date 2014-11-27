@@ -15,12 +15,13 @@
   "readmeFilename": "README.md",
   "gitHead": "368a040d5c208f2f9c425440a2eb70c31662ddfa",
   "devDependencies": {
-    "grunt": "~0.4.4",
-    "karma": "~0.12.9",
-    "grunt-karma": "~0.8.2",
+    "grunt": "~0.4.5",
+    "karma": "~0.12.28",
+    "grunt-karma": "~0.9.0",
     "karma-phantomjs-launcher": "~0.1.4",
-    "karma-jasmine": "~0.1.5",
+    "karma-jasmine": "~0.2.2",
     "requirejs": "~2.1.11",
-    "karma-requirejs": "~0.2.1"
+    "karma-requirejs": "~0.2.1",
+    "karma-firefox-launcher": "~0.1.3"
   }
 }
