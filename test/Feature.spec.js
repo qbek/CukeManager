@@ -56,17 +56,6 @@ define(['views/ScenarioView', 'models/FeatureModel', 'views/FeatureView', 'ctrls
       view = FeatureView.create(feature);
     });
 
-    it('It has "addScenario(view)" function to add "scenario.$render" to "feature.$render"', function() {
-      var scnView = ScenarioView.create({name: 'Test Scenario 1'});
-      view.addScenario(scnView);
-      expect($('.feature-scenarios', view.$render)).toContainElement('.scenario');
-
-      scnView = ScenarioView.create({name: 'Test Scenario 2'});
-      scnView = ScenarioView.create({name: 'Test Scenario 3'});
-
-
-    });
-
     it('It has "$render" element with rendered feature element', function() {
       expect(view.$render).toBeMatchedBy('.feature');
 
@@ -76,6 +65,15 @@ define(['views/ScenarioView', 'models/FeatureModel', 'views/FeatureView', 'ctrls
       //scenarios views are attached
       // view.addScenarioView(scnView);
     });
+
+    it('It has "addScenario(view)" function to add "scenario.$render" to "feature.$render"', function() {
+      var scnView = ScenarioView.create({name: 'Test Scenario 1'});
+      view.addScenario(scnView);
+      expect($('.feature-scenarios', view.$render)).toContainElement('.scenario');
+
+      scnView = ScenarioView.create({name: 'Test Scenario 2'});
+      scnView = ScenarioView.create({name: 'Test Scenario 3'});
+    })
 
     xit('"$render" element is visible only when feature.visible is true', function () {
       // TODO: this test doesn't work

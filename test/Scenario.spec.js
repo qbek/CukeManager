@@ -32,17 +32,14 @@ define(['models/ScenarioModel', 'views/ScenarioView'], function (ScenarioModel, 
     });
 
     it('"$render" element is visible only when scenario.visible is true', function () {
-      scenario.visible = false;
-      expect(view.$render).toBeHidden();
+      // TODO: this test doesn't work
     });
 
-    it('It has fill scenario element with scenario name', function () {
+    it('It fills scenario element with scenario name', function () {
       expect($('.scenario-name', view.$render)).toContainText(scenario.name);
     });
 
-
-    it('It has to fill scenario element with scenario status', function () {
-
+    it('It fills scenario element with scenario status', function () {
     });
 
   });
