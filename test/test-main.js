@@ -16,12 +16,13 @@ Object.keys(window.__karma__.files).forEach(function(file) {
 });
 
 requirejs.config({
-  "baseUrl": "js",
+  "baseUrl": "base/src/js",
   paths: {
     'jquery': 'vendor/jquery-2.1.1',
     'mustache': 'vendor/mustache',
     'text': 'vendor/text',
-    'tmpl': '../tmpl'
+    'tmpl': '../tmpl',
+    'testdata': '../../test/testdata'
   },
 
   // shim: {

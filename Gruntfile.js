@@ -5,21 +5,24 @@ module.exports = function(grunt) {
     karma: {
       options: {
         frameworks: ['jasmine', 'requirejs'],
-        files: [{pattern: 'js/models/*.js', included: false},
-                {pattern: 'js/views/*.js', included: false},
-                {pattern: 'js/vendor/text.js', included: false},
-                {pattern: '../test/*.spec.js', included: false},
-                {pattern: 'tmpl/**', included: false},
-                'js/vendor/jquery-2.1.1.js',
-                '../test/jasmine-jquery.js',
-        				'../test/test-main.js'],
+        files: [{pattern: 'src/js/models/*.js', included: false},
+                {pattern: 'src/js/views/*.js', included: false},
+                {pattern: 'src/js/ctrls/*.js', included: false},
+                {pattern: 'src/js/modules/*.js', included: false},
+                {pattern: 'src/js/vendor/text.js', included: false},
+                {pattern: 'test/*.spec.js', included: false},
+                {pattern: 'test/testdata/*.*', included: false},
+                {pattern: 'src/tmpl/**', included: false},
+                'src/js/vendor/jquery-2.1.1.js',
+                'test/jasmine-jquery.js',
+        				'test/test-main.js'],
 
         browsers: ['Firefox'],
         // browsers: ['PhantomJS'],
-        proxies: {'/': '/base/'}
+        // proxies: {'/': '/base/'}
       },
       watch: {
-        basePath: 'src/',
+        basePath: './',
         singleRun: false,
         autoWatch: true,
       }
