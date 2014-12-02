@@ -7,8 +7,8 @@ define(['models/FeatureModel'], function (Feature) {
     data.forEach(function (featureData) {
       var name = featureData.name;
       var feature = Feature.create(name);
-      // var tags = compileTags(featureData.tags);
-      // var background;
+      var tags = compileTags(featureData.tags);
+      feature.addTags(tags);
 
       featureData.elements.forEach(function (scenarioData) {
         if(scenarioData.type === 'background') {
@@ -41,8 +41,9 @@ define(['models/FeatureModel'], function (Feature) {
   }
 
   function compileTags (tags) {
-    var output = [];
+    var output = null;
     if (tags) {
+      output = [];
       tags.forEach(function (tag) {
         output.push(tag.name);
       });

@@ -11,18 +11,25 @@ define(['views/ScenarioView', 'models/FeatureModel', 'views/FeatureView', 'ctrls
       expect(feature.name).toEqual('Test Feature name');
     });
 
-    it('It has "visible" set to true by default', function () {
+    it('has "visible" set to true by default', function () {
       expect(feature.visible).toEqual(true);
     });
+
+    it('has "tags" set to null by default', function () {
+      expect(feature.tags).toBe(null);
+    })
 
     it('It has "scenarios[]" table for Scenario models', function () {
       expect(feature.scenarios).toBeDefined();
       expect(feature.scenarios.length).toBe(0);
     });
 
-    xit('It has "addTags(tags[])" function which updates "tags" property', function () {
+    it('It has "addTags(tags[])" function which updates "tags" property', function () {
       expect(feature.addTags).toBeDefined();
       var tags = ['@tag1', '@tag2'];
+      feature.addTags(tags);
+
+      expect(feature.tags).toEqual(tags);
     });
 
     describe('It has "addScenario(name)" function:', function() {

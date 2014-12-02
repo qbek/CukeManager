@@ -1,7 +1,7 @@
-@feature
+@featureTag1 @featureTag2
 Feature: Base Scenario features
 
-  @base
+  @base @scenarioTag1
   Scenario: Steps display
     Given First given step
     And Second given step
@@ -10,5 +10,5 @@ Feature: Base Scenario features
     Then First then step
     And Second then step
 
-  @base
+  @base @scenarioTag2
   Scenario: Scenario without steps

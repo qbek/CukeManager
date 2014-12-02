@@ -6,12 +6,16 @@
     "description": "",
     "tags": [
       {
-        "name": "@feature",
+        "name": "@featureTag1",
+        "line": 1
+      },
+      {
+        "name": "@featureTag2",
         "line": 1
       }
     ],
     "id": "base-scenario-features",
-    "uri": "./BaseScenarios.feature",
+    "uri": "exampleFeatures/BaseScenarios.feature",
     "elements": [
       {
         "keyword": "Scenario",
@@ -21,6 +25,10 @@
         "tags": [
           {
             "name": "@base",
+            "line": 4
+          },
+          {
+            "name": "@scenarioTag1",
             "line": 4
           }
         ],
@@ -32,11 +40,11 @@
             "name": "First given step",
             "line": 6,
             "match": {
-              "location": "./BaseScenarios.feature:6"
+              "location": "exampleFeatures/BaseScenarios.feature:6"
             },
             "result": {
               "status": "undefined",
-              "duration": 366457
+              "duration": 362825
             }
           },
           {
@@ -44,11 +52,11 @@
             "name": "Second given step",
             "line": 7,
             "match": {
-              "location": "./BaseScenarios.feature:7"
+              "location": "exampleFeatures/BaseScenarios.feature:7"
             },
             "result": {
               "status": "undefined",
-              "duration": 269029
+              "duration": 267911
             }
           },
           {
@@ -56,11 +64,11 @@
             "name": "First when step",
             "line": 8,
             "match": {
-              "location": "./BaseScenarios.feature:8"
+              "location": "exampleFeatures/BaseScenarios.feature:8"
             },
             "result": {
               "status": "undefined",
-              "duration": 3079651
+              "duration": 286419
             }
           },
           {
@@ -68,11 +76,11 @@
             "name": "Second when step",
             "line": 9,
             "match": {
-              "location": "./BaseScenarios.feature:9"
+              "location": "exampleFeatures/BaseScenarios.feature:9"
             },
             "result": {
               "status": "undefined",
-              "duration": 270844
+              "duration": 324483
             }
           },
           {
@@ -80,11 +88,11 @@
             "name": "First then step",
             "line": 10,
             "match": {
-              "location": "./BaseScenarios.feature:10"
+              "location": "exampleFeatures/BaseScenarios.feature:10"
             },
             "result": {
               "status": "undefined",
-              "duration": 319454
+              "duration": 251987
             }
           },
           {
@@ -92,11 +100,11 @@
             "name": "Second then step",
             "line": 11,
             "match": {
-              "location": "./BaseScenarios.feature:11"
+              "location": "exampleFeatures/BaseScenarios.feature:11"
             },
             "result": {
               "status": "undefined",
-              "duration": 253523
+              "duration": 367086
             }
           }
         ]
@@ -109,6 +117,10 @@
         "tags": [
           {
             "name": "@base",
+            "line": 13
+          },
+          {
+            "name": "@scenarioTag2",
             "line": 13
           }
         ],
@@ -123,7 +135,7 @@
     "line": 1,
     "description": "",
     "id": "data-type-examples",
-    "uri": "./DataTypeExamples.feature",
+    "uri": "exampleFeatures/DataTypeExamples.feature",
     "elements": [
       {
         "keyword": "Scenario",
@@ -138,11 +150,11 @@
             "name": "When define \"inline\" variable",
             "line": 5,
             "match": {
-              "location": "./DataTypeExamples.feature:5"
+              "location": "exampleFeatures/DataTypeExamples.feature:5"
             },
             "result": {
               "status": "undefined",
-              "duration": 334470
+              "duration": 377353
             }
           },
           {
@@ -150,11 +162,11 @@
             "name": "Define \"one\", \"two\" inline variables",
             "line": 6,
             "match": {
-              "location": "./DataTypeExamples.feature:6"
+              "location": "exampleFeatures/DataTypeExamples.feature:6"
             },
             "result": {
               "status": "undefined",
-              "duration": 254851
+              "duration": 257016
             }
           },
           {
@@ -162,11 +174,11 @@
             "name": "Test is ok",
             "line": 7,
             "match": {
-              "location": "./DataTypeExamples.feature:7"
+              "location": "exampleFeatures/DataTypeExamples.feature:7"
             },
             "result": {
               "status": "undefined",
-              "duration": 330000
+              "duration": 252127
             }
           }
         ]
@@ -214,11 +226,11 @@
               }
             ],
             "match": {
-              "location": "./DataTypeExamples.feature:11"
+              "location": "exampleFeatures/DataTypeExamples.feature:11"
             },
             "result": {
               "status": "undefined",
-              "duration": 2215505
+              "duration": 2008495
             }
           },
           {
@@ -226,11 +238,11 @@
             "name": "User reads this scenario",
             "line": 16,
             "match": {
-              "location": "./DataTypeExamples.feature:16"
+              "location": "exampleFeatures/DataTypeExamples.feature:16"
             },
             "result": {
               "status": "undefined",
-              "duration": 271613
+              "duration": 283067
             }
           },
           {
@@ -238,11 +250,11 @@
             "name": "Data table is correctly rendered",
             "line": 17,
             "match": {
-              "location": "./DataTypeExamples.feature:17"
+              "location": "exampleFeatures/DataTypeExamples.feature:17"
             },
             "result": {
               "status": "undefined",
-              "duration": 326299
+              "duration": 254501
             }
           }
         ]

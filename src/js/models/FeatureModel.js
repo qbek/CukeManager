@@ -4,8 +4,10 @@ define(['models/ScenarioModel'], function (Scenario) {
   function Feature (name) {
     //public variables
     this.name = name;
+    this.tags = null;
     this.visible = true;
     this.scenarios = [];
+
     //private
     // this._tags = tagsData;
   }
@@ -17,6 +19,9 @@ define(['models/ScenarioModel'], function (Scenario) {
     return scnCount - 1;
   };
 
+  Feature.prototype.addTags = function (tags) {
+    this.tags = tags;
+  };
 
 
   return {
