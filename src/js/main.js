@@ -1,4 +1,4 @@
-define(['jquery', 'modules/DataCompile', 'modules/ExportToCVS', 'TestExecutionCtrl'], function ($, DataCompilation, ExportCVS, TestExecutionCtrl) {
+define(['jquery', 'modules/DataCompile', 'modules/ExportToCVS', 'TestExecutionCtrl'], function ($, DataCompile, ExportCVS, TestExecutionCtrl) {
   'use strict';
 
   // Array.prototype.clone = function() {
@@ -20,14 +20,24 @@ define(['jquery', 'modules/DataCompile', 'modules/ExportToCVS', 'TestExecutionCt
     });
   }
 
+  function readFile (file) {
+    var promise = $.Deferred();
+    var fileReader = new FileReader();
+    fileReader.onloadend = function (e) {
+      var result = e.target.result;
+      promise.resolve(result);
+    };
+    fileReader.readAsText(file);
+    return promise;
+  }
+
 	$('input').on('change', function (e) {
 		var file = e.target.files[0];
-		DataCompilation.readFile(file)
-      .done (function (compiled) {
-        features = compiled;
+    readFile(file)
+      .done (function (filecontent) {
+        features = DataCompile.compile(filecontent);
         startEventHandlers();
         TestExecutionCtrl.init(features);
       });
-    // $a.trigger('click');
 	});
 });

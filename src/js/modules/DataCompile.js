@@ -1,8 +1,8 @@
 define(['models/FeatureModel'], function (Feature) {
   'use strict';
-  function compileData (json) {
+  function compileData (jsonString) {
     var features = [];
-    var data = $.parseJSON(json);
+    var data = $.parseJSON(jsonString);
     //loop through features
     data.forEach(function (featureData) {
       var name = featureData.name;
@@ -62,19 +62,9 @@ define(['models/FeatureModel'], function (Feature) {
 
 
   return {
-    // readFile: function (file) {
-    //   var promise = $.Deferred();
-    //   var fileReader = new FileReader();
-    //   fileReader.onloadend = function (e) {
-    //     var result = e.target.result;
-    //     compileData(result);
-    //     promise.resolve(features);
-    //   };
-    //   fileReader.readAsText(file);
-    //   return promise;
-    // }
-    compile: function (dataJSON) {
-      var features = compileData(dataJSON);
+
+    compile: function (filecontent) {
+      var features = compileData(filecontent);
 
       return features;
     }
