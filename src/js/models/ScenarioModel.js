@@ -10,6 +10,10 @@ define([], function () {
     this.visible = true;
   }
 
+  Scenario.prototype.setTags = function (tagsArray) {
+    this.tags = tagsArray;
+  };
+
 
 
   return {

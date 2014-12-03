@@ -8,17 +8,18 @@ define(['models/FeatureModel'], function (Feature) {
       var name = featureData.name;
       var feature = Feature.create(name);
       var tags = compileTags(featureData.tags);
-      feature.addTags(tags);
+      feature.setTags(tags);
 
       featureData.elements.forEach(function (scenarioData) {
         if(scenarioData.type === 'background') {
           // background = compileBackground(scenarioData);
         } else if (scenarioData.type === 'scenario') {
           var name = scenarioData.name;
+          var tags = compileTags(scenarioData.tags);
           // var description = scenarioData.description;
-          // var tags = compileTags(scenarioData.tags);
           // var steps = compileSteps(scenarioData.steps);
-          feature.addScenario(name);
+          var scnId = feature.addScenario(name);
+          feature.setScenarioTags(scnId, tags);
         }
       });
       features.push(feature);

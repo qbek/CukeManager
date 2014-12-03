@@ -12,17 +12,24 @@ define(['models/ScenarioModel'], function (Scenario) {
     // this._tags = tagsData;
   }
 
+  $.extend(Feature.prototype, {
+    //feature related function
+    setTags: function (tags) {
+      this.tags = tags;
+    },
 
-  Feature.prototype.addScenario = function (name) {
-    var scenario = Scenario.create(name);
-    var scnCount = this.scenarios.push(scenario);
-    return scnCount - 1;
-  };
+    //scenario related functions
+    addScenario: function (name) {
+      var scenario = Scenario.create(name);
+      var scnCount = this.scenarios.push(scenario);
+      return scnCount - 1;
+    },
 
-  Feature.prototype.addTags = function (tags) {
-    this.tags = tags;
-  };
+    setScenarioTags: function (id, tagsArray) {
+      this.scenarios[id].setTags(tagsArray);
+    }
 
+  });
 
   return {
     create: function (name) {

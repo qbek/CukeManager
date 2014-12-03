@@ -15,6 +15,11 @@ define(['models/ScenarioModel', 'views/ScenarioView'], function (ScenarioModel, 
     it('It has "visible" set to true by default', function () {
       expect(scenario.visible).toEqual(true);
     });
+
+    it('has "setTags()" function which sets "tags" property', function () {
+      scenario.setTags(['tag1', 'tag2']);
+      expect(scenario.tags).toEqual(['tag1', 'tag2']);
+    })
   });
 
   describe('Scenario View', function() {
