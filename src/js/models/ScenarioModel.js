@@ -10,9 +10,16 @@ define([], function () {
     this.visible = true;
   }
 
-  Scenario.prototype.setTags = function (tagsArray) {
-    this.tags = tagsArray;
-  };
+  $.extend(Scenario.prototype, {
+    setTags: function (tagsArray) {
+      this.tags = tagsArray;
+    },
+
+    setSteps: function (stepsArray) {
+      this.steps = stepsArray;
+    }
+  });
+
 
 
 

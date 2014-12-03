@@ -47,6 +47,29 @@ define(['modules/DataCompile', 'text!testdata/example.json'], function (DataComp
         scenario = featureTwo.scenarios[1];
         expect(scenario.tags).toBe(null);
       });
+
+      it('reads scenario step key word, step name and step result', function () {
+        //check steps of 'Scenario: Steps display'
+        var scenario = featureOne.scenarios[0];
+        expect(scenario.steps.length).toBe(6);
+        expect(scenario.steps[0].name).toEqual('First given step');
+        expect(scenario.steps[0].keyword).toEqual('Given');
+        expect(scenario.steps[0].result).toEqual('undefined');
+
+        expect(scenario.steps[2].name).toEqual('First when step');
+        expect(scenario.steps[2].keyword).toEqual('When');
+        expect(scenario.steps[2].result).toEqual('undefined');
+
+        expect(scenario.steps[5].name).toEqual('Second then step');
+        expect(scenario.steps[5].keyword).toEqual('And');
+        expect(scenario.steps[5].result).toEqual('undefined');
+
+        //check steps of 'Scenario: Scenario without steps'
+        scenario = featureOne.scenarios[1];
+        expect(scenario.steps).toBe(null);
+
+
+      });
     });
   });
 });

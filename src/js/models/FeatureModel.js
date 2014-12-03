@@ -27,8 +27,11 @@ define(['models/ScenarioModel'], function (Scenario) {
 
     setScenarioTags: function (id, tagsArray) {
       this.scenarios[id].setTags(tagsArray);
-    }
+    },
 
+    setScenarioSteps: function (id, stepsArray) {
+      this.scenarios[id].setSteps(stepsArray);
+    }
   });
 
   return {

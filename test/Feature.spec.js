@@ -52,7 +52,7 @@ define(['views/ScenarioView', 'models/FeatureModel', 'views/FeatureView', 'ctrls
       });
     });
 
-    it('has "setScenarioTags(id, tagsArray)" function which set scenario tags', function () {
+    it('has "setScenarioTags(id, tagsArray)" function which sets scenario tags', function () {
       var idOne = feature.addScenario('Test Scenario 1');
       var idTwo = feature.addScenario('Test Scenario 2');
       feature.setScenarioTags(idOne, ['tag11', 'tag12']);
@@ -60,6 +60,16 @@ define(['views/ScenarioView', 'models/FeatureModel', 'views/FeatureView', 'ctrls
 
       expect(feature.scenarios[0].tags).toEqual(['tag11', 'tag12']);
       expect(feature.scenarios[1].tags).toEqual(['tag21', 'tag22', 'tag23']);
+    });
+
+    it('setScenarioSteps(id, stepsArray) - sets scenario steps', function () {
+      feature.addScenario('Test Scenario 1');
+      var idTwo = feature.addScenario('Test Scenario 2');
+      var steps = [{ name: 'Name 1', keyword: 'Given', result: 'undefined'},
+                   { name: 'Name 2', keyword: 'When', result: 'undefined'}];
+
+      feature.setScenarioSteps(idTwo, steps);
+      expect(feature.scenarios[1].steps).toEqual(steps);
     });
 
   });

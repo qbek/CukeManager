@@ -19,7 +19,15 @@ define(['models/ScenarioModel', 'views/ScenarioView'], function (ScenarioModel, 
     it('has "setTags()" function which sets "tags" property', function () {
       scenario.setTags(['tag1', 'tag2']);
       expect(scenario.tags).toEqual(['tag1', 'tag2']);
-    })
+    });
+
+    it('has "setSteps()" function which sets "steps" property', function () {
+      var steps = [{ name: 'Name 1', keyword: 'Given', result: 'undefined'},
+                   { name: 'Name 2', keyword: 'When', result: 'undefined'}];
+
+      scenario.setSteps(steps);
+      expect(scenario.steps).toEqual(steps);
+    });
   });
 
   describe('Scenario View', function() {
