@@ -26,6 +26,10 @@ define(['modules/DataCompile', 'text!testdata/example.json'], function (DataComp
         expect(featureTwo.tags).toBe(null);
       });
 
+      it('reads feature description', function () {
+        expect(featureOne.description).toEqual('!Author: Jakub Szewczyk\n!Reviewer:\nThis is short description of feature');
+      });
+
 
       it('reads scenario names', function () {
         //check if all Scenarios were compiled
@@ -47,6 +51,11 @@ define(['modules/DataCompile', 'text!testdata/example.json'], function (DataComp
         scenario = featureTwo.scenarios[1];
         expect(scenario.tags).toBe(null);
       });
+
+      it('reads scenario description', function () {
+        var scenario = featureOne.scenarios[0];
+        expect(scenario.description).toEqual('!Overview: An overview of scenario\n\n!Preconditions:\n  - set of preconditions\n\n!Pass Criteria:\n  - some pass criteria');
+      })
 
       it('reads scenario step key word, step name and step result', function () {
         //check steps of 'Scenario: Steps display'

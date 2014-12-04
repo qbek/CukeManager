@@ -28,6 +28,16 @@ define(['models/ScenarioModel', 'views/ScenarioView'], function (ScenarioModel, 
       scenario.setSteps(steps);
       expect(scenario.steps).toEqual(steps);
     });
+
+    it('has "setDescription()" function with sets "description" property', function () {
+      var desc = 'Example description';
+      //check if user cannot set property using =
+      scenario.description = "New description";
+      expect(scenario.description).toEqual(null);
+      //check if function sets correctly property
+      scenario.setDescription(desc);
+      expect(scenario.description).toEqual(desc);
+    })
   });
 
   describe('Scenario View', function() {
@@ -37,6 +47,7 @@ define(['models/ScenarioModel', 'views/ScenarioView'], function (ScenarioModel, 
     beforeEach(function () {
       scenario = ScenarioModel.create('Test name');
       scenario.setTags(['scnTag1', 'scnTag2']);
+      scenario.setDescription('Example description');
       view = ScenarioView.create(scenario);
     });
 
@@ -54,8 +65,12 @@ define(['models/ScenarioModel', 'views/ScenarioView'], function (ScenarioModel, 
     });
 
     it('It fills scenario element with scenario tags', function () {
-      expect($('.scenario-name', view.$render)).toContainText(scenario.name);
+      expect($('.scenario-tags', view.$render)).toContainText('scnTag1 scnTag2');
     });
+
+    it('It fills scenario element with description', function () {
+      expect($('.scenario-description', view.$render)).toContainText('Example description');
+    })
 
 
     it('It fills scenario element with scenario status', function () {

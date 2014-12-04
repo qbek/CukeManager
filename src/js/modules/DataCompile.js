@@ -9,6 +9,7 @@ define(['models/FeatureModel'], function (Feature) {
       var feature = Feature.create(name);
       var tags = compileTags(featureData.tags);
       feature.setTags(tags);
+      feature.setDescription(featureData.description);
 
       featureData.elements.forEach(function (scenarioData) {
         if(scenarioData.type === 'background') {
@@ -16,11 +17,12 @@ define(['models/FeatureModel'], function (Feature) {
         } else if (scenarioData.type === 'scenario') {
           var name = scenarioData.name;
           var tags = compileTags(scenarioData.tags);
-          // var description = scenarioData.description;
+          var description = scenarioData.description;
           var steps = compileSteps(scenarioData.steps);
           var scnId = feature.addScenario(name);
           feature.setScenarioTags(scnId, tags);
           feature.setScenarioSteps(scnId, steps);
+          feature.setScenarioDescription(scnId, description);
         }
       });
       features.push(feature);

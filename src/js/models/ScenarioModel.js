@@ -2,12 +2,26 @@ define([], function () {
   'use strict';
 
   function Scenario (name) {
+    //stores scenario description
+    var description = null;
+
     this.name = name;
-    this.decription = null;
     this.status = 'undefined';
     this.tags = null;
     this.steps = null;
     this.visible = true;
+
+    Object.defineProperty(this, 'description', {
+      enumerable: false,
+      configurable: false,
+      get: function () { return description; }
+    });
+
+
+    this.setDescription = function(desc) {
+      description = desc;
+    };
+
   }
 
   $.extend(Scenario.prototype, {

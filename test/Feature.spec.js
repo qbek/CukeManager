@@ -32,6 +32,16 @@ define(['views/ScenarioView', 'models/FeatureModel', 'views/FeatureView', 'ctrls
       expect(feature.tags).toEqual(tags);
     });
 
+    it('has "setDescription()" function with sets "description" property', function () {
+      var desc = 'Example description';
+      //check if user cannot set property using =
+      feature.description = "New description";
+      expect(feature.description).toEqual(null);
+      //check if function sets correctly property
+      feature.setDescription(desc);
+      expect(feature.description).toEqual(desc);
+    })
+
     describe('It has "addScenario(name)" function:', function() {
       it('returns id of added scenario', function () {
         expect(feature.addScenario).toBeDefined();
@@ -72,6 +82,14 @@ define(['views/ScenarioView', 'models/FeatureModel', 'views/FeatureView', 'ctrls
       expect(feature.scenarios[1].steps).toEqual(steps);
     });
 
+    it('setScenarioDescription(id, description) - sets scenario description', function () {
+      feature.addScenario('Test Scenario 1');
+      feature.addScenario('Test Scenario 2');
+      var desc = 'Example description';
+      feature.setScenarioDescription(1, desc);
+      expect(feature.scenarios[1].description).toEqual(desc);
+    })
+
   });
 
   describe('Feature View', function () {
@@ -81,6 +99,7 @@ define(['views/ScenarioView', 'models/FeatureModel', 'views/FeatureView', 'ctrls
     beforeEach(function () {
       feature = FeatureModel.create('Test Feature name');
       feature.setTags(['@featureTag1', '@featureTag2']);
+      feature.setDescription('Example description');
       view = FeatureView.create(feature);
     });
 
@@ -89,11 +108,10 @@ define(['views/ScenarioView', 'models/FeatureModel', 'views/FeatureView', 'ctrls
 
       //feature name is correctly rendered
       expect($('.feature-name', view.$render)).toContainText(feature.name);
-
-
-
+      //feature tags are correctly rendered
       expect($('.feature-tags', view.$render)).toContainText('@featureTag1 @featureTag2');
-
+      //feature description is correctly rendered
+      expect($('.feature-description', view.$render)).toContainText('Example description');
 
       //scenarios views are attached
       // view.addScenarioView(scnView);
