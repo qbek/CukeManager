@@ -2,6 +2,11 @@ define(['text!tmpl/FeatureViewTmpl.html'], function (tmpl) {
 
   function render (feature, $render) {
     $('.feature-name', $render).html(feature.name);
+    var tagsString = '';
+    if(feature.tags) {
+      tagsString = feature.tags.join(' ');
+    }
+    $('.feature-tags', $render).html(tagsString);
   }
 
   function FeatureView (feature) {

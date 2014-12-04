@@ -1,0 +1,9 @@
+#feature-list {
+  margin: 10px;
+}
+
+.feature-tags, .scenario-tags {
+  color: rgb(65, 131, 196);
+  font-style: italic;
+}
+

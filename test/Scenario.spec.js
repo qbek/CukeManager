@@ -35,7 +35,8 @@ define(['models/ScenarioModel', 'views/ScenarioView'], function (ScenarioModel, 
     var view;
 
     beforeEach(function () {
-      scenario = ScenarioModel.create('Test name', 'Test description');
+      scenario = ScenarioModel.create('Test name');
+      scenario.setTags(['scnTag1', 'scnTag2']);
       view = ScenarioView.create(scenario);
     });
 
@@ -52,7 +53,13 @@ define(['models/ScenarioModel', 'views/ScenarioView'], function (ScenarioModel, 
       expect($('.scenario-name', view.$render)).toContainText(scenario.name);
     });
 
+    it('It fills scenario element with scenario tags', function () {
+      expect($('.scenario-name', view.$render)).toContainText(scenario.name);
+    });
+
+
     it('It fills scenario element with scenario status', function () {
+      expect($('.scenario-tags', view.$render)).toContainText('scnTag1 scnTag2');
     });
 
   });

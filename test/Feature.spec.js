@@ -80,14 +80,20 @@ define(['views/ScenarioView', 'models/FeatureModel', 'views/FeatureView', 'ctrls
 
     beforeEach(function () {
       feature = FeatureModel.create('Test Feature name');
+      feature.setTags(['@featureTag1', '@featureTag2']);
       view = FeatureView.create(feature);
     });
 
-    it('It has "$render" element with rendered feature element', function() {
+    it('It has "$render" element with fully rendered feature element', function() {
       expect(view.$render).toBeMatchedBy('.feature');
 
       //feature name is correctly rendered
       expect($('.feature-name', view.$render)).toContainText(feature.name);
+
+
+
+      expect($('.feature-tags', view.$render)).toContainText('@featureTag1 @featureTag2');
+
 
       //scenarios views are attached
       // view.addScenarioView(scnView);
