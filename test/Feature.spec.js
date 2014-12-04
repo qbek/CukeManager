@@ -1,4 +1,4 @@
-define(['views/ScenarioView', 'models/FeatureModel', 'views/FeatureView', 'ctrls/FeatureCtrl'], function (ScenarioView, FeatureModel, FeatureView, FeatureCtrl) {
+define(['models/ScenarioModel', 'models/FeatureModel', 'views/FeatureListView', 'ctrls/FeatureCtrl'], function (ScenarioModel, FeatureModel, FeatureView, FeatureCtrl) {
 
   describe('Feature Model', function () {
     var feature;
@@ -92,53 +92,75 @@ define(['views/ScenarioView', 'models/FeatureModel', 'views/FeatureView', 'ctrls
 
   });
 
-  describe('Feature View', function () {
-    var feature;
-    var view;
+  describe('FeatureListView module', function () {
 
-    beforeEach(function () {
-      feature = FeatureModel.create('Test Feature name');
-      feature.setTags(['@featureTag1', '@featureTag2']);
-      feature.setDescription('Example description');
-      view = FeatureView.create(feature);
+    describe('FeatureView object created by createFeatureView(featureModel) function', function() {
+      var feature;
+
+      beforeEach(function () {
+        feature = FeatureModel.create('Test Feature name');
+        feature.setTags(['@featureTag1', '@featureTag2']);
+        feature.setDescription('Example description');
+        view = FeatureView.createFeatureView(feature);
+      });
+
+      it('It has "$render" element with fully rendered feature element', function() {
+        expect(view.$render).toBeMatchedBy('.feature');
+        //feature name is correctly rendered
+        expect($('.feature-name', view.$render)).toContainText(feature.name);
+        //feature tags are correctly rendered
+        expect($('.feature-tags', view.$render)).toContainText('@featureTag1 @featureTag2');
+        //feature description is correctly rendered
+        expect($('.feature-description', view.$render)).toContainText('Example description');
+      });
+
+      it('It has "addScenario(view)" function to add "scenario.$render" to "feature.$render"', function() {
+        var scnView = FeatureView.createScenarioView({name: 'Test Scenario 1'});
+        view.addScenario(scnView);
+        expect($('.feature-scenarios', view.$render)).toContainElement('.scenario');
+
+        scnView = FeatureView.createScenarioView({name: 'Test Scenario 2'});
+        scnView = FeatureView.createScenarioView({name: 'Test Scenario 3'});
+      });
     });
 
-    it('It has "$render" element with fully rendered feature element', function() {
-      expect(view.$render).toBeMatchedBy('.feature');
+    describe('ScenarioView object created by createScenarioView(scenarioModel) function', function() {
+      var scenario;
+      var view;
 
-      //feature name is correctly rendered
-      expect($('.feature-name', view.$render)).toContainText(feature.name);
-      //feature tags are correctly rendered
-      expect($('.feature-tags', view.$render)).toContainText('@featureTag1 @featureTag2');
-      //feature description is correctly rendered
-      expect($('.feature-description', view.$render)).toContainText('Example description');
+      beforeEach(function () {
+        scenario = ScenarioModel.create('Test name');
+        scenario.setTags(['scnTag1', 'scnTag2']);
+        scenario.setDescription('Example description');
+        view = FeatureView.createScenarioView(scenario);
+      });
 
-      //scenarios views are attached
-      // view.addScenarioView(scnView);
+      it('It has "$render" with rendered scenario element', function () {
+        expect(view.$render).toBeDefined();
+        expect(view.$render).toBeMatchedBy('.scenario');
+      });
+
+      it('"$render" element is visible only when scenario.visible is true', function () {
+        // TODO: this test doesn't work
+      });
+
+      it('It fills scenario element with scenario name', function () {
+        expect($('.scenario-name', view.$render)).toContainText(scenario.name);
+      });
+
+      it('It fills scenario element with scenario tags', function () {
+        expect($('.scenario-tags', view.$render)).toContainText('scnTag1 scnTag2');
+      });
+
+      it('It fills scenario element with description', function () {
+        expect($('.scenario-description', view.$render)).toContainText('Example description');
+      });
+
+      it('It fills scenario element with scenario status', function () {
+        expect($('.scenario-tags', view.$render)).toContainText('scnTag1 scnTag2');
+      });
+
     });
-
-    it('It has "addScenario(view)" function to add "scenario.$render" to "feature.$render"', function() {
-      var scnView = ScenarioView.create({name: 'Test Scenario 1'});
-      view.addScenario(scnView);
-      expect($('.feature-scenarios', view.$render)).toContainElement('.scenario');
-
-      scnView = ScenarioView.create({name: 'Test Scenario 2'});
-      scnView = ScenarioView.create({name: 'Test Scenario 3'});
-    })
-
-    xit('"$render" element is visible only when feature.visible is true', function () {
-      // TODO: this test doesn't work
-    });
-
-
-
-
-
 
   });
-
-
-
-
-
-})
+});

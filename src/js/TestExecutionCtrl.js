@@ -1,15 +1,13 @@
-define(['views/ScenarioView', 'views/FeatureView'], function (ScenarioView, FeatureView) {
+define(['views/FeatureListView'], function (FeatureListView) {
   var views = [];
-
-
 
   return {
     init: function (features) {
       features.forEach(function (feature) {
-        var featureView = FeatureView.create(feature);
+        var featureView = FeatureListView.createFeatureView(feature);
 
         feature.scenarios.forEach(function (scenario) {
-          var scenarioView = ScenarioView.create(scenario);
+          var scenarioView = FeatureListView.createScenarioView(scenario);
           featureView.addScenario(scenarioView);
         });
         views.push(featureView);
