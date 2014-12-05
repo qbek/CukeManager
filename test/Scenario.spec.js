@@ -1,4 +1,4 @@
-define(['models/ScenarioModel', 'views/ScenarioView'], function (ScenarioModel, ScenarioView) {
+define(['models/ScenarioModel', 'views/ScenarioDetailsView', 'modules/DataCompile', 'text!testdata/example.json'], function (ScenarioModel, ScenarioDetailsView, DataCompile, json) {
 
   describe('Scenario Model', function() {
 
@@ -37,10 +37,44 @@ define(['models/ScenarioModel', 'views/ScenarioView'], function (ScenarioModel, 
       //check if function sets correctly property
       scenario.setDescription(desc);
       expect(scenario.description).toEqual(desc);
-    })
+    });
   });
 
-  describe('Scenario View', function() {
+  describe('ScenarioDetailsView', function() {
+    describe('ScenarioView object created by createScenarioView(features)', function() {
+      var view;
+      beforeEach(function () {
+        var result = DataCompile.compile(json);
+        view = ScenarioDetailsView.createScenarioView(result);
+      });
+
+      it('render(featureId, scenarioId) - renders scenario to $render property', function () {
+        //check scenario name
+        view.render(0, 1);
+        expect($('.scenario-name', view.$render).html()).toBe('Scenario without steps');
+
+        //check scenario tags
+        view.render(0, 0);
+        expect($('.scenario-tags', view.$render).html()).toBe('@base @scenarioTag1');
+
+        //check scenario description
+        view.render(0, 0);
+        expect($('.scenario-description', view.$render).html()).toBe('!Overview: An overview of scenario\n\n!Preconditions:\n  - set of preconditions\n\n!Pass Criteria:\n  - some pass criteria');
+
+        //check scenario steps
+        view.render(1, 1);
+        var $steps = $('.scenario-step', view.$render);
+        expect($steps.length).toBe(3);
+        expect($('.step-keyword', $steps[0]).html()).toBe('Given');
+        expect($('.step-name', $steps[0]).html()).toBe('Data table');
+        expect($('.step-keyword', $steps[1]).html()).toBe('When');
+        expect($('.step-name', $steps[1]).html()).toBe('User reads this scenario');
+        expect($('.step-keyword', $steps[2]).html()).toBe('Then');
+        expect($('.step-name', $steps[2]).html()).toBe('Data table is correctly rendered');
+
+
+      });
+    });
 
 
   });

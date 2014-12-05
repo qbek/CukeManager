@@ -1,4 +1,4 @@
-define(['views/FeatureListView'], function (FeatureListView) {
+define(['views/FeatureListView', 'views/ScenarioDetailsView'], function (FeatureListView, ScenarioDetailsView) {
   var views = [];
 
   return {
@@ -13,8 +13,12 @@ define(['views/FeatureListView'], function (FeatureListView) {
         views.push(featureView);
 
         $('#feature-list').append(featureView.$render);
-
       });
+
+      scnDetailsView = ScenarioDetailsView.createScenarioView(features);
+      scnDetailsView.render(0, 0);
+
+      $('#scenario-view').append(scnDetailsView.$render);
     }
   };
 

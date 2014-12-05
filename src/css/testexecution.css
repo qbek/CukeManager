@@ -2,8 +2,24 @@
   margin: 10px;
 }
 
-.feature-tags, .scenario-tags {
+.feature-tags,
+.scenario-tags {
   color: rgb(65, 131, 196);
   font-style: italic;
+}
+
+#feature-list,
+#scenario-view
+{
+  float: left;
+  width: 50%;
+  margin: 10px 0px;
+  padding: 0px 0px 0px 10px;
+  box-sizing: border-box;
+}
+
+
+#scenario-view {
+  background-color: yellow;
 }
 
