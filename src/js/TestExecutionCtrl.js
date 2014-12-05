@@ -1,5 +1,8 @@
 define(['views/FeatureListView', 'views/ScenarioDetailsView'], function (FeatureListView, ScenarioDetailsView) {
+  'use strict';
   var views = [];
+  var scnDetailsView;
+
 
   return {
     init: function (features) {
@@ -14,11 +17,11 @@ define(['views/FeatureListView', 'views/ScenarioDetailsView'], function (Feature
 
         $('#feature-list').append(featureView.$render);
       });
-
       scnDetailsView = ScenarioDetailsView.createScenarioView(features);
-      scnDetailsView.render(0, 0);
+    },
 
-      $('#scenario-view').append(scnDetailsView.$render);
+    showScenario: function(featureId, scenarioId) {
+      scnDetailsView.show(featureId, scenarioId);
     }
   };
 

@@ -6,34 +6,32 @@
   <link rel="stylesheet" href="css/testexecution.css">
 </head>
 <body>
-	<form>
-		<input type="file" name="file">
-    <a href="">Download CVS</a>
-	</form>
-
-
-  <section id="feature-list">
-
+  <section id="load-file" style="display:none">
+  	<form>
+  		<input type="file" name="file">
+  	</form>
   </section>
 
-  <section id="scenario-view">
 
+  <section id="feature-list" style="display:none">
+    <a href="">Download CVS</a>
+  </section>
+
+  <section id="scenario-view" style="display:none">
   </section>
 
   <script type="text/javascript" src="js/vendor/require.js"></script>
+  <script type="text/javascript" src="js/vendor/jquery-2.1.1.js"></script>
+  <script type="text/javascript" src="js/vendor/director.min.js"></script>
   <script>
     requirejs.config({
       "baseUrl": "js",
       paths: {
-        'jquery': 'vendor/jquery-2.1.1',
         'mustache': 'vendor/mustache',
         'text': 'vendor/text',
-        'tmpl': '../tmpl'
-      },
+        'tmpl': '../tmpl',
 
-      shim: {
-        jquery: { exports: '$' }
-      }
+      },
     });
 
     // Load the main app module to start the app

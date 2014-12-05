@@ -29,10 +29,11 @@ define(['text!tmpl/ScenarioDetails.tmpl.html', 'text!tmpl/ScenarioDetailsStep.tm
 
   function ScenarioView (features) {
     this.$render = $(scenarioTmpl);
-    console.log('ScenarioView $render' + this.$render.html());
-    this.render =  function(featureId, scenarioId) {
+    this.show =  function(featureId, scenarioId) {
       var scenario = features[featureId].scenarios[scenarioId];
       renderScenario(scenario, this.$render);
+      $('#scenario-view').empty();
+      $('#scenario-view').append(this.$render);
     };
   }
 

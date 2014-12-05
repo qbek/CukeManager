@@ -48,21 +48,21 @@ define(['models/ScenarioModel', 'views/ScenarioDetailsView', 'modules/DataCompil
         view = ScenarioDetailsView.createScenarioView(result);
       });
 
-      it('render(featureId, scenarioId) - renders scenario to $render property', function () {
+      it('show(featureId, scenarioId) - renders scenario to $render property and shows it', function () {
         //check scenario name
-        view.render(0, 1);
+        view.show(0, 1);
         expect($('.scenario-name', view.$render).html()).toBe('Scenario without steps');
 
         //check scenario tags
-        view.render(0, 0);
+        view.show(0, 0);
         expect($('.scenario-tags', view.$render).html()).toBe('@base @scenarioTag1');
 
         //check scenario description
-        view.render(0, 0);
+        view.show(0, 0);
         expect($('.scenario-description', view.$render).html()).toBe('!Overview: An overview of scenario\n\n!Preconditions:\n  - set of preconditions\n\n!Pass Criteria:\n  - some pass criteria');
 
         //check scenario steps
-        view.render(1, 1);
+        view.show(1, 1);
         var $steps = $('.scenario-step', view.$render);
         expect($steps.length).toBe(3);
         expect($('.step-keyword', $steps[0]).html()).toBe('Given');
