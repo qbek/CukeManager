@@ -23,7 +23,7 @@ define(function () {
 
   return {
     getCVS: function (features) {
-      var cvs = 'Feature name, Scenario name, Status, tags\n';
+      var cvs = 'Feature name; Scenario name; Status; Tags\n';
 
       features.forEach(function (feature) {
         cvs += getFeatureCVS(feature);
