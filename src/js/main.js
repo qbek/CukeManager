@@ -5,6 +5,13 @@ define(['jquery', 'modules/DataCompile', 'modules/ExportToCVS', 'TestExecutionCt
   //   return this.slice(0);
   // };
 
+  function setBodyDimensions() {
+    $('body').css('height', $(window).height());
+    $('body').css('width', $(window).width());
+  }
+  setBodyDimensions();
+  $(window).on('resize', setBodyDimensions);
+
   var features;
 
   function startEventHandlers() {

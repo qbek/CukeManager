@@ -122,9 +122,17 @@ define(['models/ScenarioModel', 'models/FeatureModel', 'views/FeatureListView', 
         scnView = FeatureView.createScenarioView({name: 'Test Scenario 2'});
         scnView = FeatureView.createScenarioView({name: 'Test Scenario 3'});
       });
+
+      it('toggleScenario() - toggles class .feature-scenarios-hidden on .feature-scenario element', function () {
+        expect($('.feature-scenarios', view.$render)).not.toHaveClass('feature-scenarios-hidden');
+        view.toggleScenarios();
+        expect($('.feature-scenarios', view.$render)).toHaveClass('feature-scenarios-hidden');
+        view.toggleScenarios();
+        expect($('.feature-scenarios', view.$render)).not.toHaveClass('feature-scenarios-hidden');
+      })
     });
 
-    describe('ScenarioView object created by createScenarioView(scenarioModel) function', function() {
+    describe('ScenarioView object created by createScenarioView(scenarioModel, featureId, scenarioId) function', function() {
       var scenario;
       var view;
 
@@ -132,7 +140,7 @@ define(['models/ScenarioModel', 'models/FeatureModel', 'views/FeatureListView', 
         scenario = ScenarioModel.create('Test name');
         scenario.setTags(['scnTag1', 'scnTag2']);
         scenario.setDescription('Example description');
-        view = FeatureView.createScenarioView(scenario);
+        view = FeatureView.createScenarioView(scenario, 1, 1);
       });
 
       it('It has "$render" with rendered scenario element', function () {
@@ -146,6 +154,9 @@ define(['models/ScenarioModel', 'models/FeatureModel', 'views/FeatureListView', 
         expect($('.scenario-description', view.$render)).toContainText('Example description');
         //renders scenario status
         expect($('.scenario-status', view.$render)).toContainText('undefined');
+        //adds data-featureid and data-scenarioid attr to .feature-label element
+        expect($('.scenario-label', view.$render)).toHaveAttr('data-featureid', '1');
+        expect($('.scenario-label', view.$render)).toHaveAttr('data-scenarioid', '1');
       });
     });
 

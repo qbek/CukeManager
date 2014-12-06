@@ -18,10 +18,30 @@ define(['text!tmpl/ScenarioViewTmpl.html', 'text!tmpl/FeatureViewTmpl.html'], fu
     renderFeature(feature, this.$render);
   }
 
-  FeatureView.prototype.addScenario = function (scnView) {
-    var $scnRender = scnView.$render;
-    $('.feature-scenarios', this.$render).append($scnRender);
-  };
+  $.extend(FeatureView.prototype, {
+    addScenario: function (scnView) {
+      var $scnRender = scnView.$render;
+      $('.feature-scenarios', this.$render).append($scnRender);
+    },
+
+    toggleScenarios: function () {
+      var $scenarios = $('.feature-scenarios', this.$render);
+
+      if ($scenarios.hasClass('feature-scenarios-hidden')) {
+        $scenarios.removeClass('feature-scenarios-hidden');
+      } else {
+        $scenarios.addClass('feature-scenarios-hidden');
+      }
+    }
+
+  });
+
+
+
+
+
+
+
 
   function renderScenario(scenario, $render) {
     var $scn_name = $('.scenario-name', $render);
@@ -39,14 +59,19 @@ define(['text!tmpl/ScenarioViewTmpl.html', 'text!tmpl/FeatureViewTmpl.html'], fu
     $scn_status.html(scenario.status);
   }
 
-  function ScenarioView (scenario) {
+  function ScenarioView (scenario, featureId, scenarioId) {
     this.$render = $(scenarioTmpl);
+    //render scenario data
     renderScenario(scenario, this.$render);
+    //adds featureid and scenarioid
+    $('.scenario-label', this.$render).attr('data-featureid', featureId);
+    $('.scenario-label', this.$render).attr('data-scenarioid', scenarioId);
+
   }
 
   return {
     createFeatureView: function (feature) {return new FeatureView(feature);},
-    createScenarioView: function (scenario) {return new ScenarioView(scenario);}
+    createScenarioView: function (scenario, featureId, scenarioId) {return new ScenarioView(scenario, featureId, scenarioId);}
   };
 
 

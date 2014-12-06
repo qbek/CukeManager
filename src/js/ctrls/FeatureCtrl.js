@@ -1,17 +1,23 @@
-define(['models/FeatureModel', 'views/FeatureView'], function (Model, View) {
+define( function () {
 
 
-  function FeatureCtrl(name) {
+  function FeatureCtrl(featureView) {
+    var $view = featureView.$render;
 
 
+    $view.on('click', '.feature-label', function (event) {
+      featureView.toggleScenarios();
+    });
 
-
-    var view = View.create(model);
-
+    $view.on('click', '.scenario-label', function (event) {
+      var featureId = $(this).attr('data-featureid');
+      var scenarioId = $(this).attr('data-scenarioid');
+      window.location.hash = String.concat('#/features/scenario/', featureId, '/', scenarioId);
+    });
   }
 
 
   return {
-    create: function (name) { return new FeatureCtrl(name);}
+    create: function (featureView) { return new FeatureCtrl(featureView);}
   };
 });

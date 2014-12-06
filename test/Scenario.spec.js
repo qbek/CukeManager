@@ -72,6 +72,24 @@ define(['models/ScenarioModel', 'views/ScenarioDetailsView', 'modules/DataCompil
         expect($('.step-keyword', $steps[2]).html()).toBe('Then');
         expect($('.step-name', $steps[2]).html()).toBe('Data table is correctly rendered');
 
+        //sets additional css classes to color step types
+        view.show(0, 0);
+        var $steps = $('.scenario-step', view.$render);
+        expect($steps[0]).toHaveClass('step-keyword-given');
+        expect($steps[1]).toHaveClass('step-keyword-given');
+        expect($steps[2]).toHaveClass('step-keyword-when');
+        expect($steps[3]).toHaveClass('step-keyword-when');
+        expect($steps[4]).toHaveClass('step-keyword-then');
+        expect($steps[5]).toHaveClass('step-keyword-then');
+
+        //sets .set-block-first at beginning of each type block
+        expect($steps[0]).toHaveClass('step-block-first');
+        expect($steps[1]).not.toHaveClass('step-block-first');
+        expect($steps[2]).toHaveClass('step-block-first');
+        expect($steps[3]).not.toHaveClass('step-block-first');
+        expect($steps[4]).toHaveClass('step-block-first');
+        expect($steps[5]).not.toHaveClass('step-block-first');
+
 
       });
     });
