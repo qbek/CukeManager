@@ -3,7 +3,9 @@
 }
 
 body {
-  margin: 0 10px;
+  /*margin: 0 10px;*/
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 pre {
@@ -11,7 +13,7 @@ pre {
   font-family: 'Source Code Pro', sans-serif;
   font-size: 0.8em;
   clear: both;
-  margin: 6px 70px;
+  margin: 6px 9px;
 }
 
 #feature-list {
@@ -25,6 +27,8 @@ pre {
   margin: 10px 0px;
   padding: 0px 0px 0px 10px;
   box-sizing: border-box;
+  overflow: scroll;
+  height: inherit;
 }
 #feature-list.wide {
   width: 100%;
@@ -39,11 +43,11 @@ pre {
 }
 
 #scenario-view {
-  background-color: yellow;
+
 }
 
 .feature {
-  margin-top: 24px;
+ /* margin-top: 24px;*/
 }
 
 .feature-tags,
@@ -55,10 +59,15 @@ pre {
   font-size: 0.8em;
 }
 
+.feature-tags {
+  color: rgb(107,41,136);
+}
+
 .feature-label {
   overflow: hidden;
   border: 1px solid rgb(107,41,136);
   border-radius: 0 6px 6px 6px;
+  cursor: pointer;
 }
 
 .feature-keyword {
@@ -66,20 +75,26 @@ pre {
   color: white;
   float: left;
   font-weight: 600;
-  font-size: 1em;
+  font-size: 0.8em;
   padding: 4px 6px;
   margin: 0px;
 }
 
 .feature-name {
-  font-weight: 600;
+  /*font-weight: 600;*/
   margin: 0px;
   padding: 2px 6px;
-  font-size: 1.2em;
+  font-size: 1em;
   float: left;
 }
 .feature-scenarios {
   margin: 0px;
+  height: auto;
+}
+
+.feature-scenarios-hidden {
+  height: 0px;
+  overflow: hidden;
 }
 
 
@@ -100,7 +115,7 @@ pre {
 
 .scenario-label {
   border: 1px solid rgb(50, 140, 231);
-  border-radius: 2px 6px 6px 6px;
+  border-radius: 0px 6px 6px 6px;
   overflow: hidden;
 }
 
@@ -124,4 +139,44 @@ pre {
   text-transform: uppercase;
   font-size: 0.8em;
   margin: 2px;
+}
+
+.scenario-steps {
+  list-style: none;
+}
+
+.scenario-step {
+  margin-top: 6px;
+}
+
+
+.step-keyword,
+.step-name {
+  /*display: inline-block;*/
+  font-size: 1.1em;
+}
+
+.step-keyword {
+  width: 48px;
+  font-weight: 600;
+  text-align: right;
+}
+
+.step-keyword-given {
+  /*color: rgb(107,41,136);*/
+  color: rgb(50,140,231);
+}
+
+.step-keyword-when {
+  color: rgb(10,99,183);
+  margin-left: 24px;
+}
+
+.step-keyword-then {
+  color: rgb(237,95,2);
+  margin-left: 48px;
+}
+
+.step-block-first {
+  margin-top: 18px;
 }
