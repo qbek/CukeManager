@@ -1,25 +1,127 @@
-#feature-list {
-  margin: 10px;
+* {
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
-.feature-tags,
-.scenario-tags {
-  color: rgb(65, 131, 196);
-  font-style: italic;
+body {
+  margin: 0 10px;
+}
+
+pre {
+  white-space: pre-wrap;
+  font-family: 'Source Code Pro', sans-serif;
+  font-size: 0.8em;
+  clear: both;
+  margin: 6px 70px;
+}
+
+#feature-list {
+  margin: 10px;
 }
 
 #feature-list,
 #scenario-view
 {
   float: left;
-  width: 50%;
   margin: 10px 0px;
   padding: 0px 0px 0px 10px;
   box-sizing: border-box;
 }
+#feature-list.wide {
+  width: 100%;
+}
 
+#feature-list.narrow {
+  width: 50%;
+}
+
+#scenario-view {
+  width: 50%;
+}
 
 #scenario-view {
   background-color: yellow;
 }
 
+.feature {
+  margin-top: 24px;
+}
+
+.feature-tags,
+.scenario-tags {
+  margin-top: 6px;
+  margin-bottom: 1px;
+  color: rgb(50,140,231);
+  font-style: italic;
+  font-size: 0.8em;
+}
+
+.feature-label {
+  overflow: hidden;
+  border: 1px solid rgb(107,41,136);
+  border-radius: 0 6px 6px 6px;
+}
+
+.feature-keyword {
+  background-color: rgb(107,41,136);
+  color: white;
+  float: left;
+  font-weight: 600;
+  font-size: 1em;
+  padding: 4px 6px;
+  margin: 0px;
+}
+
+.feature-name {
+  font-weight: 600;
+  margin: 0px;
+  padding: 2px 6px;
+  font-size: 1.2em;
+  float: left;
+}
+.feature-scenarios {
+  margin: 0px;
+}
+
+
+.scenario {
+  margin: 0 12px;
+  list-style: none;
+}
+
+
+.scenario-name,
+.scenario-keyword,
+.scenario-status {
+  display: inline-block;
+  margin: 0px;
+  padding: 2px 6px;
+  font-size: 1em;
+}
+
+.scenario-label {
+  border: 1px solid rgb(50, 140, 231);
+  border-radius: 2px 6px 6px 6px;
+  overflow: hidden;
+}
+
+.scenario-keyword {
+  background-color: rgb(50, 140, 231);
+  color: white;
+  float: left;
+  font-weight: 600;
+  font-size: 0.8em;
+  padding: 4px 6px;
+}
+
+.scenario-name {
+  float: left;
+}
+
+.scenario-status {
+  float: right;
+  background-color: rgb(212, 215, 219);
+  border-radius: 6px;
+  text-transform: uppercase;
+  font-size: 0.8em;
+  margin: 2px;
+}

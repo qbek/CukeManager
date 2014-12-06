@@ -58,6 +58,7 @@ define(['jquery', 'modules/DataCompile', 'modules/ExportToCVS', 'TestExecutionCt
   function handleFeaturesRoute() {
     //show features-list section
     resetScreen();
+    $('#feature-list').attr('class', 'wide');
     $('#feature-list').show();
 
     //start TestExecutionCtrl
@@ -71,6 +72,7 @@ define(['jquery', 'modules/DataCompile', 'modules/ExportToCVS', 'TestExecutionCt
     //show features-list and scenarios-list sections
     resetScreen();
     $('#feature-list').show();
+    $('#feature-list').attr('class', 'narrow');
     $('#scenario-view').show();
 
   }
