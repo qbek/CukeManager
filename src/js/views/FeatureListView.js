@@ -23,25 +23,20 @@ define(['text!tmpl/ScenarioViewTmpl.html', 'text!tmpl/FeatureViewTmpl.html'], fu
     $('.feature-scenarios', this.$render).append($scnRender);
   };
 
-  function renderScenario(scn, $render) {
+  function renderScenario(scenario, $render) {
     var $scn_name = $('.scenario-name', $render);
     var $scn_tags = $('.scenario-tags', $render);
     var $scn_desc = $('.scenario-description', $render);
+    var $scn_status = $('.scenario-status', $render);
     var tagsString = null;
-    if(scn.tags) {
-      tagsString = scn.tags.join(' ');
+    if(scenario.tags) {
+      tagsString = scenario.tags.join(' ');
     }
 
-    $scn_name.html(scn.name);
+    $scn_name.html(scenario.name);
     $scn_tags.html(tagsString);
-    $scn_desc.html(scn.description);
-
-
-    if (scn.visible) {
-      $render.show();
-    } else {
-      $render.hide();
-    }
+    $scn_desc.html(scenario.description);
+    $scn_status.html(scenario.status);
   }
 
   function ScenarioView (scenario) {

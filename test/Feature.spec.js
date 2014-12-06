@@ -138,28 +138,15 @@ define(['models/ScenarioModel', 'models/FeatureModel', 'views/FeatureListView', 
       it('It has "$render" with rendered scenario element', function () {
         expect(view.$render).toBeDefined();
         expect(view.$render).toBeMatchedBy('.scenario');
-      });
-
-      it('"$render" element is visible only when scenario.visible is true', function () {
-        // TODO: this test doesn't work
-      });
-
-      it('It fills scenario element with scenario name', function () {
+        //renders scenario name
         expect($('.scenario-name', view.$render)).toContainText(scenario.name);
-      });
-
-      it('It fills scenario element with scenario tags', function () {
+        //renders scenario tags
         expect($('.scenario-tags', view.$render)).toContainText('scnTag1 scnTag2');
-      });
-
-      it('It fills scenario element with description', function () {
+        //renders scenario description
         expect($('.scenario-description', view.$render)).toContainText('Example description');
+        //renders scenario status
+        expect($('.scenario-status', view.$render)).toContainText('undefined');
       });
-
-      it('It fills scenario element with scenario status', function () {
-        expect($('.scenario-tags', view.$render)).toContainText('scnTag1 scnTag2');
-      });
-
     });
 
   });
