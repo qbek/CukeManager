@@ -1,24 +1,39 @@
 define(['models/FeatureModel'], function (Feature) {
   'use strict';
+
+  function htmlEscape(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+  }
+
   function compileData (jsonString) {
     var features = [];
     var data = $.parseJSON(jsonString);
     //loop through features
     data.forEach(function (featureData) {
-      var name = featureData.name;
-      var feature = Feature.create(name);
+      //read feature data
+      var name = htmlEscape(featureData.name);
+      var description = htmlEscape(featureData.description);
       var tags = compileTags(featureData.tags);
+      //create new feature and fill with read data
+      var feature = Feature.create(name);
       feature.setTags(tags);
-      feature.setDescription(featureData.description);
-
+      feature.setDescription(description);
+      //loop through scenarios
       featureData.elements.forEach(function (scenarioData) {
         if(scenarioData.type === 'background') {
           // background = compileBackground(scenarioData);
         } else if (scenarioData.type === 'scenario') {
-          var name = scenarioData.name;
+          //read scenario data
+          var name = htmlEscape(scenarioData.name);
           var tags = compileTags(scenarioData.tags);
-          var description = scenarioData.description;
+          var description = htmlEscape(scenarioData.description);
           var steps = compileSteps(scenarioData.steps);
+          //create new scenario and fill wtih read data
           var scnId = feature.addScenario(name);
           feature.setScenarioTags(scnId, tags);
           feature.setScenarioSteps(scnId, steps);
