@@ -146,7 +146,8 @@ pre {
 }
 
 .scenario-step {
-  margin-top: 6px;
+  margin-top: 3px;
+  margin-bottom: 3px;
 }
 
 
@@ -183,4 +184,25 @@ pre {
 
 .step-variable {
   color: rgb(107,41,136);
+}
+
+
+.step-datatable {
+  margin-left: 48px;
+  color: darkgrey;
+}
+
+.step-datatable tr {
+  padding: 0px 3px;
+}
+
+.step-datatable td {
+  padding: 0px 6px;
+  border-left: 1px solid;
+  border-color: rgb(107,41,136);
+}
+
+.step-datatable td:last-child {
+  border-right: 1px solid;
+  border-color: rgb(107,41,136);
 }

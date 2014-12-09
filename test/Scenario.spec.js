@@ -109,6 +109,16 @@ define(['models/ScenarioModel', 'views/ScenarioDetailsView', 'modules/DataCompil
         expect($('.step-name', $steps[0]).html()).toEqual('When define <span class="step-variable">"inline"</span> variable');
         expect($('.step-name', $steps[1]).html()).toEqual('Define <span class="step-variable">"one"</span>, <span class="step-variable">"two"</span> inline variables and even <span class="step-variable">"three"</span>');
 
+        //if step contains data table, renders it, if not hides table element
+        view.show(1, 1);
+        var $steps = $('.scenario-step', view.$render);
+        var datatableRows = $('.step-datatable tr', $steps[0])
+        expect(datatableRows.length).toBe(4);
+
+        expect($(datatableRows[0]).html()).toEqual('<td>datakey</td><td>datavalue</td>');
+        expect($(datatableRows[2]).html()).toEqual('<td>key2</td><td>value2</td>');
+
+
 
       });
     });

@@ -30,6 +30,7 @@ define(['text!tmpl/ScenarioDetails.tmpl.html', 'text!tmpl/ScenarioDetailsStep.tm
       var previousClass;
       scn.steps.forEach(function (step) {
         var $step = $(stepTmpl);
+        var $step_datatable = $('.step-datatable', $step);
         $('.step-keyword', $step).html(step.keyword);
 
         if (step.keyword === 'Given') {
@@ -47,10 +48,26 @@ define(['text!tmpl/ScenarioDetails.tmpl.html', 'text!tmpl/ScenarioDetailsStep.tm
         } else {
           $step.addClass(previousClass);
         }
-
-
         var stepName = renderStepVariables(step.name);
         $('.step-name', $step).html(stepName);
+
+        if(step.dataTable) {
+          var dataHtml = String('');
+          step.dataTable.forEach(function (row) {
+            var rowHtml = '<tr>';
+            row.forEach(function (cell) {
+              rowHtml = rowHtml.concat('<td>', cell, '</td>');
+            });
+            rowHtml = rowHtml.concat('</tr>');
+            // console.log(rowHtml);
+            dataHtml = dataHtml.concat(rowHtml);
+          });
+
+          $('tbody', $step_datatable).html(dataHtml);
+        }
+
+
+
         $step.appendTo($scn_steps);
       });
     }
