@@ -160,23 +160,27 @@ pre {
   width: 48px;
   font-weight: 600;
   text-align: right;
+  display: inline-block;
 }
 
-.step-keyword-given {
+.step-keyword-given .step-keyword {
   /*color: rgb(107,41,136);*/
+  color: rgb(63,181,31);
+}
+
+.step-keyword-when .step-keyword{
   color: rgb(50,140,231);
 }
 
-.step-keyword-when {
-  color: rgb(10,99,183);
-  margin-left: 24px;
-}
+.step-keyword-then .step-keyword{
 
-.step-keyword-then {
   color: rgb(237,95,2);
-  margin-left: 48px;
 }
 
 .step-block-first {
   margin-top: 18px;
+}
+
+.step-variable {
+  color: rgb(107,41,136);
 }

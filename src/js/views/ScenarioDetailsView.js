@@ -1,5 +1,14 @@
 define(['text!tmpl/ScenarioDetails.tmpl.html', 'text!tmpl/ScenarioDetailsStep.tmpl.html'], function (scenarioTmpl, stepTmpl) {
 
+  function renderStepVariables(stepName) {
+    return String(stepName)
+      .replace(/\s"/g, ' <span class="step-variable">"')
+      .replace(/"\s/g, '"</span> ')
+      .replace(/",/g, '"</span>,')
+      .replace(/"$/g, '"</span>');
+  }
+
+
   function renderScenario(scn, $render) {
     var $scn_name = $('.scenario-name', $render);
     var $scn_tags = $('.scenario-tags', $render);
@@ -40,8 +49,8 @@ define(['text!tmpl/ScenarioDetails.tmpl.html', 'text!tmpl/ScenarioDetailsStep.tm
         }
 
 
-
-        $('.step-name', $step).html(step.name);
+        var stepName = renderStepVariables(step.name);
+        $('.step-name', $step).html(stepName);
         $step.appendTo($scn_steps);
       });
     }
