@@ -4,6 +4,8 @@ define([], function () {
   function Scenario (name) {
     //stores scenario description
     var description = null;
+    //stores scenario steps
+    var steps = null;
 
     this.name = name;
     this.status = 'undefined';
@@ -17,9 +19,26 @@ define([], function () {
       get: function () { return description; }
     });
 
+    Object.defineProperty(this, 'steps', {
+      enumerable: false,
+      configurable: false,
+      get: function () { return steps; }
+    });
 
     this.setDescription = function(desc) {
       description = desc;
+    };
+
+    this.addStep = function(key, name, result, datatable) {
+      if(steps === null) { steps = []; }
+      var step = {
+        keyword: key,
+        name: name,
+        result: result,
+      };
+
+      if(datatable) { step.dataTable = datatable; }
+      steps.push(step);
     };
 
   }
@@ -29,9 +48,9 @@ define([], function () {
       this.tags = tagsArray;
     },
 
-    setSteps: function (stepsArray) {
-      this.steps = stepsArray;
-    }
+    // setSteps: function (stepsArray) {
+    //   this.steps = stepsArray;
+    // }
   });
 
 

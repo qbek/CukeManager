@@ -55,7 +55,7 @@ define(['modules/DataCompile', 'text!testdata/example.json'], function (DataComp
       it('reads scenario description', function () {
         var scenario = featureOne.scenarios[0];
         expect(scenario.description).toEqual('!Overview: An overview of scenario\n\n!Preconditions:\n  - set of preconditions\n\n!Pass Criteria:\n  - some pass criteria');
-      })
+      });
 
       it('reads scenario step key word, step name and step result', function () {
         //check steps of 'Scenario: Steps display'
@@ -76,9 +76,18 @@ define(['modules/DataCompile', 'text!testdata/example.json'], function (DataComp
         //check steps of 'Scenario: Scenario without steps'
         scenario = featureOne.scenarios[1];
         expect(scenario.steps).toBe(null);
-
-
       });
+
+      it('reads data tables attached to steps', function () {
+        var scenario = featureTwo.scenarios[1];
+        expect(scenario.steps[0].dataTable.length).toBe(4);
+        expect(scenario.steps[0].dataTable[0].length).toBe(2);
+        expect(scenario.steps[0].dataTable[2].length).toBe(2);
+
+        expect(scenario.steps[0].dataTable[1]).toEqual(['key1', 'value1']);
+        expect(scenario.steps[0].dataTable[2]).toEqual(['key2', 'value2']);
+      })
+
     });
   });
 });

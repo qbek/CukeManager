@@ -32,12 +32,31 @@ define(['models/FeatureModel'], function (Feature) {
           var name = htmlEscape(scenarioData.name);
           var tags = compileTags(scenarioData.tags);
           var description = htmlEscape(scenarioData.description);
-          var steps = compileSteps(scenarioData.steps);
-          //create new scenario and fill wtih read data
+          //create new scenario and fill with read data
           var scnId = feature.addScenario(name);
           feature.setScenarioTags(scnId, tags);
-          feature.setScenarioSteps(scnId, steps);
           feature.setScenarioDescription(scnId, description);
+          //read steps and add to scenario
+          if(scenarioData.steps) {
+            scenarioData.steps.forEach(function (step) {
+              var key = step.keyword.trim();
+              var name = step.name;
+              var status = step.result.status;
+              var rowsDataTable = step.rows;
+
+              if(rowsDataTable) {
+                var datatable = [];
+                rowsDataTable.forEach(function(row) {
+                  datatable.push(row.cells);
+                });
+                feature.addScenarioStep(scnId, key, name, status, datatable);
+              } else {
+                feature.addScenarioStep(scnId, key, name, status);
+              }
+
+
+            });
+          }
         }
       });
       features.push(feature);
@@ -51,9 +70,7 @@ define(['models/FeatureModel'], function (Feature) {
       output = [];
       steps.forEach(function (step) {
         output.push({
-          keyword: step.keyword.trim(),
-          name: step.name,
-          result: step.result.status
+
         });
       });
     }

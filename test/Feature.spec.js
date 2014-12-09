@@ -72,7 +72,8 @@ define(['models/ScenarioModel', 'models/FeatureModel', 'views/FeatureListView', 
       expect(feature.scenarios[1].tags).toEqual(['tag21', 'tag22', 'tag23']);
     });
 
-    it('setScenarioSteps(id, stepsArray) - sets scenario steps', function () {
+    //to be removed
+    xit('setScenarioSteps(id, stepsArray) - sets scenario steps', function () {
       feature.addScenario('Test Scenario 1');
       var idTwo = feature.addScenario('Test Scenario 2');
       var steps = [{ name: 'Name 1', keyword: 'Given', result: 'undefined'},
@@ -90,6 +91,21 @@ define(['models/ScenarioModel', 'models/FeatureModel', 'views/FeatureListView', 
       expect(feature.scenarios[1].description).toEqual(desc);
     })
 
+    it('addScenarioStep(id, key, name, result, datatable) - adds step to scenario', function () {
+      feature.addScenario('Test Scenario 1');
+      var idTwo = feature.addScenario('Test Scenario 2');
+      var stepG = {keyword: 'Given', name: 'Test', result: 'undefined'};
+      feature.addScenarioStep(idTwo, 'Given', 'Test', 'undefined');
+      var stepW = {keyword: 'When', name: 'Test 2', result: 'undefined'};
+      feature.addScenarioStep(idTwo, 'When', 'Test 2', 'undefined');
+      var stepT = {keyword: 'Then', name: 'Test 3', result: 'undefined', dataTable:[['key1', 'value1'], ['key2', 'value2']]};
+      feature.addScenarioStep(idTwo, 'Then', 'Test 3', 'undefined', [['key1', 'value1'], ['key2', 'value2']]);
+
+      expect(feature.scenarios[1].steps.length).toBe(3);
+      expect(feature.scenarios[1].steps[0]).toEqual(stepG);
+      expect(feature.scenarios[1].steps[1]).toEqual(stepW);
+      expect(feature.scenarios[1].steps[2]).toEqual(stepT);
+    })
   });
 
   describe('FeatureListView module', function () {

@@ -3,7 +3,7 @@ Feature: Data type examples
   Scenario: Inline variables
 
     Given When define "inline" variable
-    When Define "one", "two" inline variables
+    When Define "one", "two" inline variables and even "three"
     Then Test is ok
 
   Scenario: Data tables

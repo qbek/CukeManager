@@ -49,6 +49,10 @@ define(['models/ScenarioModel'], function (Scenario) {
 
     setScenarioDescription: function (id, desc) {
       this.scenarios[id].setDescription(desc);
+    },
+
+    addScenarioStep: function (id, key, name, status, datatable) {
+      this.scenarios[id].addStep(key, name, status, datatable);
     }
   });
 

@@ -44,7 +44,7 @@
             },
             "result": {
               "status": "undefined",
-              "duration": 435810
+              "duration": 379518
             }
           },
           {
@@ -56,7 +56,7 @@
             },
             "result": {
               "status": "undefined",
-              "duration": 3145022
+              "duration": 333143
             }
           },
           {
@@ -68,7 +68,7 @@
             },
             "result": {
               "status": "undefined",
-              "duration": 294242
+              "duration": 339010
             }
           },
           {
@@ -80,7 +80,7 @@
             },
             "result": {
               "status": "undefined",
-              "duration": 367505
+              "duration": 270286
             }
           },
           {
@@ -92,7 +92,7 @@
             },
             "result": {
               "status": "undefined",
-              "duration": 295708
+              "duration": 338591
             }
           },
           {
@@ -104,7 +104,7 @@
             },
             "result": {
               "status": "undefined",
-              "duration": 276501
+              "duration": 351092
             }
           }
         ]
@@ -154,19 +154,19 @@
             },
             "result": {
               "status": "undefined",
-              "duration": 260438
+              "duration": 334121
             }
           },
           {
             "keyword": "When ",
-            "name": "Define \"one\", \"two\" inline variables",
+            "name": "Define \"one\", \"two\" inline variables and even \"three\"",
             "line": 6,
             "match": {
               "location": "exampleFeatures/DataTypeExamples.feature:6"
             },
             "result": {
               "status": "undefined",
-              "duration": 263232
+              "duration": 259460
             }
           },
           {
@@ -178,7 +178,7 @@
             },
             "result": {
               "status": "undefined",
-              "duration": 317569
+              "duration": 325531
             }
           }
         ]
@@ -230,7 +230,7 @@
             },
             "result": {
               "status": "undefined",
-              "duration": 2020089
+              "duration": 1979092
             }
           },
           {
@@ -242,7 +242,7 @@
             },
             "result": {
               "status": "undefined",
-              "duration": 321339
+              "duration": 260717
             }
           },
           {
@@ -254,7 +254,7 @@
             },
             "result": {
               "status": "undefined",
-              "duration": 259530
+              "duration": 312749
             }
           }
         ]

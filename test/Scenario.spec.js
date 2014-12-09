@@ -21,10 +21,10 @@ define(['models/ScenarioModel', 'views/ScenarioDetailsView', 'modules/DataCompil
       expect(scenario.tags).toEqual(['tag1', 'tag2']);
     });
 
-    it('has "setSteps()" function which sets "steps" property', function () {
+    //to remove
+    xit('has "setSteps()" function which sets "steps" property', function () {
       var steps = [{ name: 'Name 1', keyword: 'Given', result: 'undefined'},
                    { name: 'Name 2', keyword: 'When', result: 'undefined'}];
-
       scenario.setSteps(steps);
       expect(scenario.steps).toEqual(steps);
     });
@@ -38,6 +38,19 @@ define(['models/ScenarioModel', 'views/ScenarioDetailsView', 'modules/DataCompil
       scenario.setDescription(desc);
       expect(scenario.description).toEqual(desc);
     });
+
+    it('has "addStep(keyword, name, result [, datatable])" function which adds step to "steps" property', function () {
+      //check if steps property is read only
+      scenario.steps = "first step";
+      expect(scenario.steps).toBe(null);
+      //check if can be added step without dataTable
+      scenario.addStep('Given', 'Test step', 'undefined');
+      expect(scenario.steps[0]).toEqual({keyword: 'Given', name: 'Test step', result: 'undefined'});
+      //check if can be added full step
+      scenario.addStep('When', 'Data table', 'undefined', [['key1', 'value1'], ['key2', 'value2']]);
+      expect(scenario.steps[1]).toEqual({keyword: 'When', name: 'Data table', result: 'undefined', dataTable: [['key1', 'value1'], ['key2', 'value2']]});
+
+    })
   });
 
   describe('ScenarioDetailsView', function() {
@@ -89,6 +102,12 @@ define(['models/ScenarioModel', 'views/ScenarioDetailsView', 'modules/DataCompil
         expect($steps[3]).not.toHaveClass('step-block-first');
         expect($steps[4]).toHaveClass('step-block-first');
         expect($steps[5]).not.toHaveClass('step-block-first');
+
+        //In step name variables are surrounded with span.step-variable element
+        view.show(1, 0);
+        var $steps = $('.scenario-step', view.$render);
+        expect($('.step-name', $steps[0]).html()).toEqual('When define <span class="step-variable">"inline"</span> variable');
+        expect($('.step-name', $steps[1]).html()).toEqual('Define <span class="step-variable">"one"</span>, <span class="step-variable">"two"</span> inline variables and even <span class="step-variable">"three"</span>');
 
 
       });
