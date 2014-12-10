@@ -30,6 +30,15 @@ define(['modules/DataCompile', 'text!testdata/example.json'], function (DataComp
         expect(featureOne.description).toEqual('!Author: Jakub Szewczyk\n!Reviewer:\nThis is short description of feature');
       });
 
+      it('reads feature background steps', function () {
+        expect(featureTwo.background.length).toBe(2);
+        expect(featureTwo.background[0]).toEqual({keyword: 'Given', name: 'First background step'});
+        expect(featureTwo.background[1]).toEqual({keyword: 'And', name: 'Last background step'});
+
+        //from scenarios background steps are cut out
+        expect(featureTwo.scenarios[0].steps.length).toBe(3);
+
+      });
 
       it('reads scenario names', function () {
         //check if all Scenarios were compiled
@@ -86,7 +95,7 @@ define(['modules/DataCompile', 'text!testdata/example.json'], function (DataComp
 
         expect(scenario.steps[0].dataTable[1]).toEqual(['key1', 'value1']);
         expect(scenario.steps[0].dataTable[2]).toEqual(['key2', 'value2']);
-      })
+      });
 
     });
   });

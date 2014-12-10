@@ -3,6 +3,18 @@ define(['models/ScenarioModel'], function (Scenario) {
 
   function Feature (name) {
     var description = null;
+    Object.defineProperty(this, 'description', {
+      enumerable: false,
+      configurable: false,
+      get: function () { return description; }
+    });
+
+    var background = null;
+    Object.defineProperty(this, 'background', {
+      enumerable: false,
+      configurable: false,
+      get: function () { return background; }
+    });
 
     //public variables
     this.name = name;
@@ -13,17 +25,27 @@ define(['models/ScenarioModel'], function (Scenario) {
     //private
     // this._tags = tagsData;
 
-    Object.defineProperty(this, 'description', {
-      enumerable: false,
-      configurable: false,
-      get: function () { return description; }
-    });
+
 
 
     this.setDescription = function(desc) {
       description = desc;
     };
 
+    this.addBackgroundStep = function (keyword, name, datatable) {
+      var step = {
+        keyword: keyword,
+        name: name
+      };
+      if(datatable) {
+        step.dataTable = datatable;
+      }
+      if(background === null) {
+        background = [];
+      }
+
+      background.push(step);
+    };
   }
 
   $.extend(Feature.prototype, {

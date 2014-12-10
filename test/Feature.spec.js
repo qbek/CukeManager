@@ -17,7 +17,7 @@ define(['models/ScenarioModel', 'models/FeatureModel', 'views/FeatureListView', 
 
     it('has "tags" set to null by default', function () {
       expect(feature.tags).toBe(null);
-    })
+    });
 
     it('It has "scenarios[]" table for Scenario models', function () {
       expect(feature.scenarios).toBeDefined();
@@ -40,7 +40,19 @@ define(['models/ScenarioModel', 'models/FeatureModel', 'views/FeatureListView', 
       //check if function sets correctly property
       feature.setDescription(desc);
       expect(feature.description).toEqual(desc);
-    })
+    });
+
+    it('addBackgroundStep() function adds step to "background" read only property', function () {
+      //check if background property is read only
+      feature.background = "test";
+      expect(feature.background).toBe(null);
+      //check if addBackgroundStep() adds step to background
+      feature.addBackgroundStep('Given', 'Test step');
+      expect(feature.background[0]).toEqual({keyword:'Given', name:'Test step'});
+      var datatable = [[1,2 ], [3,4]];
+      feature.addBackgroundStep('And', 'Second test', datatable);
+      expect(feature.background[1]).toEqual({keyword:'And', name:'Second test', dataTable: datatable});
+    });
 
     describe('It has "addScenario(name)" function:', function() {
       it('returns id of added scenario', function () {

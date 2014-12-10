@@ -1,5 +1,10 @@
 Feature: Data type examples
 
+  Background:
+
+    Given First background step
+    And Last background step
+
   Scenario: Inline variables
 
     Given When define "inline" variable
