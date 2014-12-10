@@ -39,11 +39,9 @@ define(['text!tmpl/ScenarioDetails.tmpl.html', 'text!tmpl/ScenarioDetailsStep.tm
           previousClass = 'step-keyword-given';
         } else if (step.keyword === 'When') {
           $step.addClass('step-keyword-when');
-          $step.addClass('step-block-first');
           previousClass = 'step-keyword-when';
         } else if (step.keyword === 'Then') {
           $step.addClass('step-keyword-then');
-          $step.addClass('step-block-first');
           previousClass = 'step-keyword-then';
         } else {
           $step.addClass(previousClass);

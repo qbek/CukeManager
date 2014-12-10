@@ -95,12 +95,12 @@ define(['models/ScenarioModel', 'views/ScenarioDetailsView', 'modules/DataCompil
         expect($steps[4]).toHaveClass('step-keyword-then');
         expect($steps[5]).toHaveClass('step-keyword-then');
 
-        //sets .set-block-first at beginning of each type block
+        //sets .set-block-first at beginning of each Given step
         expect($steps[0]).toHaveClass('step-block-first');
         expect($steps[1]).not.toHaveClass('step-block-first');
-        expect($steps[2]).toHaveClass('step-block-first');
+        expect($steps[2]).not.toHaveClass('step-block-first');
         expect($steps[3]).not.toHaveClass('step-block-first');
-        expect($steps[4]).toHaveClass('step-block-first');
+        expect($steps[4]).not.toHaveClass('step-block-first');
         expect($steps[5]).not.toHaveClass('step-block-first');
 
         //In step name variables are surrounded with span.step-variable element
@@ -122,7 +122,6 @@ define(['models/ScenarioModel', 'views/ScenarioDetailsView', 'modules/DataCompil
 
       });
     });
-
 
   });
 });
