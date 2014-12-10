@@ -13,7 +13,7 @@ pre {
   font-family: 'Source Code Pro', sans-serif;
   font-size: 0.8em;
   clear: both;
-  margin: 6px 9px;
+  margin: 0px 9px;
 }
 
 #feature-list {
@@ -52,7 +52,7 @@ pre {
 
 .feature-tags,
 .scenario-tags {
-  margin-top: 6px;
+  margin-top: 3px;
   margin-bottom: 1px;
   color: rgb(50,140,231);
   font-style: italic;
@@ -101,7 +101,11 @@ pre {
 .scenario {
   margin: 0 12px;
   list-style: none;
+  font-size: 0.8em;
 }
+
+/*in feature list view scenario name and status are smaller ones*/
+
 
 
 .scenario-name,
@@ -110,7 +114,7 @@ pre {
   display: inline-block;
   margin: 0px;
   padding: 2px 6px;
-  font-size: 1em;
+  /*font-size: 1em;*/
 }
 
 .scenario-label {
@@ -141,8 +145,38 @@ pre {
   margin: 2px;
 }
 
-.scenario-steps {
+.scenario-background {
+  margin: 0 12px;
+  background-color: rgb(232, 235, 239);
+  border: 1px solid rgb(66,69,73);
+  border-radius: 0px 6px 6px 6px;
+}
+
+.scenario-background-keyword {
+    background-color: rgb(66, 69, 73);
+    color: rgb(232, 235, 239);
+    display: inline-block;
+    font-size: 0.7em;
+    margin: 0;
+    padding: 3px 6px;
+    float: left;
+}
+
+.scenario-steps,
+.scenario-background-steps {
   list-style: none;
+  padding: 0;
+}
+
+.scenario-background-steps {
+  font-size: 0.8em;
+  margin: 0;
+  clear: left;
+}
+
+.scenario-steps {
+  margin: 6px 12px;
+  font-size: 0.8em;
 }
 
 .scenario-step {
@@ -179,7 +213,11 @@ pre {
 }
 
 .step-block-first {
-  margin-top: 18px;
+  margin-top: 24px;
+}
+
+.step-block-first:first-child {
+  margin-top: 0px;
 }
 
 .step-variable {
@@ -189,7 +227,7 @@ pre {
 
 .step-datatable {
   margin-left: 48px;
-  color: darkgrey;
+  color: rgb(66,69,73);
 }
 
 .step-datatable tr {

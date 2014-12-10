@@ -74,9 +74,20 @@ define(['models/ScenarioModel', 'views/ScenarioDetailsView', 'modules/DataCompil
         view.show(0, 0);
         expect($('.scenario-description', view.$render).html()).toBe('!Overview: An overview of scenario\n\n!Preconditions:\n  - set of preconditions\n\n!Pass Criteria:\n  - some pass criteria');
 
+        //renders scenario background steps
+        view.show(1, 0);
+        var $steps = $('.scenario-background-steps .scenario-step', view.$render);
+        expect($steps.length).toBe(2);
+        expect($('.step-keyword', $steps[0]).html()).toBe('Given');
+        expect($('.step-name', $steps[0]).html()).toBe('First background step');
+        expect($('.step-keyword', $steps[1]).html()).toBe('And');
+        expect($('.step-name', $steps[1]).html()).toBe('Last background step');
+
+
+
         //check scenario steps
         view.show(1, 1);
-        var $steps = $('.scenario-step', view.$render);
+        $steps = $('.scenario-steps .scenario-step', view.$render);
         expect($steps.length).toBe(3);
         expect($('.step-keyword', $steps[0]).html()).toBe('Given');
         expect($('.step-name', $steps[0]).html()).toBe('Data table');
@@ -87,7 +98,7 @@ define(['models/ScenarioModel', 'views/ScenarioDetailsView', 'modules/DataCompil
 
         //sets additional css classes to color step types
         view.show(0, 0);
-        var $steps = $('.scenario-step', view.$render);
+        $steps = $('.scenario-steps .scenario-step', view.$render);
         expect($steps[0]).toHaveClass('step-keyword-given');
         expect($steps[1]).toHaveClass('step-keyword-given');
         expect($steps[2]).toHaveClass('step-keyword-when');
@@ -105,14 +116,14 @@ define(['models/ScenarioModel', 'views/ScenarioDetailsView', 'modules/DataCompil
 
         //In step name variables are surrounded with span.step-variable element
         view.show(1, 0);
-        var $steps = $('.scenario-step', view.$render);
+        $steps = $('.scenario-steps .scenario-step', view.$render);
         expect($('.step-name', $steps[0]).html()).toEqual('When define <span class="step-variable">"inline"</span> variable');
         expect($('.step-name', $steps[1]).html()).toEqual('Define <span class="step-variable">"one"</span>, <span class="step-variable">"two"</span> inline variables and even <span class="step-variable">"three"</span>');
 
         //if step contains data table, renders it, if not hides table element
         view.show(1, 1);
-        var $steps = $('.scenario-step', view.$render);
-        var datatableRows = $('.step-datatable tr', $steps[0])
+        $steps = $('.scenario-steps .scenario-step', view.$render);
+        var datatableRows = $('.step-datatable tr', $steps[0]);
         expect(datatableRows.length).toBe(4);
 
         expect($(datatableRows[0]).html()).toEqual('<td>datakey</td><td>datavalue</td>');
