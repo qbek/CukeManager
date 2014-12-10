@@ -69,18 +69,26 @@ define(['jquery', 'modules/DataCompile', 'modules/ExportToCVS', 'TestExecutionCt
     $('#feature-list').show();
 
     //start TestExecutionCtrl
-    TestExecutionCtrl.init(features);
+    if(features) {
+      TestExecutionCtrl.init(features);
+    } else {
+      router.setRoute('/');
+    }
   }
 
   function handleScenarioDetailRoute(featureId, scenarioId) {
-    //first to prepare section to show - filing with data
-    TestExecutionCtrl.showScenario(featureId, scenarioId);
+    if(features) {
+      //first to prepare section to show - filing with data
+      TestExecutionCtrl.showScenario(featureId, scenarioId);
 
-    //show features-list and scenarios-list sections
-    resetScreen();
-    $('#feature-list').show();
-    $('#feature-list').attr('class', 'narrow');
-    $('#scenario-view').show();
+      //show features-list and scenarios-list sections
+      resetScreen();
+      $('#feature-list').show();
+      $('#feature-list').attr('class', 'narrow');
+      $('#scenario-view').show();
+    } else {
+      router.setRoute('/');
+    }
 
   }
 
