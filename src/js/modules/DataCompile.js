@@ -10,29 +10,14 @@ define(['models/FeatureModel'], function (Feature) {
       .replace(/>/g, '&gt;');
   }
 
-  function compileDataTable(data) {
-    var datatable = [];
-    data.forEach(function(row) {
-      datatable.push(row.cells);
-    });
-
-    return datatable;
-  }
-
   function compileData (jsonString) {
     var features = [];
     var data = $.parseJSON(jsonString);
     //loop through features
     data.forEach(function (featureData) {
-      //read feature data
-      var name = htmlEscape(featureData.name);
-      var description = htmlEscape(featureData.description);
-      var tags = compileTags(featureData.tags);
       var backgroundSteps = 0;
-      //create new feature and fill with read data
-      var feature = Feature.create(name);
-      feature.setTags(tags);
-      feature.setDescription(description);
+      //read feature data
+      var feature = compileFeatureBaseData(featureData);
       //loop through scenarios
       featureData.elements.forEach(function (scenarioData) {
         if(scenarioData.type === 'background') {
@@ -50,16 +35,8 @@ define(['models/FeatureModel'], function (Feature) {
               }
             });
           }
-
         } else if (scenarioData.type === 'scenario') {
-          //read scenario data
-          var name = htmlEscape(scenarioData.name);
-          var tags = compileTags(scenarioData.tags);
-          var description = htmlEscape(scenarioData.description);
-          //create new scenario and fill with read data
-          var scnId = feature.addScenario(name);
-          feature.setScenarioTags(scnId, tags);
-          feature.setScenarioDescription(scnId, description);
+          var scenarioId = compileScenarioBaseData(feature, scenarioData);
           //read steps and add to scenario
           if(scenarioData.steps) {
             scenarioData.steps.forEach(function (step, index) {
@@ -71,9 +48,9 @@ define(['models/FeatureModel'], function (Feature) {
                 var rowsDataTable = step.rows;
                 if(rowsDataTable) {
                   var datatable = compileDataTable(rowsDataTable);
-                  feature.addScenarioStep(scnId, key, name, status, datatable);
+                  feature.addScenarioStep(scenarioId, key, name, status, datatable);
                 } else {
-                  feature.addScenarioStep(scnId, key, name, status);
+                  feature.addScenarioStep(scenarioId, key, name, status);
                 }
               }
             });
@@ -85,6 +62,30 @@ define(['models/FeatureModel'], function (Feature) {
     return features;
   }
 
+  function compileFeatureBaseData (featureData) {
+    var name = htmlEscape(featureData.name);
+    var description = htmlEscape(featureData.description);
+    var tags = compileTags(featureData.tags);
+    //create new feature and fill with read data
+    var feature = Feature.create(name);
+    feature.setTags(tags);
+    feature.setDescription(description);
+    return feature;
+  }
+
+  function compileScenarioBaseData(feature, scenarioData) {
+    //read scenario data
+    var name = htmlEscape(scenarioData.name);
+    var tags = compileTags(scenarioData.tags);
+    var description = htmlEscape(scenarioData.description);
+    //create new scenario and fill with read data
+    var scnId = feature.addScenario(name);
+    feature.setScenarioTags(scnId, tags);
+    feature.setScenarioDescription(scnId, description);
+
+    return scnId;
+  }
+
   function compileTags (tags) {
     var output = null;
     if (tags) {
@@ -94,6 +95,15 @@ define(['models/FeatureModel'], function (Feature) {
       });
     }
     return output;
+  }
+
+  function compileDataTable(data) {
+    var datatable = [];
+    data.forEach(function(row) {
+      datatable.push(row.cells);
+    });
+
+    return datatable;
   }
 
 
