@@ -146,7 +146,7 @@ pre {
 }
 
 .scenario-background {
-  margin: 0 12px;
+  margin: 6px 12px;
   background-color: rgb(232, 235, 239);
   border: 1px solid rgb(66,69,73);
   border-radius: 0px 6px 6px 6px;
@@ -243,4 +243,41 @@ pre {
 .step-datatable td:last-child {
   border-right: 1px solid;
   border-color: rgb(107,41,136);
+}
+
+.scenario-enterresult {
+  background-color: rgb(232, 235, 239);
+  border: 1px solid rgb(66,69,73);
+  border-radius: 0px 6px 6px 6px;
+  clear:both;
+  padding: 12px 24px;
+  margin: 6px 12px;
+  overflow: auto;
+}
+
+.scenario-enterresult textarea {
+  float: left;
+}
+
+.scenario-enterresult button {
+  float: left;
+  width: 100px;
+  margin: 3px 0 3px 6px;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 6px;
+  padding: 3px 0px;
+
+}
+
+.scenario-enterresult .button-pass {
+  background-color: #3FB51F;
+}
+
+.scenario-enterresult .button-fail {
+  background-color: #ED5F02;
+}
+
+.scenario-enterresult .button-norun {
+  background-color: #0A63B7;
 }
