@@ -182,9 +182,27 @@ define(['models/ScenarioModel', 'models/FeatureModel', 'views/FeatureListView', 
         expect($('.scenario-description', view.$render)).toContainText('Example description');
         //renders scenario status
         expect($('.scenario-status', view.$render)).toContainText('undefined');
+        //adds class .scenario-status-pass when on pass
+        scenario.setStatus('pass');
+        expect($('.scenario-status', view.$render)).toHaveClass('scenario-status-pass');
+        //check if removing status removes also class
+        scenario.setStatus('undefined');
+        expect($('.scenario-status', view.$render)).not.toHaveClass('scenario-status-pass');
+        scenario.setStatus('fail');
+        expect($('.scenario-status', view.$render)).toHaveClass('scenario-status-fail');
+        scenario.setStatus('no run');
+        expect($('.scenario-status', view.$render)).toHaveClass('scenario-status-norun');
+
+
         //adds data-featureid and data-scenarioid attr to .feature-label element
         expect($('.scenario-label', view.$render)).toHaveAttr('data-featureid', '1');
         expect($('.scenario-label', view.$render)).toHaveAttr('data-scenarioid', '1');
+      });
+
+      it('Updates status in $render on "change:status" even triggered by scenario model', function () {
+        expect($('.scenario-status', view.$render)).toContainText('undefined');
+        scenario.setStatus('pass');
+        expect($('.scenario-status', view.$render)).toContainText('pass');
       });
     });
 

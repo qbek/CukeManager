@@ -5,7 +5,7 @@ define(['models/ScenarioModel', 'views/ScenarioDetailsView', 'modules/DataCompil
     var scenario;
 
     beforeEach(function () {
-      scenario = ScenarioModel.create('Test name', 'Test description');
+      scenario = ScenarioModel.create('Test name');
     });
 
     it('It has "name" with name of the scenario', function () {
@@ -49,8 +49,31 @@ define(['models/ScenarioModel', 'views/ScenarioDetailsView', 'modules/DataCompil
       //check if can be added full step
       scenario.addStep('When', 'Data table', 'undefined', [['key1', 'value1'], ['key2', 'value2']]);
       expect(scenario.steps[1]).toEqual({keyword: 'When', name: 'Data table', result: 'undefined', dataTable: [['key1', 'value1'], ['key2', 'value2']]});
+    });
 
-    })
+    describe('setStatus(status, comment)', function () {
+      it('sets read only properties "status" and "statusComment"', function () {
+        //check if properties are read only
+        scenario.status = 'changed';
+        scenario.statusComment = 'changed';
+        expect(scenario.status).toBe('undefined');
+        expect(scenario.statusComment).toBe(null);
+        //check if setStatus() sets status
+        scenario.setStatus('pass', 'no comment');
+        expect(scenario.status).toBe('pass');
+        expect(scenario.statusComment).toBe('no comment');
+
+        scenario.setStatus('no run');
+        expect(scenario.status).toBe('no run');
+        expect(scenario.statusComment).toBe(null);
+      });
+
+      it('triggers "change:status" event', function () {
+        var spyEvent = spyOnEvent(scenario, 'change:status');
+        scenario.setStatus('pass');
+        expect('change:status').toHaveBeenTriggeredOn(scenario);
+      });
+    });
   });
 
   describe('ScenarioDetailsView', function() {

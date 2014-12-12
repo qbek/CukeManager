@@ -140,9 +140,21 @@ pre {
   float: right;
   background-color: rgb(212, 215, 219);
   border-radius: 6px;
-  text-transform: uppercase;
   font-size: 0.8em;
   margin: 2px;
+  text-align: center;
+  text-transform: uppercase;
+  width: 55px;
+}
+
+.scenario-status-pass {
+  background-color: #3FB51F;
+}
+.scenario-status-fail {
+  background-color: #ED5F02;
+}
+.scenario-status-norun {
+  background-color: #328CE7;
 }
 
 .scenario-background {
@@ -253,10 +265,13 @@ pre {
   padding: 12px 24px;
   margin: 6px 12px;
   overflow: auto;
+  min-width: 326px;
 }
 
 .scenario-enterresult textarea {
   float: left;
+  min-width: 318px;
+  width: 75%;
 }
 
 .scenario-enterresult button {

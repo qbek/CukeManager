@@ -6,9 +6,14 @@ define([], function () {
     var description = null;
     //stores scenario steps
     var steps = null;
+    //stores scenario status
+    var status = {
+      result: 'undefined',
+      comment: null
+    };
+
 
     this.name = name;
-    this.status = 'undefined';
     this.tags = null;
     this.steps = null;
     this.visible = true;
@@ -23,6 +28,18 @@ define([], function () {
       enumerable: false,
       configurable: false,
       get: function () { return steps; }
+    });
+
+    Object.defineProperty(this, 'status', {
+      enumerable: false,
+      configurable: false,
+      get: function () { return status.result; }
+    });
+
+    Object.defineProperty(this, 'statusComment', {
+      enumerable: false,
+      configurable: false,
+      get: function () { return status.comment; }
     });
 
     this.setDescription = function(desc) {
@@ -41,6 +58,16 @@ define([], function () {
       steps.push(step);
     };
 
+    this.setStatus = function(stat, comment) {
+      status.result = stat;
+      if(comment) {
+        status.comment = comment;
+      } else {
+        status.comment = null;
+      }
+
+      $(this).trigger('change:status');
+    };
   }
 
   $.extend(Scenario.prototype, {
