@@ -33,8 +33,31 @@ define(['text!tmpl/ScenarioDetails.tmpl.html', 'text!tmpl/ScenarioDetailsStep.tm
     }
     //render base scenario data
     $scn_name.html(scn.name);
+
     $scn_tags.html(tagsString);
     $scn_desc.html(scn.description);
+  }
+
+  function renderScenarioStatus (scenario, $render) {
+    var $scn_status = $('.scenario-status', $render);
+    $scn_status.html(scenario.status);
+
+    //color status labels
+    //cleanup all status classes
+    $scn_status.removeClass();
+    $scn_status.addClass('scenario-status');
+
+    switch (scenario.status) {
+      case 'pass':
+        $scn_status.addClass('scenario-status-pass');
+        break;
+      case 'fail':
+        $scn_status.addClass('scenario-status-fail');
+        break;
+      case 'no run':
+        $scn_status.addClass('scenario-status-norun');
+        break;
+      }
   }
 
   function renderScenarioBackground(background, $render) {
@@ -93,10 +116,19 @@ define(['text!tmpl/ScenarioDetails.tmpl.html', 'text!tmpl/ScenarioDetailsStep.tm
     this.show =  function(featureId, scenarioId) {
       var scenario = features[featureId].scenarios[scenarioId];
       var background = features[featureId].background;
-      renderScenario(scenario, this.$render);
-      renderScenarioBackground(background, this.$render);
+      var $render = this.$render;
+      renderScenario(scenario, $render);
+      renderScenarioStatus(scenario, $render);
+      renderScenarioBackground(background, $render);
       $('#scenario-view').empty();
       $('#scenario-view').append(this.$render);
+      $('#scenario-view').scrollTop(0);
+      $('#scenario-enterresult textarea').val('');
+
+
+      $(scenario).one('change:status', function () {
+        renderScenarioStatus(scenario, $render);
+      });
     };
   }
 
