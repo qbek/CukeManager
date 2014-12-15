@@ -81,6 +81,9 @@ define(['models/ScenarioModel', 'views/ScenarioDetailsView', 'modules/DataCompil
       var view;
       beforeEach(function () {
         var result = DataCompile.compile(json);
+        result[0].scenarios[1].setStatus('pass');
+        result[1].scenarios[0].setStatus('no run');
+        result[1].scenarios[1].setStatus('fail', 'fail comment');
         view = ScenarioDetailsView.createScenarioView(result);
       });
 
@@ -91,7 +94,20 @@ define(['models/ScenarioModel', 'views/ScenarioDetailsView', 'modules/DataCompil
 
         //check scenario tags
         view.show(0, 0);
-        expect($('.scenario-tags', view.$render).html()).toBe('@base @scenarioTag1');
+        expect($('.scenario-status', view.$render).html()).toBe('undefined');
+        view.show(0, 1);
+        expect($('.scenario-status', view.$render).html()).toBe('pass');
+        expect($('.scenario-status', view.$render)).toHaveClass('scenario-status-pass');
+        view.show(1, 0);
+        expect($('.scenario-status', view.$render).html()).toBe('no run');
+        expect($('.scenario-status', view.$render)).toHaveClass('scenario-status-norun');
+        view.show(1, 1);
+        expect($('.scenario-status', view.$render).html()).toBe('fail');
+        expect($('.scenario-status', view.$render)).toHaveClass('scenario-status-fail');
+
+
+        //check scenario status
+        view.show(0, 0);
 
         //check scenario description
         view.show(0, 0);
@@ -105,7 +121,6 @@ define(['models/ScenarioModel', 'views/ScenarioDetailsView', 'modules/DataCompil
         expect($('.step-name', $steps[0]).html()).toBe('First background step');
         expect($('.step-keyword', $steps[1]).html()).toBe('And');
         expect($('.step-name', $steps[1]).html()).toBe('Last background step');
-
 
 
         //check scenario steps
@@ -151,8 +166,6 @@ define(['models/ScenarioModel', 'views/ScenarioDetailsView', 'modules/DataCompil
 
         expect($(datatableRows[0]).html()).toEqual('<td>datakey</td><td>datavalue</td>');
         expect($(datatableRows[2]).html()).toEqual('<td>key2</td><td>value2</td>');
-
-
 
       });
     });
