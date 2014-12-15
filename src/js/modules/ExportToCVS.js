@@ -4,13 +4,13 @@ define(function () {
   function getScenarioCVS (scenario) {
     var scenarioCVS = String.concat(';', scenario.name);
     scenarioCVS += String.concat(';', scenario.status);
-    scenarioCVS += String.concat(';',  scenario.tags);
+    scenarioCVS += String.concat(';',  scenario.statusComment);
     scenarioCVS += '\n';
     return scenarioCVS;
   }
 
   function getFeatureCVS (feature) {
-    var featureCVS = String.concat(feature.name, ';', ';','\n');
+    var featureCVS = String.concat(feature.name, ';', ';', ';', '\n');
     var scenarios = feature.scenarios;
 
     scenarios.forEach(function (scenario) {
@@ -23,7 +23,7 @@ define(function () {
 
   return {
     getCVS: function (features) {
-      var cvs = 'Feature name; Scenario name; Status; Tags\n';
+      var cvs = 'Feature name; Scenario name; Status; Comments\n';
 
       features.forEach(function (feature) {
         cvs += getFeatureCVS(feature);
