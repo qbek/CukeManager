@@ -68,6 +68,7 @@ pre {
   border: 1px solid rgb(107,41,136);
   border-radius: 0 6px 6px 6px;
   cursor: pointer;
+  margin: 18px 6px 6px 6px;
 }
 
 .feature-keyword {
@@ -121,6 +122,8 @@ pre {
   border: 1px solid rgb(50, 140, 231);
   border-radius: 0px 6px 6px 6px;
   overflow: hidden;
+  margin-bottom: 3px;
+  
 }
 
 .scenario-keyword {
@@ -210,16 +213,16 @@ pre {
   display: inline-block;
 }
 
-.step-keyword-given .step-keyword {
+.step-keyword-given {
   /*color: rgb(107,41,136);*/
   color: rgb(63,181,31);
 }
 
-.step-keyword-when .step-keyword{
+.step-keyword-when {
   color: rgb(50,140,231);
 }
 
-.step-keyword-then .step-keyword{
+.step-keyword-then {
 
   color: rgb(237,95,2);
 }
