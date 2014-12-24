@@ -1,24 +1,19 @@
-define(['views/FeatureListView', 'ctrls/FeatureCtrl', 'views/ScenarioDetailsView'], function (FeatureListView, FeatureCtrl, ScenarioDetailsView) {
+define(['views/TestExecutionView', 'modules/ExportToCVS'], function () {
   'use strict';
   var views = [];
-  var features;
+  var _features;
   var scnDetailsView;
 
-  function setScenarioStatus (scenario, status, comment) {
-    if(comment) {
-      scenario.setStatus(status, comment);
-    } else {
-      scenario.setStatus(status);
-    }
-  }
+  var _TestExecutionView = require('views/TestExecutionView');
 
-  function enableMainEvents () {
+
+  function _enableMainEvents () {
     var $downloadCVS = $('#downloadCVS');
 
 
     $downloadCVS.on('click', function () {
       var ExportCVS = require('modules/ExportToCVS');
-      var cvsString = ExportCVS.getCVS(features);
+      var cvsString = ExportCVS.getCVS(_features);
       var base64 = btoa(cvsString);
 
       $downloadCVS.prop('href', 'data:text;base64,' + base64);
@@ -27,50 +22,45 @@ define(['views/FeatureListView', 'ctrls/FeatureCtrl', 'views/ScenarioDetailsView
 
       $downloadCVS.show();
     });
+  }
 
+  function _enableOpenScenarioDetailsEvent () {
+    var $featureList = $('#feature-list');
+    $('[data-gr="scenario"]', $featureList).on('click', function (event) {
+      var featureId = $(this).attr('data-featureid');
+      var scenarioId = $(this).attr('data-scenarioid');
+      window.location.hash = String.concat('#/features/scenario/', featureId, '/', scenarioId);
+    });
+  }
+
+  function initCtrl (featuresData) {
+    _features = featuresData;
+    _TestExecutionView.showFeatureList(_features);
+    _enableOpenScenarioDetailsEvent();
+    _enableMainEvents();
+  }
+
+  function showScenario (featureID, scenarioID) {
+    var scenario = _features[featureID].scenarios[scenarioID];
+    var background = _features[featureID].background;
+    _TestExecutionView.showScenario (scenario, background);
+
+    var $scenarioEnterResult = $('[data-eventBind="enter-scenario-status"]');
+    $scenarioEnterResult.off('click');
+    $scenarioEnterResult.on('click', 'button', function (e) {
+      var status = $(this).val();
+      var comment = $('textarea', $scenarioEnterResult).val();
+      if (status === 'fail' && !comment) {
+        alert('Please provide reason of fail in comment');
+      } else {
+        scenario.setStatus(status, comment);
+      }
+    });
   }
 
   return {
-    init: function (featuresData) {
-      features = featuresData;
-      features.forEach(function (feature, featureId) {
-        var featureView = FeatureListView.createFeatureView(feature);
-        feature.scenarios.forEach(function (scenario, scenarioId) {
-          var scenarioView = FeatureListView.createScenarioView(scenario, featureId, scenarioId);
-          featureView.addScenario(scenarioView);
-        });
-        var featureCtrl = FeatureCtrl.create(featureView);
-        views.push(featureView);
-
-        $('#feature-list').append(featureView.$render);
-      });
-      scnDetailsView = ScenarioDetailsView.createScenarioView(features);
-
-      enableMainEvents();
-    },
-
-    showScenario: function(featureId, scenarioId) {
-      scnDetailsView.show(featureId, scenarioId);
-      var $scenarioEnterResult = $('#scenario-enterresult');
-      var scenario = features[featureId].scenarios[scenarioId];
-      $scenarioEnterResult.off();
-      $scenarioEnterResult.on('click', '.button-pass', function (e) {
-        var comment = $('textarea', $scenarioEnterResult).val();
-        setScenarioStatus(scenario, 'pass', comment);
-      });
-      $scenarioEnterResult.on('click', '.button-fail', function (e) {
-        var comment = $('textarea', $scenarioEnterResult).val();
-        if(comment) {
-          setScenarioStatus(scenario, 'fail', comment);
-        } else {
-          alert('Please provide reason of fail in comment');
-        }
-      });
-      $scenarioEnterResult.on('click', '.button-norun', function (e) {
-        var comment = $('textarea', $scenarioEnterResult).val();
-        setScenarioStatus(scenario, 'no run', comment);
-      });
-    }
+    init: initCtrl,
+    showScenario: showScenario
   };
 
 

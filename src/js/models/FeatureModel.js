@@ -22,12 +22,6 @@ define(['models/ScenarioModel'], function (Scenario) {
     this.visible = true;
     this.scenarios = [];
 
-    //private
-    // this._tags = tagsData;
-
-
-
-
     this.setDescription = function(desc) {
       description = desc;
     };
@@ -56,8 +50,13 @@ define(['models/ScenarioModel'], function (Scenario) {
 
     //scenario related functions
     addScenario: function (name) {
+      var feature = this;
       var scenario = Scenario.create(name);
       var scnCount = this.scenarios.push(scenario);
+      $(scenario).on('change.status', function () {
+        console.log('change status catched by feature');
+        $(feature).trigger('change.scenario.status');
+      });
       return scnCount - 1;
     },
 

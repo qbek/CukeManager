@@ -1,4 +1,9 @@
 define(function () {
+  //style definitions used in this module
+  var GIVEN_KEYWORD_CLASS = 'step-keyword-given';
+  var WHEN_KEYWORD_CLASS = 'step-keyword-when';
+  var THEN_KEYWORD_CLASS = 'step-keyword-then';
+  var STEP_VAR_CLASS = 'step-variable';
 
   //returns jQuery object with data-gr=value in $render
   function _getGrElement (value, $render) {
@@ -43,13 +48,54 @@ define(function () {
     });
   }
 
+  //stores last step keyword css class. Starts with GIVEN
+  var _keywordClass = GIVEN_KEYWORD_CLASS;
   //renders and returns new step jQuery object, based on delivered $step template
   function _renderScenarioStep (step, $step) {
     var $newStep = $step.clone();
-    _getGrElement('step-keyword', $newStep).html(step.keyword);
-    _getGrElement('step-name', $newStep).html(step.name);
+    var $dataTable = _getGrElement('step-datatable', $step);
+    var $keyword = _getGrElement('step-keyword', $newStep);
+    $keyword.html(step.keyword);
+    switch (step.keyword) {
+      case 'Given':
+        _keywordClass = GIVEN_KEYWORD_CLASS;
+        break;
+      case 'When':
+        _keywordClass = WHEN_KEYWORD_CLASS;
+        break;
+      case 'Then':
+        _keywordClass = THEN_KEYWORD_CLASS;
+    }
+    $keyword.addClass(_keywordClass);
+
+    var stepName = _markScenarioStepVariables(step.name);
+    _getGrElement('step-name', $newStep).html(stepName);
+
+    //render data table if exists
+    if(step.dataTable) {
+      var dataHtml = String('');
+      step.dataTable.forEach(function (row) {
+        var rowHtml = '<tr>';
+        row.forEach(function (cell) {
+          rowHtml = rowHtml.concat('<td>', cell, '</td>');
+        });
+        rowHtml = rowHtml.concat('</tr>');
+        // console.log(rowHtml);
+        dataHtml = dataHtml.concat(rowHtml);
+      });
+      $('tbody', $dataTable).html(dataHtml);
+    }
 
     return $newStep;
+  }
+
+  //surrounds variables in step with span.step-variable
+  function _markScenarioStepVariables(stepName) {
+    return String(stepName)
+      .replace(/\s"/g, ' <span class="'+ STEP_VAR_CLASS +'">"')
+      .replace(/"\s/g, '"</span> ')
+      .replace(/",/g, '"</span>,')
+      .replace(/"$/g, '"</span>');
   }
 
   function renderScenario (scenario, background, $template) {
@@ -65,16 +111,9 @@ define(function () {
     var $render = $template.clone();
     var $scn_template = _getGrElement('scenario', $render);
     $scn_template.detach();
-    var $scenarios = _getGrElement('scenarios', $render);
     var $name = _getGrElement('feat-name', $render);
 
-
     $name.html(feature.name);
-    //loop through scenarios and render them
-    feature.scenarios.forEach(function (scenario) {
-      var $newScenario = renderScenario(scenario, null, $scn_template);
-      $newScenario.appendTo($scenarios);
-    });
     return $render;
   }
 

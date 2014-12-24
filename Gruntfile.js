@@ -7,7 +7,7 @@ module.exports = function(grunt) {
         frameworks: ['jasmine', 'requirejs'],
         files: [{pattern: 'src/js/models/*.js', included: false},
                 {pattern: 'src/js/views/*.js', included: false},
-                {pattern: 'src/js/ctrls/*.js', included: false},
+                {pattern: 'src/js/views/components/*.js', included: false},
                 {pattern: 'src/js/modules/*.js', included: false},
                 {pattern: 'src/js/vendor/text.js', included: false},
                 {pattern: 'test/*.spec.js', included: false},

@@ -15,7 +15,6 @@ define([], function () {
 
     this.name = name;
     this.tags = null;
-    this.steps = null;
     this.visible = true;
 
     Object.defineProperty(this, 'description', {
@@ -66,7 +65,7 @@ define([], function () {
         status.comment = null;
       }
 
-      $(this).trigger('change:status');
+      $(this).trigger('change.status');
     };
   }
 

@@ -69,15 +69,6 @@ function () {
         var $render = GherkinRender.renderFeature(featuresSet[0], $featureTmpl);
         expect($('[data-gr="feat-name"]', $render)).toContainText(featuresSet[0].name);
       });
-
-      it('fills data-gr="scenarios" with feature scenarios data', function () {
-        var $render = GherkinRender.renderFeature(featuresSet[0], $featureTmpl);
-        var $scenarios = $('[data-gr="scenarios"] [data-gr="scenario"]', $render);
-        expect($scenarios.length).toBe(2);
-        expect($('[data-gr="scn-name"]', $scenarios[0])).toContainText(featuresSet[0].scenarios[0].name);
-        expect($('[data-gr="scn-name"]', $scenarios[1])).toContainText(featuresSet[0].scenarios[1].name);
-      });
-
     });
 
   });
