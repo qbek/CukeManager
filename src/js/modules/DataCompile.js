@@ -79,10 +79,7 @@ define(['models/FeatureModel'], function (Feature) {
     var tags = compileTags(scenarioData.tags);
     var description = htmlEscape(scenarioData.description);
     //create new scenario and fill with read data
-    var scnId = feature.addScenario(name);
-    feature.setScenarioTags(scnId, tags);
-    feature.setScenarioDescription(scnId, description);
-
+    var scnId = feature.addScenario(name, description, tags);
     return scnId;
   }
 
