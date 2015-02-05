@@ -2,70 +2,13 @@ define([], function () {
   'use strict';
 
   function Scenario (name) {
-    //stores scenario description
-    var description = null;
-    //stores scenario steps
-    var steps = null;
-    //stores scenario status
-    var status = {
+    this.name = name;
+    this.tags = [];
+    this.description = null;
+    this.steps = [];
+    this.status = {
       result: 'undefined',
       comment: null
-    };
-
-
-    this.name = name;
-    this.tags = null;
-    this.visible = true;
-
-    Object.defineProperty(this, 'description', {
-      enumerable: false,
-      configurable: false,
-      get: function () { return description; }
-    });
-
-    Object.defineProperty(this, 'steps', {
-      enumerable: false,
-      configurable: false,
-      get: function () { return steps; }
-    });
-
-    Object.defineProperty(this, 'status', {
-      enumerable: false,
-      configurable: false,
-      get: function () { return status.result; }
-    });
-
-    Object.defineProperty(this, 'statusComment', {
-      enumerable: false,
-      configurable: false,
-      get: function () { return status.comment; }
-    });
-
-    this.setDescription = function(desc) {
-      description = desc;
-    };
-
-    this.addStep = function(key, name, result, datatable) {
-      if(steps === null) { steps = []; }
-      var step = {
-        keyword: key,
-        name: name,
-        result: result,
-      };
-
-      if(datatable) { step.dataTable = datatable; }
-      steps.push(step);
-    };
-
-    this.setStatus = function(stat, comment) {
-      status.result = stat;
-      if(comment) {
-        status.comment = comment;
-      } else {
-        status.comment = null;
-      }
-
-      $(this).trigger('change.status');
     };
   }
 
@@ -74,13 +17,32 @@ define([], function () {
       this.tags = tagsArray;
     },
 
-    // setSteps: function (stepsArray) {
-    //   this.steps = stepsArray;
-    // }
+    setDescription: function(desc) {
+      this.description = desc;
+    },
+
+    addStep: function(key, name, result, datatable) {
+      var step = {
+        keyword: key,
+        name: name,
+        result: result,
+      };
+
+      if(datatable) { step.dataTable = datatable; }
+      this.steps.push(step);
+    },
+
+    setStatus: function(stat, comment) {
+      this.status.result = stat;
+      if(comment) {
+        this.status.comment = comment;
+      } else {
+        this.status.comment = null;
+      }
+
+      $(this).trigger('change.status');
+    }
   });
-
-
-
 
   return {
     create: function (name) {

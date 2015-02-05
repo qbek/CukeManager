@@ -19,7 +19,9 @@ define(function () {
     var $description = _getGrElement('scn-description', $render);
 
     $name.html(scenario.name);
-    $status.html(scenario.status);
+    // $status.html(scenario.status.result);
+    // $status.html('glupi test');
+
     //not all scenarios have tags
     if (scenario.tags) {
       $tags.html(scenario.tags.join(' '));
@@ -109,11 +111,17 @@ define(function () {
 
   function renderFeature(feature, $template) {
     var $render = $template.clone();
-    var $scn_template = _getGrElement('scenario', $render);
-    $scn_template.detach();
     var $name = _getGrElement('feat-name', $render);
-
+    var $status_pass = _getGrElement('feat-stat-pass', $render);
+    var $status_fail = _getGrElement('feat-stat-fail', $render);
+    var $status_norun = _getGrElement('feat-stat-norun', $render);
+    var $status_undef = _getGrElement('feat-stat-undef', $render);
     $name.html(feature.name);
+    $status_pass.html(feature.stats.pass);
+    $status_fail.html(feature.stats.fail);
+    $status_norun.html(feature.stats.norun);
+    $status_undef.html(feature.stats.undef);
+
     return $render;
   }
 

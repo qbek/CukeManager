@@ -84,7 +84,7 @@ define(['modules/DataCompile', 'text!testdata/example.json'], function (DataComp
 
         //check steps of 'Scenario: Scenario without steps'
         scenario = featureOne.scenarios[1];
-        expect(scenario.steps).toBe(null);
+        expect(scenario.steps).toEqual([]);
       });
 
       it('reads data tables attached to steps', function () {

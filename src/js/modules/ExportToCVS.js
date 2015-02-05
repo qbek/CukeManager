@@ -3,8 +3,8 @@ define(function () {
 
   function getScenarioCVS (scenario) {
     var scenarioCVS = String.concat(';', scenario.name);
-    scenarioCVS += String.concat(';', scenario.status);
-    scenarioCVS += String.concat(';',  scenario.statusComment || '');
+    scenarioCVS += String.concat(';', scenario.status.result);
+    scenarioCVS += String.concat(';',  scenario.status.comment || '');
     scenarioCVS += '\n';
     return scenarioCVS;
   }

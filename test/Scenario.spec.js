@@ -3,24 +3,75 @@ function (ScenarioModel, DataCompile, json) {
 
   describe('Scenario Model', function() {
 
-    var scenario;
-
-    beforeEach(function () {
-      scenario = ScenarioModel.create('Test name');
+    it('factory ScenarioModel.create(name) creates new scenario', function () {
+      var testScnName = 'Test scenario';
+      var scenario = ScenarioModel.create(testScnName);
+      //checks scenario public variables
+      expect(scenario.name).toBe(testScnName);
+      expect(scenario.description).toBe(null);
+      expect(scenario.tags).toEqual([]);
+      expect(scenario.steps).toEqual([]);
+      expect(scenario.status).toEqual({result: 'undefined', comment: null});
     });
 
-    it('It has "name" with name of the scenario', function () {
-      expect(scenario.name).toEqual('Test name');
+    describe('public function', function () {
+      var scenario;
+      beforeEach(function () {
+        scenario = ScenarioModel.create('Test name');
+      });
+
+      it('setTags(tags[]) - sets scenario.tags', function () {
+        var testTags = ['tag1', 'tag2'];
+        scenario.setTags(testTags);
+        expect(scenario.tags).toEqual(testTags);
+      });
+
+      it('setDescription(desc) - sets scenario.description', function () {
+        var testDescription = 'Example description';
+        scenario.setDescription(testDescription);
+        expect(scenario.description).toEqual(testDescription);
+      });
+
+      it('addStep(keyword, name, result [, datatable]) - adds step to scenario.steps', function () {
+        var testStepNameStr1 = 'Given';
+        var testStepStr1 = 'Test step one';
+        var testStepResult = 'undefined';
+        //check if can be added step without dataTable
+        scenario.addStep(testStepNameStr1, testStepStr1, testStepResult);
+        expect(scenario.steps[0]).toEqual(
+          { keyword: testStepNameStr1,
+            name: testStepStr1,
+            result: testStepResult});
+        //check if can be added full step
+        var testStepNameStr2 = 'When';
+        var testStepStr2 = 'Test step two';
+        var testDataTable = [[1,2 ], [3,4]];
+        scenario.addStep(testStepNameStr2, testStepStr2, testStepResult, testDataTable);
+        expect(scenario.steps[1]).toEqual(
+          { keyword: testStepNameStr2,
+            name: testStepStr2,
+            result: testStepResult,
+            dataTable: testDataTable});
+      });
+
+
+      it('setStatus(status, comment) - sets scenario.status and triggers "change.status" event', function () {
+        scenario.setStatus('pass', 'no comment');
+        expect(scenario.status.result).toBe('pass');
+        expect(scenario.status.comment).toBe('no comment');
+
+        scenario.setStatus('no run');
+        expect(scenario.status.result).toBe('no run');
+        expect(scenario.status.comment).toBe(null);
+
+        // it('triggers "change.status" event', function () {
+        var spyEvent = spyOnEvent(scenario, 'change.status');
+        scenario.setStatus('pass');
+        expect('change.status').toHaveBeenTriggeredOn(scenario);
+      });
     });
 
-    it('It has "visible" set to true by default', function () {
-      expect(scenario.visible).toEqual(true);
-    });
 
-    it('has "setTags()" function which sets "tags" property', function () {
-      scenario.setTags(['tag1', 'tag2']);
-      expect(scenario.tags).toEqual(['tag1', 'tag2']);
-    });
 
     //to remove
     xit('has "setSteps()" function which sets "steps" property', function () {
@@ -30,50 +81,9 @@ function (ScenarioModel, DataCompile, json) {
       expect(scenario.steps).toEqual(steps);
     });
 
-    it('has "setDescription()" function with sets "description" property', function () {
-      var desc = 'Example description';
-      //check if user cannot set property using =
-      scenario.description = "New description";
-      expect(scenario.description).toEqual(null);
-      //check if function sets correctly property
-      scenario.setDescription(desc);
-      expect(scenario.description).toEqual(desc);
-    });
 
-    it('has "addStep(keyword, name, result [, datatable])" function which adds step to "steps" property', function () {
-      //check if steps property is read only
-      scenario.steps = "first step";
-      expect(scenario.steps).toBe(null);
-      //check if can be added step without dataTable
-      scenario.addStep('Given', 'Test step', 'undefined');
-      expect(scenario.steps[0]).toEqual({keyword: 'Given', name: 'Test step', result: 'undefined'});
-      //check if can be added full step
-      scenario.addStep('When', 'Data table', 'undefined', [['key1', 'value1'], ['key2', 'value2']]);
-      expect(scenario.steps[1]).toEqual({keyword: 'When', name: 'Data table', result: 'undefined', dataTable: [['key1', 'value1'], ['key2', 'value2']]});
-    });
 
-    describe('setStatus(status, comment)', function () {
-      it('sets read only properties "status" and "statusComment"', function () {
-        //check if properties are read only
-        scenario.status = 'changed';
-        scenario.statusComment = 'changed';
-        expect(scenario.status).toBe('undefined');
-        expect(scenario.statusComment).toBe(null);
-        //check if setStatus() sets status
-        scenario.setStatus('pass', 'no comment');
-        expect(scenario.status).toBe('pass');
-        expect(scenario.statusComment).toBe('no comment');
-
-        scenario.setStatus('no run');
-        expect(scenario.status).toBe('no run');
-        expect(scenario.statusComment).toBe(null);
-      });
-
-      it('triggers "change.status" event', function () {
-        var spyEvent = spyOnEvent(scenario, 'change.status');
-        scenario.setStatus('pass');
-        expect('change.status').toHaveBeenTriggeredOn(scenario);
-      });
+    xdescribe('setStatus(status, comment)', function () {
     });
   });
 
