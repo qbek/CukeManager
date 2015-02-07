@@ -1,7 +1,7 @@
 [
   {
     "keyword": "Feature",
-    "name": "Base Scenario features",
+    "name": "Base Scenario features with \"quote\" and <tag>",
     "line": 2,
     "description": "!Author: Jakub Szewczyk\n!Reviewer:\nThis is short description of feature",
     "tags": [
@@ -14,12 +14,12 @@
         "line": 1
       }
     ],
-    "id": "base-scenario-features",
+    "id": "base-scenario-features-with-\"quote\"-and-<tag>",
     "uri": "exampleFeatures/BaseScenarios.feature",
     "elements": [
       {
         "keyword": "Scenario",
-        "name": "Steps display",
+        "name": "Steps display with \"quote\" and <tag>",
         "line": 10,
         "description": "!Overview: An overview of scenario\n\n!Preconditions:\n  - set of preconditions\n\n!Pass Criteria:\n  - some pass criteria",
         "tags": [
@@ -32,19 +32,19 @@
             "line": 9
           }
         ],
-        "id": "base-scenario-features;steps-display",
+        "id": "base-scenario-features-with-\"quote\"-and-<tag>;steps-display-with-\"quote\"-and-<tag>",
         "type": "scenario",
         "steps": [
           {
             "keyword": "Given ",
-            "name": "First given step",
+            "name": "First given step with \"quote\" and <tag>",
             "line": 19,
             "match": {
               "location": "exampleFeatures/BaseScenarios.feature:19"
             },
             "result": {
               "status": "undefined",
-              "duration": 380495
+              "duration": 439931
             }
           },
           {
@@ -56,7 +56,7 @@
             },
             "result": {
               "status": "undefined",
-              "duration": 305416
+              "duration": 3644667
             }
           },
           {
@@ -68,7 +68,7 @@
             },
             "result": {
               "status": "undefined",
-              "duration": 336285
+              "duration": 344527
             }
           },
           {
@@ -80,7 +80,7 @@
             },
             "result": {
               "status": "undefined",
-              "duration": 268959
+              "duration": 392717
             }
           },
           {
@@ -92,7 +92,7 @@
             },
             "result": {
               "status": "undefined",
-              "duration": 339917
+              "duration": 346273
             }
           },
           {
@@ -104,7 +104,7 @@
             },
             "result": {
               "status": "undefined",
-              "duration": 367854
+              "duration": 273918
             }
           }
         ]
@@ -124,7 +124,7 @@
             "line": 26
           }
         ],
-        "id": "base-scenario-features;scenario-without-steps",
+        "id": "base-scenario-features-with-\"quote\"-and-<tag>;scenario-without-steps",
         "type": "scenario"
       }
     ]
@@ -153,7 +153,7 @@
             },
             "result": {
               "status": "undefined",
-              "duration": 305625
+              "duration": 227683
             }
           },
           {
@@ -165,7 +165,7 @@
             },
             "result": {
               "status": "undefined",
-              "duration": 221816
+              "duration": 359473
             }
           }
         ]
@@ -187,7 +187,7 @@
             },
             "result": {
               "status": "undefined",
-              "duration": 160426
+              "duration": 228102
             }
           },
           {
@@ -199,7 +199,7 @@
             },
             "result": {
               "status": "undefined",
-              "duration": 236134
+              "duration": 159518
             }
           },
           {
@@ -211,7 +211,7 @@
             },
             "result": {
               "status": "undefined",
-              "duration": 256248
+              "duration": 338591
             }
           },
           {
@@ -223,7 +223,7 @@
             },
             "result": {
               "status": "undefined",
-              "duration": 355841
+              "duration": 257784
             }
           },
           {
@@ -235,7 +235,7 @@
             },
             "result": {
               "status": "undefined",
-              "duration": 283486
+              "duration": 343200
             }
           }
         ]
@@ -257,7 +257,7 @@
             },
             "result": {
               "status": "undefined",
-              "duration": 296546
+              "duration": 248076
             }
           },
           {
@@ -269,7 +269,7 @@
             },
             "result": {
               "status": "undefined",
-              "duration": 264140
+              "duration": 233479
             }
           },
           {
@@ -301,7 +301,7 @@
               {
                 "cells": [
                   "key3",
-                  "value3"
+                  "<value3>"
                 ],
                 "line": 20
               }
@@ -311,31 +311,31 @@
             },
             "result": {
               "status": "undefined",
-              "duration": 1788705
+              "duration": 1861550
             }
           },
           {
             "keyword": "When ",
             "name": "User reads this scenario",
-            "line": 21,
-            "match": {
-              "location": "exampleFeatures/DataTypeExamples.feature:21"
-            },
-            "result": {
-              "status": "undefined",
-              "duration": 281949
-            }
-          },
-          {
-            "keyword": "Then ",
-            "name": "Data table is correctly rendered",
             "line": 22,
             "match": {
               "location": "exampleFeatures/DataTypeExamples.feature:22"
             },
             "result": {
               "status": "undefined",
-              "duration": 270425
+              "duration": 309537
+            }
+          },
+          {
+            "keyword": "Then ",
+            "name": "Data table is correctly rendered",
+            "line": 23,
+            "match": {
+              "location": "exampleFeatures/DataTypeExamples.feature:23"
+            },
+            "result": {
+              "status": "undefined",
+              "duration": 290331
             }
           }
         ]

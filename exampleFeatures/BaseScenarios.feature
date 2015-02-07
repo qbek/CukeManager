@@ -1,5 +1,5 @@
 @featureTag1 @featureTag2
-Feature: Base Scenario features
+Feature: Base Scenario features with "quote" and <tag>
   !Author: Jakub Szewczyk
   !Reviewer:
   This is short description of feature
@@ -7,7 +7,7 @@ Feature: Base Scenario features
 
 
   @base @scenarioTag1
-  Scenario: Steps display
+  Scenario: Steps display with "quote" and <tag>
     !Overview: An overview of scenario
 
     !Preconditions:
@@ -16,7 +16,7 @@ Feature: Base Scenario features
     !Pass Criteria:
       - some pass criteria
 
-    Given First given step
+    Given First given step with "quote" and <tag>
     And Second given step
     When First when step
     And Second when step

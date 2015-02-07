@@ -17,6 +17,7 @@ Feature: Data type examples
       | datakey | datavalue |
       | key1    | value1    |
       | key2    | value2    |
-      | key3    | value3    |
+      | key3    | <value3>  |
+
     When User reads this scenario
     Then Data table is correctly rendered
