@@ -1,11 +1,9 @@
 define(['modules/DataCompile', 'text!testdata/example.json'], function (DataCompile, json) {
   'use strict';
   describe('DataCompile Module', function () {
-    beforeEach(function () {
-
-    });
 
     describe('has "compile()" function - it returns array of "FeatureModel\'s"', function () {
+      var testData = JSON.parse(json);
       var result = DataCompile.compile(json);
       var featureOne = result[0];
       var featureTwo = result[1];
@@ -14,8 +12,8 @@ define(['modules/DataCompile', 'text!testdata/example.json'], function (DataComp
         //check if all Features were compiled
         expect(result.length).toBe(2);
         //check names of compiled Features
-        expect(featureOne.name).toEqual('Base Scenario features');
-        expect(featureTwo.name).toEqual('Data type examples');
+        expect(result[0].name).toEqual(testData[0].name);
+        expect(result[1].name).toEqual(testData[1].name);
       });
 
       it('reads feature tags', function () {
@@ -42,12 +40,12 @@ define(['modules/DataCompile', 'text!testdata/example.json'], function (DataComp
 
       it('reads scenario names', function () {
         //check if all Scenarios were compiled
-        expect(featureOne.scenarios.length).toBe(2);
-        expect(featureTwo.scenarios.length).toBe(2);
+        expect(result[0].scenarios.length).toBe(2);
+        expect(result[1].scenarios.length).toBe(2);
         //check scenario names
         var scenarios = featureOne.scenarios;
-        expect(scenarios[0].name).toEqual('Steps display');
-        expect(scenarios[1].name).toEqual('Scenario without steps');
+        expect(scenarios[0].name).toEqual(testData[0].elements[0].name);
+        expect(scenarios[1].name).toEqual(testData[0].elements[1].name);
       });
 
       it('reads scenario tags', function () {
@@ -70,16 +68,16 @@ define(['modules/DataCompile', 'text!testdata/example.json'], function (DataComp
         //check steps of 'Scenario: Steps display'
         var scenario = featureOne.scenarios[0];
         expect(scenario.steps.length).toBe(6);
-        expect(scenario.steps[0].name).toEqual('First given step');
-        expect(scenario.steps[0].keyword).toEqual('Given');
+        expect(scenario.steps[0].name).toEqual(testData[0].elements[0].steps[0].name);
+        expect(scenario.steps[0].keyword).toEqual(testData[0].elements[0].steps[0].keyword.trim());
         expect(scenario.steps[0].result).toEqual('undefined');
 
-        expect(scenario.steps[2].name).toEqual('First when step');
-        expect(scenario.steps[2].keyword).toEqual('When');
+        expect(scenario.steps[2].name).toEqual(testData[0].elements[0].steps[2].name);
+        expect(scenario.steps[2].keyword).toEqual(testData[0].elements[0].steps[2].keyword.trim());
         expect(scenario.steps[2].result).toEqual('undefined');
 
-        expect(scenario.steps[5].name).toEqual('Second then step');
-        expect(scenario.steps[5].keyword).toEqual('And');
+        expect(scenario.steps[5].name).toEqual(testData[0].elements[0].steps[5].name);
+        expect(scenario.steps[5].keyword).toEqual(testData[0].elements[0].steps[5].keyword.trim());
         expect(scenario.steps[5].result).toEqual('undefined');
 
         //check steps of 'Scenario: Scenario without steps'

@@ -1,15 +1,6 @@
 define(['models/FeatureModel'], function (Feature) {
   'use strict';
 
-  function htmlEscape(str) {
-    return String(str)
-      .replace(/&/g, '&amp;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#39;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;');
-  }
-
   function compileData (jsonString) {
     var features = [];
     var data = $.parseJSON(jsonString);
@@ -63,8 +54,8 @@ define(['models/FeatureModel'], function (Feature) {
   }
 
   function compileFeatureBaseData (featureData) {
-    var name = htmlEscape(featureData.name);
-    var description = htmlEscape(featureData.description);
+    var name = featureData.name;
+    var description = featureData.description;
     var tags = compileTags(featureData.tags);
     //create new feature and fill with read data
     var feature = Feature.create(name);
@@ -75,9 +66,9 @@ define(['models/FeatureModel'], function (Feature) {
 
   function compileScenarioBaseData(feature, scenarioData) {
     //read scenario data
-    var name = htmlEscape(scenarioData.name);
+    var name = scenarioData.name;
     var tags = compileTags(scenarioData.tags);
-    var description = htmlEscape(scenarioData.description);
+    var description = scenarioData.description;
     //create new scenario and fill with read data
     var scnId = feature.addScenario(name, description, tags);
     return scnId;
