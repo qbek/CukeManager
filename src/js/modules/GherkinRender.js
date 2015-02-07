@@ -6,27 +6,39 @@ define(function () {
   var STEP_VAR_CLASS = 'step-variable';
 
   //returns jQuery object with data-gr=value in $render
-  function _getGrElement (value, $render) {
-    var jquery = String.concat('[data-gr="', value, '"]');
+  function _getGrElement (selector, $render) {
+    var jquery = String.concat('[data-gr="', selector, '"]');
     return $(jquery, $render);
+  }
+
+  function _htmlEscape(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+  }
+
+  function _updateGrElement (selector, data, $render) {
+    var $element = _getGrElement(selector, $render);
+    var escapedData = _htmlEscape(data);
+    $element.html(escapedData);
   }
 
   //renders name, status, tags and description of scenario
   function _fillScenarioBaseData (scenario, $render) {
-    var $name = _getGrElement('scn-name', $render);
-    var $status = _getGrElement('scn-status', $render);
     var $tags = _getGrElement('scn-tags', $render);
     var $description = _getGrElement('scn-description', $render);
 
-    $name.html(scenario.name);
-    // $status.html(scenario.status.result);
-    // $status.html('glupi test');
-
+    //fill scenario name
+    _updateGrElement('scn-name', scenario.name, $render);
+    //fill scenario description
+    _updateGrElement('scn-description', scenario.description, $render);
     //not all scenarios have tags
     if (scenario.tags) {
-      $tags.html(scenario.tags.join(' '));
+      _updateGrElement('scn-tags', scenario.tags.join(' '), $render);
     }
-    $description.html(scenario.description);
   }
 
   //renders all steps: scenario steps and background steps
@@ -111,12 +123,12 @@ define(function () {
 
   function renderFeature(feature, $template) {
     var $render = $template.clone();
-    var $name = _getGrElement('feat-name', $render);
     var $status_pass = _getGrElement('feat-stat-pass', $render);
     var $status_fail = _getGrElement('feat-stat-fail', $render);
     var $status_norun = _getGrElement('feat-stat-norun', $render);
     var $status_undef = _getGrElement('feat-stat-undef', $render);
-    $name.html(feature.name);
+    _updateGrElement('feat-name', feature.name, $render);
+
     $status_pass.html(feature.stats.pass);
     $status_fail.html(feature.stats.fail);
     $status_norun.html(feature.stats.norun);
