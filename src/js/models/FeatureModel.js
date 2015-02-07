@@ -1,13 +1,29 @@
 define(['models/ScenarioModel'], function (Scenario) {
   'use strict';
 
-  function Feature (name) {
-    this.name = name;
-    this.description = null;
-    this.tags = null;
-    this.background = null;
-    this.scenarios = [];
-    this.stats = null;
+  function Feature (data) {
+    if($.type(data) == 'string') {
+      this.name = data;
+      this.description = null;
+      this.tags = null;
+      this.background = null;
+      this.scenarios = [];
+      this.stats = {pass: 0, fail: 0, norun: 0, undef: 0};
+    } else if ($.type(data) == 'object') {
+      this.name = data.name;
+      this.description = data.description;
+      this.tags = data.tags;
+      this.background = data.background;
+      this.stats = data.stats;
+      this.scenarios = [];
+
+      var that = this;
+      data.scenarios.forEach(function (scenarioObj) {
+        var scenario = Scenario.create(scenarioObj);
+        that.scenarios.push(scenario);
+      });
+
+    }
   }
 
   $.extend(Feature.prototype, {
@@ -55,8 +71,8 @@ define(['models/ScenarioModel'], function (Scenario) {
   });
 
   return {
-    create: function (name) {
-      return new Feature(name);
+    create: function (data) {
+      return new Feature(data);
     }
   };
 });

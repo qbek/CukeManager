@@ -3,7 +3,7 @@ function (FeatureModel) {
 
   describe('Feature Model', function () {
 
-    it('factory FeatureModel.create(name) create new fature', function () {
+    it('factory FeatureModel.create(name) create new feature', function () {
       var testFeatStr = 'Test feature';
       var feature = FeatureModel.create(testFeatStr);
       //checks feature variables
@@ -12,7 +12,118 @@ function (FeatureModel) {
       expect(feature.tags).toBe(null);
       expect(feature.background).toBe(null);
       expect(feature.scenarios).toEqual([]);
-      expect(feature.stats).toBe(null);
+      expect(feature.stats).toEqual({pass: 0, fail: 0, norun: 0, undef: 0});
+    });
+
+    it('factory FeatureModel.create(fatureObj) create new feature', function () {
+      var testFeatureObj = {
+        "name": "Data type examples",
+        "description": "",
+        "tags": null,
+        "background": [
+          {
+            "keyword": "Given",
+            "name": "First background step"
+          },
+          {
+            "keyword": "And",
+            "name": "Last background step"
+          }
+        ],
+        "scenarios": [
+          {
+            "name": "Inline variables",
+            "tags": null,
+            "description": "",
+            "steps": [
+              {
+                "keyword": "Given",
+                "name": "When define \"inline\" variable",
+                "result": "undefined"
+              },
+              {
+                "keyword": "When",
+                "name": "Define \"one\", \"two\" inline variables and even \"three\"",
+                "result": "undefined"
+              },
+              {
+                "keyword": "Then",
+                "name": "Test is ok",
+                "result": "undefined"
+              }
+            ],
+            "status": {
+              "result": "undefined",
+              "comment": null
+            }
+          },
+          {
+            "name": "Data tables",
+            "tags": null,
+            "description": "",
+            "steps": [
+              {
+                "keyword": "Given",
+                "name": "Data table",
+                "result": "undefined",
+                "dataTable": [
+                  [
+                    "datakey",
+                    "datavalue"
+                  ],
+                  [
+                    "key1",
+                    "value1"
+                  ],
+                  [
+                    "key2",
+                    "value2"
+                  ],
+                  [
+                    "key3",
+                    "<value3>"
+                  ]
+                ]
+              },
+              {
+                "keyword": "When",
+                "name": "User reads this scenario",
+                "result": "undefined"
+              },
+              {
+                "keyword": "Then",
+                "name": "Data table is correctly rendered",
+                "result": "undefined"
+              }
+            ],
+            "status": {
+              "result": "undefined",
+              "comment": null
+            }
+          }
+        ],
+        "stats": {
+          "pass": 0,
+          "fail": 0,
+          "norun": 0,
+          "undef": 0
+        }
+      };
+
+      var feature = FeatureModel.create(testFeatureObj);
+      expect(feature.name).toBe(testFeatureObj.name);
+      expect(feature.description).toBe(testFeatureObj.description);
+      expect(feature.tags).toBe(testFeatureObj.tags);
+      expect(feature.background).toBe(testFeatureObj.background);
+      expect(feature.stats).toBe(testFeatureObj.stats);
+
+      //check if for scenarios ScenarioModels are created
+      expect(feature.scenarios[0].setStatus).toBeDefined();
+      expect(feature.scenarios[0].name).toBe(testFeatureObj.scenarios[0].name);
+      expect(feature.scenarios[0].description).toBe(testFeatureObj.scenarios[0].description);
+      expect(feature.scenarios[0].tags).toBe(testFeatureObj.scenarios[0].tags);
+      expect(feature.scenarios[0].steps).toBe(testFeatureObj.scenarios[0].steps);
+      expect(feature.scenarios[0].status).toBe(testFeatureObj.scenarios[0].status);
     });
 
     describe('public functions', function () {
@@ -57,6 +168,7 @@ function (FeatureModel) {
         expect(feature.scenarios[0].name).toEqual(testScenarioName1);
         expect(feature.scenarios[0].description).toEqual(testScenarioDesc1);
         expect(feature.scenarios[0].tags).toEqual(testScenarioTags1);
+        // expect(feature.stats.undef).toBe(1);
 
         var testScenarioName2 = 'Test Scenario 2';
         var testScenarioDesc2 = 'Test Description 2';
@@ -66,6 +178,7 @@ function (FeatureModel) {
         expect(feature.scenarios[1].name).toEqual('Test Scenario 2');
         expect(feature.scenarios[1].description).toEqual(testScenarioDesc2);
         expect(feature.scenarios[1].tags).toEqual(testScenarioTags2);
+        // expect(feature.stats.undef).toBe(1);
       });
 
       it('addScenarioStep(id, keyword, name, datatable, result) - adds step to scenario', function () {

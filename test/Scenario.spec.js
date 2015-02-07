@@ -14,6 +14,62 @@ function (ScenarioModel, DataCompile, json) {
       expect(scenario.status).toEqual({result: 'undefined', comment: null});
     });
 
+    it('factory ScenarioModel.create(scenarioObj) creates new scenario', function () {
+      var testScenarioObj = {
+        "name": "Steps display with \"quote\" and <tag>",
+        "tags": [
+          "@base",
+          "@scenarioTag1"
+        ],
+        "description": "!Overview: An overview of scenario\n\n!Preconditions:\n  - set of preconditions\n\n!Pass Criteria:\n  - some pass criteria",
+        "steps": [
+          {
+            "keyword": "Given",
+            "name": "First given step with \"quote\" and <tag>",
+            "result": "undefined"
+          },
+          {
+            "keyword": "And",
+            "name": "Second given step",
+            "result": "undefined"
+          },
+          {
+            "keyword": "When",
+            "name": "First when step",
+            "result": "undefined"
+          },
+          {
+            "keyword": "And",
+            "name": "Second when step",
+            "result": "undefined"
+          },
+          {
+            "keyword": "Then",
+            "name": "First then step",
+            "result": "undefined"
+          },
+          {
+            "keyword": "And",
+            "name": "Second then step",
+            "result": "undefined"
+          }
+        ],
+        "status": {
+          "result": "undefined",
+          "comment": null
+        }
+      };
+
+      var scenario = ScenarioModel.create(testScenarioObj);
+      expect(scenario.name).toBe(testScenarioObj.name);
+      expect(scenario.description).toBe(testScenarioObj.description);
+      expect(scenario.tags).toBe(testScenarioObj.tags);
+      expect(scenario.steps).toBe(testScenarioObj.steps);
+      expect(scenario.status).toBe(testScenarioObj.status);
+    });
+
+
+
     describe('public function', function () {
       var scenario;
       beforeEach(function () {

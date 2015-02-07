@@ -45,8 +45,8 @@ define([], function () {
   });
 
   return {
-    create: function (name) {
-      return new Scenario(name);
+    create: function (data) {
+      return new Scenario(data);
     }
   };
 });
