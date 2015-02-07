@@ -1,4 +1,4 @@
-define(['jquery', 'modules/DataCompile', 'modules/ExportToCVS', 'TestExecutionCtrl'], function ($, DataCompile, ExportCVS, TestExecutionCtrl) {
+define(['modules/DataCompile', 'modules/ExportToCVS', 'TestExecutionCtrl'], function (DataCompile, ExportCVS, TestExecutionCtrl) {
   'use strict';
 
   // Array.prototype.clone = function() {
