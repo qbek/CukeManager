@@ -1,15 +1,24 @@
 define([], function () {
   'use strict';
 
-  function Scenario (name) {
-    this.name = name;
-    this.tags = [];
-    this.description = null;
-    this.steps = [];
-    this.status = {
-      result: 'undefined',
-      comment: null
-    };
+  function Scenario (data) {
+    if($.type(data) == 'string') {
+      this.name = data;
+      this.tags = [];
+      this.description = null;
+      this.steps = [];
+      this.status = {
+        result: 'undefined',
+        comment: null
+      };
+    } else if ($.type(data) == 'object') {
+      this.name = data.name;
+      this.tags = data.tags;
+      this.description = data.description;
+      this.steps = data.steps;
+      this.status = data.status;
+    } else throw 'Scenario model constructor invoked with invalid data type';
+
   }
 
   $.extend(Scenario.prototype, {
