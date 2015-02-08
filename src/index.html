@@ -11,23 +11,25 @@
   	<form>
   		<input type="file" name="file">
   	</form>
+    <a id="loadProgress" href="#">Load progress</a>
   </section>
   <section id="feature-list" style="display:none">
     <a id="downloadCVS" href="">Download CVS report</a>
+    <a id="storeProgress" href="">Store progress</a>
   </section>
 
   <section id="scenario-view" style="display:none">
 
   </section>
 
-  <script type="text/javascript" src="js/vendor/require.js"></script>
   <script type="text/javascript" src="js/vendor/jquery-2.1.1.js"></script>
+  <script type="text/javascript" src="js/vendor/storageapi.min.js"></script>
   <script type="text/javascript" src="js/vendor/director.min.js"></script>
+  <script type="text/javascript" src="js/vendor/require.js"></script>
   <script>
     requirejs.config({
-      "baseUrl": "js",
+      'baseUrl': 'js',
       paths: {
-        'mustache': 'vendor/mustache',
         'text': 'vendor/text',
         'tmpl': '../tmpl',
 

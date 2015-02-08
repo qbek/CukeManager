@@ -1,18 +1,15 @@
-define(['modules/DataCompile', 'modules/ExportToCVS', 'TestExecutionCtrl'], function (DataCompile, ExportCVS, TestExecutionCtrl) {
+define(['modules/DataCompile', 'modules/ExportToCVS', 'TestExecutionCtrl', 'models/FeatureModel'], function (DataCompile, ExportCVS, TestExecutionCtrl) {
   'use strict';
 
-  // Array.prototype.clone = function() {
-  //   return this.slice(0);
-  // };
+  var features = [];
 
   function setBodyDimensions() {
     $('body').css('height', $(window).height());
     $('body').css('width', $(window).width());
   }
+
   setBodyDimensions();
   $(window).on('resize', setBodyDimensions);
-
-  var features;
 
   function startEventHandlers() {
     $('body').on('click', 'a',  function (e) {
@@ -34,7 +31,7 @@ define(['modules/DataCompile', 'modules/ExportToCVS', 'TestExecutionCtrl'], func
     $('#scenario-view').hide();
   }
 
-  function handleLoadFileReoute() {
+  function handleLoadReoute() {
     //close all other and show load-file section
     resetScreen();
     $('#load-file').show();
@@ -60,6 +57,24 @@ define(['modules/DataCompile', 'modules/ExportToCVS', 'TestExecutionCtrl'], func
           router.setRoute('/features');
         });
   	});
+
+    //attach handler to Load progress button
+    $('#loadProgress').on('click', function (e) {
+      e.preventDefault();
+      var storage = $.localStorage;
+      if(storage.isSet('features')) {
+        var data = storage.get('features');
+        var FeatureModel = require('models/FeatureModel');
+        data.forEach(function (featureObj) {
+          var feature = FeatureModel.create(featureObj);
+          features.push(feature);
+        });
+        router.setRoute('/features');
+      } else {
+        alert('There is nothing to load');
+      }
+
+    });
   }
 
   function handleFeaturesRoute() {
@@ -89,13 +104,11 @@ define(['modules/DataCompile', 'modules/ExportToCVS', 'TestExecutionCtrl'], func
     } else {
       router.setRoute('/');
     }
-
   }
 
 
-
   var routes = {
-    '': handleLoadFileReoute,
+    '': handleLoadReoute,
     '/features': handleFeaturesRoute,
     '/features/scenario/:featureId/:scenarioId': handleScenarioDetailRoute
   };

@@ -9,7 +9,7 @@ define(['views/TestExecutionView', 'modules/ExportToCVS'], function () {
 
   function _enableMainEvents () {
     var $downloadCVS = $('#downloadCVS');
-
+    var $storeProgress = $('#storeProgress');
 
     $downloadCVS.on('click', function () {
       var ExportCVS = require('modules/ExportToCVS');
@@ -21,6 +21,12 @@ define(['views/TestExecutionView', 'modules/ExportToCVS'], function () {
       $downloadCVS.prop('download', 'TestReport.csv');
 
       $downloadCVS.show();
+    });
+
+    $storeProgress.on('click', function (e) {
+      e.preventDefault();
+      var storage = $.localStorage;
+      storage.set('features', _features);
     });
   }
 
