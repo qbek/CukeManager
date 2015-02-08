@@ -123,16 +123,8 @@ define(function () {
 
   function renderFeature(feature, $template) {
     var $render = $template.clone();
-    var $status_pass = _getGrElement('feat-stat-pass', $render);
-    var $status_fail = _getGrElement('feat-stat-fail', $render);
-    var $status_norun = _getGrElement('feat-stat-norun', $render);
-    var $status_undef = _getGrElement('feat-stat-undef', $render);
     _updateGrElement('feat-name', feature.name, $render);
-
-    $status_pass.html(feature.stats.pass);
-    $status_fail.html(feature.stats.fail);
-    $status_norun.html(feature.stats.norun);
-    $status_undef.html(feature.stats.undef);
+    _updateGrElement('feat-description', feature.description, $render);
 
     return $render;
   }

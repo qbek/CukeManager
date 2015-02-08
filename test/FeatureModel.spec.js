@@ -12,7 +12,6 @@ function (FeatureModel) {
       expect(feature.tags).toBe(null);
       expect(feature.background).toBe(null);
       expect(feature.scenarios).toEqual([]);
-      expect(feature.stats).toEqual({pass: 0, fail: 0, norun: 0, undef: 0});
     });
 
     it('factory FeatureModel.create(fatureObj) create new feature', function () {
@@ -101,13 +100,7 @@ function (FeatureModel) {
               "comment": null
             }
           }
-        ],
-        "stats": {
-          "pass": 0,
-          "fail": 0,
-          "norun": 0,
-          "undef": 0
-        }
+        ]
       };
 
       var feature = FeatureModel.create(testFeatureObj);
@@ -115,7 +108,6 @@ function (FeatureModel) {
       expect(feature.description).toBe(testFeatureObj.description);
       expect(feature.tags).toBe(testFeatureObj.tags);
       expect(feature.background).toBe(testFeatureObj.background);
-      expect(feature.stats).toBe(testFeatureObj.stats);
 
       //check if for scenarios ScenarioModels are created
       expect(feature.scenarios[0].setStatus).toBeDefined();
@@ -124,6 +116,25 @@ function (FeatureModel) {
       expect(feature.scenarios[0].tags).toBe(testFeatureObj.scenarios[0].tags);
       expect(feature.scenarios[0].steps).toBe(testFeatureObj.scenarios[0].steps);
       expect(feature.scenarios[0].status).toBe(testFeatureObj.scenarios[0].status);
+    });
+
+    it('Feature.stats property contains feature statistics', function () {
+      var feature = FeatureModel.create('Testing feature statistics');
+      expect(feature.stats).toEqual({pass: 0, norun: 0, fail: 0, undef: 0});
+
+      feature.addScenario('Test Scenario 1');
+      expect(feature.stats).toEqual({pass: 0, norun: 0, fail: 0, undef: 1});
+      feature.addScenario('Test Scenario 2');
+      expect(feature.stats).toEqual({pass: 0, norun: 0, fail: 0, undef: 2});
+      feature.addScenario('Test Scenario 3');
+      expect(feature.stats).toEqual({pass: 0, norun: 0, fail: 0, undef: 3});
+
+      feature.scenarios[0].setStatus('pass');
+      expect(feature.stats).toEqual({pass: 1, norun: 0, fail: 0, undef: 2});
+      feature.scenarios[1].setStatus('fail', 'commnet');
+      expect(feature.stats).toEqual({pass: 1, norun: 0, fail: 1, undef: 1});
+      feature.scenarios[2].setStatus('norun');
+      expect(feature.stats).toEqual({pass: 1, norun: 1, fail: 1, undef: 0});
     });
 
     describe('public functions', function () {

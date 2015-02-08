@@ -64,11 +64,17 @@ function () {
 
     describe('renderFeature(feature, $template) function', function () {
       var $featureTmpl = $(require('text!tmpl/TestFeature.tmpl.html'));
+      var $render = GherkinRender.renderFeature(featuresSet[0], $featureTmpl);
 
       it('fills data-gr="feat-name" with feature name', function () {
-        var $render = GherkinRender.renderFeature(featuresSet[0], $featureTmpl);
         expect($('[data-gr="feat-name"]', $render)).toContainText(featuresSet[0].name);
       });
+
+      it('fills data-gr="feat-description" with feature description', function () {
+        expect($('[data-gr="feat-description"]', $render)).toContainText(featuresSet[0].description);
+      });
+
+
     });
 
   });

@@ -88,15 +88,46 @@ pre {
   font-size: 1em;
   float: left;
 }
+
+.feature-stats {
+  margin: 0px;
+  padding: 2px 6px;
+  font-size: 1em;
+  float: right;
+}
+
+.feature-stats span:nth-child(1) {
+  color: #3FB51F;
+}
+
+.feature-stats span:nth-child(2) {
+  color: #ED5F02;
+}
+
+.feature-stats span:nth-child(3) {
+  color: #0A63B7;
+}
+
+.feature-stats span:nth-child(4) {
+  color: darkgrey;
+}
+
+.feature-details-off {
+  display: none;
+}
+
+
+
 .feature-scenarios {
   margin: 0px;
   height: auto;
 }
 
-.feature-scenarios-hidden {
+/*.feature-scenarios-hidden {
   height: 0px;
   overflow: hidden;
-}
+}*/
+
 
 
 .scenario {
@@ -123,7 +154,7 @@ pre {
   border-radius: 0px 6px 6px 6px;
   overflow: hidden;
   margin-bottom: 3px;
-  
+
 }
 
 .scenario-keyword {

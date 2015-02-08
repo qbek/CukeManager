@@ -22,7 +22,7 @@ define(['modules/GherkinRender'], function () {
       case 'fail':
         $status.addClass(STATUS_FAIL_CLASS);
         break;
-      case 'no run':
+      case 'norun':
         $status.addClass(STATUS_NORUN_CLASS);
         break;
       }

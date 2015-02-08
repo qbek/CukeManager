@@ -8,13 +8,11 @@ define(['models/ScenarioModel'], function (Scenario) {
       this.tags = null;
       this.background = null;
       this.scenarios = [];
-      this.stats = {pass: 0, fail: 0, norun: 0, undef: 0};
     } else if ($.type(data) == 'object') {
       this.name = data.name;
       this.description = data.description;
       this.tags = data.tags;
       this.background = data.background;
-      this.stats = data.stats;
       this.scenarios = [];
 
       var that = this;
@@ -22,8 +20,19 @@ define(['models/ScenarioModel'], function (Scenario) {
         var scenario = Scenario.create(scenarioObj);
         that.scenarios.push(scenario);
       });
-
     }
+
+    Object.defineProperty(this, 'stats', {
+      get: function () {
+        var stats = {pass: 0, norun: 0, fail: 0, undef: 0};
+
+        this.scenarios.forEach(function (scenario) {
+          stats[scenario.status.result]++;
+        });
+
+        return stats;
+      }
+    });
   }
 
   $.extend(Feature.prototype, {

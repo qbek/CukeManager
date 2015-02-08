@@ -8,7 +8,7 @@ define([], function () {
       this.description = null;
       this.steps = [];
       this.status = {
-        result: 'undefined',
+        result: 'undef',
         comment: null
       };
     } else if ($.type(data) == 'object') {

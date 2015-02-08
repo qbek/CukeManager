@@ -11,7 +11,7 @@ function (ScenarioModel, DataCompile, json) {
       expect(scenario.description).toBe(null);
       expect(scenario.tags).toEqual([]);
       expect(scenario.steps).toEqual([]);
-      expect(scenario.status).toEqual({result: 'undefined', comment: null});
+      expect(scenario.status).toEqual({result: 'undef', comment: null});
     });
 
     it('factory ScenarioModel.create(scenarioObj) creates new scenario', function () {
@@ -68,8 +68,6 @@ function (ScenarioModel, DataCompile, json) {
       expect(scenario.status).toBe(testScenarioObj.status);
     });
 
-
-
     describe('public function', function () {
       var scenario;
       beforeEach(function () {
@@ -116,8 +114,8 @@ function (ScenarioModel, DataCompile, json) {
         expect(scenario.status.result).toBe('pass');
         expect(scenario.status.comment).toBe('no comment');
 
-        scenario.setStatus('no run');
-        expect(scenario.status.result).toBe('no run');
+        scenario.setStatus('norun');
+        expect(scenario.status.result).toBe('norun');
         expect(scenario.status.comment).toBe(null);
 
         // it('triggers "change.status" event', function () {
