@@ -84,7 +84,7 @@ define(['modules/DataCompile', 'modules/ExportToCVS', 'TestExecutionCtrl', 'mode
     $('#feature-list').show();
 
     //start TestExecutionCtrl
-    if(features) {
+    if(features.length) {
       TestExecutionCtrl.init(features);
     } else {
       router.setRoute('/');
