@@ -33,7 +33,8 @@ define(['modules/GherkinRender'], function () {
   function ScenarioView (scenario, background, $template) {
     var $render = GherkinRender.renderScenario(scenario, background, $template);
     _updateStatus(scenario.status.result, $render);
-
+    //render scenario result comment
+    $('textarea', $render).val(scenario.status.comment);
 
     $(scenario).on('change.status', function () {
       _updateStatus(scenario.status.result, $render);
