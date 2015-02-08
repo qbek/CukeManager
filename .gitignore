@@ -1,4 +1,5 @@
 node_modules
+deploy
 CukeManager.sublime-project
 CukeManager.sublime-workspace
 *.json
