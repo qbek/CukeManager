@@ -1,6 +1,21 @@
 define(['models/ScenarioModel'], function (Scenario) {
   'use strict';
 
+  //helper function
+  function _getDescriptionElement(label, description) {
+    var startIndex = description.indexOf(label)
+    if(startIndex == -1) {
+      return null;
+    }
+    startIndex += label.length;
+    var element = description.substr(startIndex);
+    var endIndex = element.indexOf('\n');
+    if(endIndex != -1) {
+      element = element.slice(0, endIndex + 1);
+    }
+    return element.trim();
+  }
+
   function Feature (data) {
     if($.type(data) == 'string') {
       this.name = data;
@@ -33,7 +48,20 @@ define(['models/ScenarioModel'], function (Scenario) {
         return stats;
       }
     });
+
+    Object.defineProperty(this, 'author', {
+      get: function () {
+        return _getDescriptionElement('!Author:', this.description);
+      }
+    });
+
+    Object.defineProperty(this, 'reviewer', {
+      get: function () {
+        return _getDescriptionElement('!Reviewer:', this.description);
+      }
+    });
   }
+
 
   $.extend(Feature.prototype, {
     //feature related function

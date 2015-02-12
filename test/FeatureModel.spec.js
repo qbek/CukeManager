@@ -118,23 +118,47 @@ function (FeatureModel) {
       expect(feature.scenarios[0].status).toBe(testFeatureObj.scenarios[0].status);
     });
 
-    it('Feature.stats property contains feature statistics', function () {
-      var feature = FeatureModel.create('Testing feature statistics');
-      expect(feature.stats).toEqual({pass: 0, norun: 0, fail: 0, undef: 0});
+    describe('properties', function () {
 
-      feature.addScenario('Test Scenario 1');
-      expect(feature.stats).toEqual({pass: 0, norun: 0, fail: 0, undef: 1});
-      feature.addScenario('Test Scenario 2');
-      expect(feature.stats).toEqual({pass: 0, norun: 0, fail: 0, undef: 2});
-      feature.addScenario('Test Scenario 3');
-      expect(feature.stats).toEqual({pass: 0, norun: 0, fail: 0, undef: 3});
+      it('stats - contains feature statistics', function () {
+        var feature = FeatureModel.create('Testing feature statistics');
+        expect(feature.stats).toEqual({pass: 0, norun: 0, fail: 0, undef: 0});
 
-      feature.scenarios[0].setStatus('pass');
-      expect(feature.stats).toEqual({pass: 1, norun: 0, fail: 0, undef: 2});
-      feature.scenarios[1].setStatus('fail', 'commnet');
-      expect(feature.stats).toEqual({pass: 1, norun: 0, fail: 1, undef: 1});
-      feature.scenarios[2].setStatus('norun');
-      expect(feature.stats).toEqual({pass: 1, norun: 1, fail: 1, undef: 0});
+        feature.addScenario('Test Scenario 1');
+        expect(feature.stats).toEqual({pass: 0, norun: 0, fail: 0, undef: 1});
+        feature.addScenario('Test Scenario 2');
+        expect(feature.stats).toEqual({pass: 0, norun: 0, fail: 0, undef: 2});
+        feature.addScenario('Test Scenario 3');
+        expect(feature.stats).toEqual({pass: 0, norun: 0, fail: 0, undef: 3});
+
+        feature.scenarios[0].setStatus('pass');
+        expect(feature.stats).toEqual({pass: 1, norun: 0, fail: 0, undef: 2});
+        feature.scenarios[1].setStatus('fail', 'commnet');
+        expect(feature.stats).toEqual({pass: 1, norun: 0, fail: 1, undef: 1});
+        feature.scenarios[2].setStatus('norun');
+        expect(feature.stats).toEqual({pass: 1, norun: 1, fail: 1, undef: 0});
+      });
+
+      it('author - contains feature author', function () {
+        var feature = FeatureModel.create('Testing feature statistics');
+        feature.description = 'Feature description \n !Author: Jakub Szewczyk';
+        expect(feature.author).toEqual('Jakub Szewczyk');
+        feature.description = '!Author: Jakub Baran \n !Reviewer: Edward Kowalski \n Feature description';
+        expect(feature.author).toEqual('Jakub Baran');
+        feature.description = '!Reviewer: Edward Kowalski \n !Author: Jakub Kot \n Feature description';
+        expect(feature.author).toEqual('Jakub Kot');
+      });
+
+      it('reviewer - contains feature reviewer', function () {
+        var feature = FeatureModel.create('Testing feature statistics');
+        feature.description = 'Feature description \n !Author: Jakub Szewczyk';
+        expect(feature.reviewer).toEqual(null);
+        feature.description = '!Author: Jakub Baran \n !Reviewer: Edward Kowalski \n Feature description';
+        expect(feature.reviewer).toEqual('Edward Kowalski');
+        feature.description = '!Reviewer: Edward Slon \n !Author: Jakub Kot \n Feature description';
+        expect(feature.reviewer).toEqual('Edward Slon');
+      });
+
     });
 
     describe('public functions', function () {
