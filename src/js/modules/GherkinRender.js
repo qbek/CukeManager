@@ -53,6 +53,8 @@ define(function () {
         var $newStep = _renderScenarioStep(step, $step);
         $newStep.appendTo($bg_steps);
       });
+    } else {
+      $('div.scenario-background', $render).detach();
     }
 
     //render main steps
