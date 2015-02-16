@@ -1,19 +1,8 @@
-define(['models/ScenarioModel'], function (Scenario) {
+define(['models/ScenarioModel', 'PrototypeExtends'], function (Scenario) {
   'use strict';
 
-  //helper function
-  function _getDescriptionElement(label, description) {
-    var startIndex = description.indexOf(label)
-    if(startIndex == -1) {
-      return null;
-    }
-    startIndex += label.length;
-    var element = description.substr(startIndex);
-    var endIndex = element.indexOf('\n');
-    if(endIndex != -1) {
-      element = element.slice(0, endIndex + 1);
-    }
-    return element.trim();
+  if(String.getDescriptionElement === undefined) {
+    require('PrototypeExtends');
   }
 
   function Feature (data) {
@@ -51,13 +40,13 @@ define(['models/ScenarioModel'], function (Scenario) {
 
     Object.defineProperty(this, 'author', {
       get: function () {
-        return _getDescriptionElement('!Author:', this.description);
+        return this.description.getDescriptionElement('!Author:');
       }
     });
 
     Object.defineProperty(this, 'reviewer', {
       get: function () {
-        return _getDescriptionElement('!Reviewer:', this.description);
+        return this.description.getDescriptionElement('!Reviewer:');
       }
     });
   }
