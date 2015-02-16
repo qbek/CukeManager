@@ -25,7 +25,7 @@ define(['modules/DataCompile', 'text!testdata/example.json'], function (DataComp
       });
 
       it('reads feature description', function () {
-        expect(featureOne.description).toEqual('!Author: Jakub Szewczyk\n!Reviewer:\nThis is short description of feature');
+        expect(featureOne.description).toEqual(testData[0].description);
       });
 
       it('reads feature background steps', function () {
