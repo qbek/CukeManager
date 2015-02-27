@@ -80,6 +80,13 @@ function () {
         expect($('[data-gr="feat-description"]', $render)).toContainText(featuresSet[0].description);
       });
 
+      it('fills data-gr="feat-author" with feature author', function () {
+        expect($('[data-gr="feat-author"]', $render)).toContainText(featuresSet[0].author);
+      });
+
+      it('fills data-gr="feat-reviewer" with feature reviewer', function () {
+        expect($('[data-gr="feat-reviewer"]', $render)).toContainText(featuresSet[0].reviewer);
+      });
 
     });
 

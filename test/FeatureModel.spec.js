@@ -141,24 +141,39 @@ function (FeatureModel) {
 
       it('author - contains feature author', function () {
         var feature = FeatureModel.create('Testing feature statistics');
-        feature.description = 'Feature description \n !Author: Jakub Szewczyk';
+        expect(feature.author).toEqual(null);
+        feature.description = '!Overview: Feature description \n !Author: Jakub Szewczyk';
         expect(feature.author).toEqual('Jakub Szewczyk');
-        feature.description = '!Author: Jakub Baran \n !Reviewer: Edward Kowalski \n Feature description';
+        feature.description = '!Author: Jakub Baran \n !Reviewer: Edward Kowalski \n !Overview: Feature description';
         expect(feature.author).toEqual('Jakub Baran');
-        feature.description = '!Reviewer: Edward Kowalski \n !Author: Jakub Kot \n Feature description';
+        feature.description = '!Reviewer: Edward Kowalski \n !Author: Jakub Kot \n !Overview: Feature description';
         expect(feature.author).toEqual('Jakub Kot');
       });
 
       it('reviewer - contains feature reviewer', function () {
         var feature = FeatureModel.create('Testing feature statistics');
-        feature.description = 'Feature description \n !Author: Jakub Szewczyk';
         expect(feature.reviewer).toEqual(null);
-        feature.description = '!Author: Jakub Baran \n !Reviewer: Edward Kowalski \n Feature description';
+        feature.description = '!Overview: Feature description \n !Author: Jakub Szewczyk';
+        expect(feature.reviewer).toEqual(null);
+        feature.description = '!Author: Jakub Baran \n !Reviewer: Edward Kowalski \n !Overview: Feature description';
         expect(feature.reviewer).toEqual('Edward Kowalski');
-        feature.description = '!Reviewer: Edward Slon \n !Author: Jakub Kot \n Feature description';
+        feature.description = '!Reviewer: Edward Slon \n !Author: Jakub Kot \n !Overview: Feature description';
         expect(feature.reviewer).toEqual('Edward Slon');
       });
 
+      it('overview - contains feature overview', function () {
+        var feature = FeatureModel.create('Testing feature statistics');
+        expect(feature.overview).toEqual(null);
+        feature.description = '!Author: Jakub Baran \n !Reviewer: Edward Kowalski \n !Overview:\n Feature description \n second line of description';
+        expect(feature.overview).toEqual('Feature description \n second line of description');
+      });
+
+      it('preconditions - contains feature preconditions', function () {
+        var feature = FeatureModel.create('Testing feature statistics');
+        expect(feature.preconditions).toEqual(null);
+        feature.description = '!Author: Jakub Baran \n !Reviewer: Edward Kowalski \n !Overview:\n Feature description \n second line of description \n !Preconditions:\n - first precondition\n - second precondition';
+        expect(feature.preconditions).toEqual('- first precondition\n - second precondition');
+      });
     });
 
     describe('public functions', function () {

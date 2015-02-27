@@ -40,13 +40,41 @@ define(['models/ScenarioModel', 'PrototypeExtends'], function (Scenario) {
 
     Object.defineProperty(this, 'author', {
       get: function () {
-        return this.description.getDescriptionElement('!Author:');
+        var author = null;
+        if(this.description) {
+          author =  this.description.getDescriptionElement('!Author:');
+        }
+        return author;
       }
     });
 
     Object.defineProperty(this, 'reviewer', {
       get: function () {
-        return this.description.getDescriptionElement('!Reviewer:');
+        var reviewer = null;
+        if(this.description) {
+          reviewer = this.description.getDescriptionElement('!Reviewer:');
+        }
+        return reviewer;
+      }
+    });
+
+    Object.defineProperty(this, 'overview', {
+      get: function () {
+        var overview = null;
+        if(this.description) {
+          overview = this.description.getDescriptionElement('!Overview:');
+        }
+        return overview;
+      }
+    });
+
+    Object.defineProperty(this, 'preconditions', {
+      get: function () {
+        var preconditions = null;
+        if(this.description) {
+          preconditions = this.description.getDescriptionElement('!Preconditions:');
+        }
+        return preconditions;
       }
     });
   }

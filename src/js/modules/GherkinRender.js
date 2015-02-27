@@ -126,6 +126,8 @@ define(function () {
   function renderFeature(feature, $template) {
     var $render = $template.clone();
     _updateGrElement('feat-name', feature.name, $render);
+    _updateGrElement('feat-author', feature.author, $render);
+    _updateGrElement('feat-reviewer', feature.reviewer, $render);
     _updateGrElement('feat-description', feature.description, $render);
 
     return $render;
