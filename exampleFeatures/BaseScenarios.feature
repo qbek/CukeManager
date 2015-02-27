@@ -1,9 +1,13 @@
 @featureTag1 @featureTag2
 Feature: Base Scenario features with "quote" and <tag>
   !Author: Jakub Szewczyk
-  !Reviewer:
+  !Reviewer: Jan Kowalski
+
+  !Overview:
   This is short description of feature
 
+  !Preconditions:
+  - Global preconditions for all scenarios
 
 
   @base @scenarioTag1

@@ -60,6 +60,12 @@ function () {
         expect($('[data-gr="step-keyword"]', $testStep)).toContainText(background[1].keyword);
         expect($('[data-gr="step-name"]', $testStep)).toContainText(background[1].name);
       });
+
+      it('removes "div.scenario-background" when background doesn\'t exists', function () {
+        var scenario = featuresSet[1].scenarios[0];
+        $render = GherkinRender.renderScenario(scenario, null, $scenarioTmpl);
+        expect($render).not.toContainElement('div.scenario-background');
+      });
     });
 
     describe('renderFeature(feature, $template) function', function () {

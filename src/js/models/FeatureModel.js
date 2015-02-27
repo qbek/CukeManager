@@ -1,5 +1,9 @@
-define(['models/ScenarioModel'], function (Scenario) {
+define(['models/ScenarioModel', 'PrototypeExtends'], function (Scenario) {
   'use strict';
+
+  if(String.getDescriptionElement === undefined) {
+    require('PrototypeExtends');
+  }
 
   function Feature (data) {
     if($.type(data) == 'string') {
@@ -33,7 +37,20 @@ define(['models/ScenarioModel'], function (Scenario) {
         return stats;
       }
     });
+
+    Object.defineProperty(this, 'author', {
+      get: function () {
+        return this.description.getDescriptionElement('!Author:');
+      }
+    });
+
+    Object.defineProperty(this, 'reviewer', {
+      get: function () {
+        return this.description.getDescriptionElement('!Reviewer:');
+      }
+    });
   }
+
 
   $.extend(Feature.prototype, {
     //feature related function
