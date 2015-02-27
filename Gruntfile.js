@@ -55,13 +55,37 @@ module.exports = function(grunt) {
         singleRun: false,
         autoWatch: true,
       }
+    },
+
+    sass: {
+      dist: {
+        options: {
+          update: true,
+        },
+
+
+        files: {
+          'src/css/main.css': 'src/sass/main.scss'
+        }
+      }
+    },
+
+    watch: {
+      sass: {
+        expand: true,
+        files: 'src/sass/**',
+        tasks: ['sass'],
+      }
     }
+
   });
 
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-requirejs');
+  grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   grunt.registerTask('deploy',['clean:deploy', 'copy:deploy', 'requirejs:deploy']);
 };

@@ -3,3 +3,6 @@ deploy
 CukeManager.sublime-project
 CukeManager.sublime-workspace
 *.json
+.sass-cache
+src/css/main.css
+src/css/main.css.map
