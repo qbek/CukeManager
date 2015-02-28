@@ -1,7 +1,7 @@
 define(['modules/GherkinRender'], function () {
   var GherkinRender = require('modules/GherkinRender');
 
-  var STATUS_CLASS = 'scenario-status';
+  var STATUS_UNDEF_CLASS = 'scenario-status-undef';
   var STATUS_PASS_CLASS = 'scenario-status-pass';
   var STATUS_FAIL_CLASS = 'scenario-status-fail';
   var STATUS_NORUN_CLASS = 'scenario-status-norun';
@@ -13,7 +13,6 @@ define(['modules/GherkinRender'], function () {
     //color status labels
     //cleanup all status classes
     $status.removeClass();
-    $status.addClass(STATUS_CLASS);
 
     switch (status) {
       case 'pass':
@@ -24,6 +23,9 @@ define(['modules/GherkinRender'], function () {
         break;
       case 'norun':
         $status.addClass(STATUS_NORUN_CLASS);
+        break;
+      case 'undef':
+        $status.addClass(STATUS_UNDEF_CLASS);
         break;
       }
   }
