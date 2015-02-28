@@ -3,7 +3,7 @@
     "keyword": "Feature",
     "name": "Base Scenario features with \"quote\" and <tag>",
     "line": 2,
-    "description": "!Author: Jakub Szewczyk\n!Reviewer: Jan Kowalski\n\n!Overview:\nThis is short description of feature\n\n!Preconditions:\n- Global preconditions for all scenarios",
+    "description": "!Author: Jakub Szewczyk\n!Reviewer: Jan Kowalski\n\n!Overview:\nThis is short description of feature\nThis short description is multi line\n\n!Preconditions:\n- Global precondition for all scenarios\n- Another global precondition",
     "tags": [
       {
         "name": "@featureTag1",
@@ -20,16 +20,16 @@
       {
         "keyword": "Scenario",
         "name": "Steps display with \"quote\" and <tag>",
-        "line": 14,
+        "line": 15,
         "description": "!Overview: An overview of scenario\n\n!Preconditions:\n  - set of preconditions\n\n!Pass Criteria:\n  - some pass criteria",
         "tags": [
           {
             "name": "@base",
-            "line": 13
+            "line": 14
           },
           {
             "name": "@scenarioTag1",
-            "line": 13
+            "line": 14
           }
         ],
         "id": "base-scenario-features-with-\"quote\"-and-<tag>;steps-display-with-\"quote\"-and-<tag>",
@@ -38,73 +38,73 @@
           {
             "keyword": "Given ",
             "name": "First given step with \"quote\" and <tag>",
-            "line": 23,
-            "match": {
-              "location": "exampleFeatures/BaseScenarios.feature:23"
-            },
-            "result": {
-              "status": "undefined",
-              "duration": 406616
-            }
-          },
-          {
-            "keyword": "And ",
-            "name": "Second given step",
             "line": 24,
             "match": {
               "location": "exampleFeatures/BaseScenarios.feature:24"
             },
             "result": {
               "status": "undefined",
-              "duration": 286978
+              "duration": 399212
             }
           },
           {
-            "keyword": "When ",
-            "name": "First when step",
+            "keyword": "And ",
+            "name": "Second given step",
             "line": 25,
             "match": {
               "location": "exampleFeatures/BaseScenarios.feature:25"
             },
             "result": {
               "status": "undefined",
-              "duration": 287606
+              "duration": 286139
             }
           },
           {
-            "keyword": "And ",
-            "name": "Second when step",
+            "keyword": "When ",
+            "name": "First when step",
             "line": 26,
             "match": {
               "location": "exampleFeatures/BaseScenarios.feature:26"
             },
             "result": {
               "status": "undefined",
-              "duration": 312051
+              "duration": 286908
             }
           },
           {
-            "keyword": "Then ",
-            "name": "First then step",
+            "keyword": "And ",
+            "name": "Second when step",
             "line": 27,
             "match": {
               "location": "exampleFeatures/BaseScenarios.feature:27"
             },
             "result": {
               "status": "undefined",
-              "duration": 313797
+              "duration": 309955
             }
           },
           {
-            "keyword": "And ",
-            "name": "Second then step",
+            "keyword": "Then ",
+            "name": "First then step",
             "line": 28,
             "match": {
               "location": "exampleFeatures/BaseScenarios.feature:28"
             },
             "result": {
               "status": "undefined",
-              "duration": 315054
+              "duration": 282019
+            }
+          },
+          {
+            "keyword": "And ",
+            "name": "Second then step",
+            "line": 29,
+            "match": {
+              "location": "exampleFeatures/BaseScenarios.feature:29"
+            },
+            "result": {
+              "status": "undefined",
+              "duration": 303670
             }
           }
         ]
@@ -112,16 +112,16 @@
       {
         "keyword": "Scenario",
         "name": "Scenario without steps",
-        "line": 31,
+        "line": 32,
         "description": "!Overview: An overview of second scenario\n\n!Preconditions:\n  - set of preconditions for second scenario\n\n!Pass Criteria:\n  - some pass criteria",
         "tags": [
           {
             "name": "@base",
-            "line": 30
+            "line": 31
           },
           {
             "name": "@scenarioTag2",
-            "line": 30
+            "line": 31
           }
         ],
         "id": "base-scenario-features-with-\"quote\"-and-<tag>;scenario-without-steps",
@@ -153,7 +153,7 @@
             },
             "result": {
               "status": "undefined",
-              "duration": 264908
+              "duration": 303460
             }
           },
           {
@@ -165,7 +165,7 @@
             },
             "result": {
               "status": "undefined",
-              "duration": 244096
+              "duration": 265187
             }
           }
         ]
@@ -187,7 +187,7 @@
             },
             "result": {
               "status": "undefined",
-              "duration": 181517
+              "duration": 168039
             }
           },
           {
@@ -199,7 +199,7 @@
             },
             "result": {
               "status": "undefined",
-              "duration": 164476
+              "duration": 201283
             }
           },
           {
@@ -211,7 +211,7 @@
             },
             "result": {
               "status": "undefined",
-              "duration": 265327
+              "duration": 261834
             }
           },
           {
@@ -223,7 +223,7 @@
             },
             "result": {
               "status": "undefined",
-              "duration": 305416
+              "duration": 298921
             }
           },
           {
@@ -235,7 +235,7 @@
             },
             "result": {
               "status": "undefined",
-              "duration": 260578
+              "duration": 257854
             }
           }
         ]
@@ -257,7 +257,7 @@
             },
             "result": {
               "status": "undefined",
-              "duration": 276850
+              "duration": 264349
             }
           },
           {
@@ -269,7 +269,7 @@
             },
             "result": {
               "status": "undefined",
-              "duration": 274057
+              "duration": 271403
             }
           },
           {
@@ -311,7 +311,7 @@
             },
             "result": {
               "status": "undefined",
-              "duration": 1802464
+              "duration": 1913023
             }
           },
           {
@@ -323,7 +323,7 @@
             },
             "result": {
               "status": "undefined",
-              "duration": 279994
+              "duration": 283486
             }
           },
           {
@@ -335,7 +335,7 @@
             },
             "result": {
               "status": "undefined",
-              "duration": 279505
+              "duration": 278038
             }
           }
         ]

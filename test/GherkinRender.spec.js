@@ -70,23 +70,44 @@ function () {
 
     describe('renderFeature(feature, $template) function', function () {
       var $featureTmpl = $(require('text!tmpl/TestFeature.tmpl.html'));
-      var $render = GherkinRender.renderFeature(featuresSet[0], $featureTmpl);
+      //contain all Feature description elements
+      var $render_fullDesc = GherkinRender.renderFeature(featuresSet[0], $featureTmpl);
+      //doesn't contains Feature description elements
+      var $render_noDesc = GherkinRender.renderFeature(featuresSet[1], $featureTmpl);
 
       it('fills data-gr="feat-name" with feature name', function () {
-        expect($('[data-gr="feat-name"]', $render)).toContainText(featuresSet[0].name);
+        expect($('[data-gr="feat-name"]', $render_fullDesc)).toContainText(featuresSet[0].name);
       });
 
-      it('fills data-gr="feat-description" with feature description', function () {
-        expect($('[data-gr="feat-description"]', $render)).toContainText(featuresSet[0].description);
-      });
+      // it('fills data-gr="feat-description" with feature description', function () {
+      //   expect($('[data-gr="feat-description"]', $render)).toContainText(featuresSet[0].description);
+      // });
 
       it('fills data-gr="feat-author" with feature author', function () {
-        expect($('[data-gr="feat-author"]', $render)).toContainText(featuresSet[0].author);
+        expect($('[data-gr="feat-author"]', $render_fullDesc)).toContainText(featuresSet[0].author);
+        //element is removed when author is null
+        expect($render_noDesc).not.toContainElement('div.feature-author');
       });
 
       it('fills data-gr="feat-reviewer" with feature reviewer', function () {
-        expect($('[data-gr="feat-reviewer"]', $render)).toContainText(featuresSet[0].reviewer);
+        expect($('[data-gr="feat-reviewer"]', $render_fullDesc)).toContainText(featuresSet[0].reviewer);
+        //element is removed when reviewer is null
+        expect($render_noDesc).not.toContainElement('div.feature-reviewer');
       });
+
+      it('fills data-gr="feat-overview" with feature overview', function () {
+        expect($('[data-gr="feat-overview"]', $render_fullDesc).html()).toEqual(featuresSet[0].overview.replace(/\n/g, '<br>'));
+        //element is removed when overview is null
+        expect($render_noDesc).not.toContainElement('div.feature-overview');
+      });
+
+      it('fills data-gr="feat-preconditions" with feature preconditions', function () {
+        expect($('[data-gr="feat-preconditions"]', $render_fullDesc).html()).toEqual(featuresSet[0].preconditions.replace(/\n/g, '<br>'));
+        //element is removed when preconditions is null
+        expect($render_noDesc).not.toContainElement('div.feature-preconditions');
+      });
+
+
 
     });
 

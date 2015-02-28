@@ -5,10 +5,11 @@ Feature: Base Scenario features with "quote" and <tag>
 
   !Overview:
   This is short description of feature
+  This short description is multi line
 
   !Preconditions:
-  - Global preconditions for all scenarios
-
+  - Global precondition for all scenarios
+  - Another global precondition
 
   @base @scenarioTag1
   Scenario: Steps display with "quote" and <tag>

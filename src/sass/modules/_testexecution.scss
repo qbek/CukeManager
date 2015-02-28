@@ -69,5 +69,25 @@ $status_undef: $grey_light;
   font-size: 0.8em;
 }
 
+%description-panel {
+  margin: 6px 12px 6px 52px;
+  border-radius: 0px 6px 6px 6px;
+  border: 1px solid;
+
+  p {
+    margin: 2px 6px;
+    font-size: 0.8em;
+  }
+}
+
+%description-panel-keyword {
+  display: block;
+  font-size: 0.8em;
+  margin: 0;
+  padding: 3px 6px;
+  color: white;
+  border-bottom: 1px solid;
+}
+
 @import 'testexecution/feature';
 @import 'testexecution/scenario';

@@ -8,7 +8,7 @@ $step_datatable: $grey;
 $step_datatable_light: $grey_light;
 
 $background_border: $grey;
-$background_bg: $grey_light;
+// $background_bg: $grey_light;
 
 $enterresult_border: $grey;
 $enterresult_bg: $grey_light;
@@ -71,19 +71,19 @@ $enterresult_bg: $grey_light;
 
 .scenario-background {
   margin: 6px 12px;
-  background-color: $background_bg;
+  // background-color: $background_bg;
   border: 1px solid $background_border;
   border-radius: 0px 6px 6px 6px;
 }
 
 .scenario-background-keyword {
-    background-color: $background_border;
-    color: $background_bg;
-    display: inline-block;
+    // background-color: $background_border;
+    color: $background_border;
+    display: block;
     font-size: 0.7em;
     margin: 0;
     padding: 3px 6px;
-    float: left;
+    border-bottom: 1px solid $background_border;
 }
 
 .scenario-steps,

@@ -1,4 +1,5 @@
 define(function () {
+  'use strict';
   //style definitions used in this module
   var GIVEN_KEYWORD_CLASS = 'step-keyword-given';
   var WHEN_KEYWORD_CLASS = 'step-keyword-when';
@@ -22,8 +23,12 @@ define(function () {
 
   function _updateGrElement (selector, data, $render) {
     var $element = _getGrElement(selector, $render);
-    var escapedData = _htmlEscape(data);
-    $element.html(escapedData);
+    if(data != null) {
+      var escapedData = _htmlEscape(data);
+      $element.html(escapedData);
+    } else {
+      $element.parent().detach();
+    }
   }
 
   //renders name, status, tags and description of scenario
@@ -114,6 +119,14 @@ define(function () {
       .replace(/"$/g, '"</span>');
   }
 
+  //converts all '\n' chars into HTML <br/> for given element gr selector
+  function _convertLineBreaksToHTML(selector, $render) {
+    var $element = _getGrElement(selector, $render);
+    var content = $element.html();
+    content = content.replace(/\n/g, '<br>');
+    $element.html(content);
+  }
+
   function renderScenario (scenario, background, $template) {
     var $render = $template.clone();
     _fillScenarioBaseData(scenario, $render);
@@ -128,7 +141,15 @@ define(function () {
     _updateGrElement('feat-name', feature.name, $render);
     _updateGrElement('feat-author', feature.author, $render);
     _updateGrElement('feat-reviewer', feature.reviewer, $render);
-    _updateGrElement('feat-description', feature.description, $render);
+    _updateGrElement('feat-overview', feature.overview, $render);
+    _updateGrElement('feat-preconditions', feature.preconditions, $render);
+    // _updateGrElement('feat-description', feature.description, $render);
+    if(feature.overview) {
+      _convertLineBreaksToHTML('feat-overview', $render);
+    }
+    if(feature.preconditions) {
+      _convertLineBreaksToHTML('feat-preconditions', $render);
+    }
 
     return $render;
   }
