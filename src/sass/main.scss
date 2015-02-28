@@ -1,0 +1,34 @@
+* {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+body {
+  /*margin: 0 10px;*/
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+pre {
+  white-space: pre-wrap;
+  font-family: 'Source Code Pro', sans-serif;
+  font-size: 0.8em;
+  clear: both;
+  margin: 0px 9px;
+}
+
+
+// <-- COLORS DEFINITIONS -->
+$blue_light: rgb(50,140,231);
+$blue_dark: #0A63B7;
+$violet: rgb(107,41,136);
+$green_light: #3FB51F;
+$orange: #ED5F02;
+$grey: rgb(66,69,73);
+$grey_light: rgb(232, 235, 239);
+// <-- END COLORS DEFINITION -->
+
+
+
+@import 'modules/testexecution';
+
+

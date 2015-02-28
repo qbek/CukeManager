@@ -1,0 +1,73 @@
+#feature-list {
+  margin: 10px;
+}
+
+#feature-list,
+#scenario-view
+{
+  float: left;
+  margin: 10px 0px;
+  padding: 0px 0px 0px 10px;
+  box-sizing: border-box;
+  overflow: scroll;
+  height: inherit;
+}
+#feature-list.wide {
+  width: 100%;
+}
+
+#feature-list.narrow {
+  width: 50%;
+}
+
+
+#scenario-view {
+  width: 50%;
+}
+
+// <--- GLOBAL COLOR DEFINITIONS FOR TEST EXECUTION VIEW --->
+$feature_color: $violet;
+$scenario_color: $blue_light;
+
+$status_pass: $green_light;
+$status_fail: $orange;
+$status_norun: $blue_light;
+$status_undef: $grey_light;
+
+// <--- END OF COLOR DEFINITIONS --->
+
+%label {
+  border: 1px solid;
+  border-radius: 0 6px 6px 6px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+%label-keyword {
+  display: inline-block;
+  color: white;
+  float: left;
+  font-weight: 600;
+  font-size: 0.8em;
+  padding: 4px 6px;
+  margin: 0px;
+}
+
+%label-name {
+  display: inline-block;
+  margin: 0px;
+  padding: 2px 6px;
+  // font-size: 1em;
+  float: left;
+}
+
+%tags {
+  margin-top: 3px;
+  margin-bottom: 1px;
+  color: $blue_light;
+  font-style: italic;
+  font-size: 0.8em;
+}
+
+@import 'testexecution/feature';
+@import 'testexecution/scenario';

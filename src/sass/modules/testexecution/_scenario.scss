@@ -1,0 +1,215 @@
+// <--- SCENARIO VIEW COLOR DEFINITIONS --->
+$step_keyword_given: $green_light;
+$step_keyword_when: $blue_light;
+$step_keyword_then: $orange;
+
+$step_variable: $violet;
+$step_datatable: $grey;
+$step_datatable_light: $grey_light;
+
+$background_border: $grey;
+$background_bg: $grey_light;
+
+$enterresult_border: $grey;
+$enterresult_bg: $grey_light;
+
+
+// <--- END OF COLOR DEFINITIONS --->
+
+
+.scenario-label {
+  @extend %label;
+  border-color: $scenario_color;
+  margin-bottom: 3px;
+}
+
+.scenario-tags {
+  @extend %tags;
+}
+
+.scenario-keyword {
+  @extend %label-keyword;
+  background-color: $scenario_color;
+}
+
+.scenario-name {
+  @extend %label-name;
+}
+
+%scenario-status {
+  display: inline-block;
+  margin: 0px;
+  padding: 2px 6px;
+  float: right;
+
+  // color: white;
+  border-radius: 6px;
+  font-size: 0.8em;
+  margin: 2px;
+  text-align: center;
+  text-transform: uppercase;
+  width: 62px;
+}
+
+.scenario-status-pass {
+  @extend %scenario-status;
+  background-color: $status_pass;
+}
+.scenario-status-fail {
+  @extend %scenario-status;
+  background-color: $status_fail;
+}
+.scenario-status-norun {
+  @extend %scenario-status;
+  background-color: $status_norun;
+}
+
+.scenario-status-undef {
+  @extend %scenario-status;
+  background-color: $status_undef;
+}
+
+.scenario-background {
+  margin: 6px 12px;
+  background-color: $background_bg;
+  border: 1px solid $background_border;
+  border-radius: 0px 6px 6px 6px;
+}
+
+.scenario-background-keyword {
+    background-color: $background_border;
+    color: $background_bg;
+    display: inline-block;
+    font-size: 0.7em;
+    margin: 0;
+    padding: 3px 6px;
+    float: left;
+}
+
+.scenario-steps,
+.scenario-background-steps {
+  list-style: none;
+  padding: 0;
+}
+
+.scenario-background-steps {
+  font-size: 0.8em;
+  margin: 0;
+  clear: left;
+}
+
+.scenario-steps {
+  margin: 6px 12px;
+  font-size: 0.8em;
+}
+
+.scenario-step {
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
+
+.step-keyword,
+.step-name {
+  /*display: inline-block;*/
+  font-size: 1.1em;
+}
+
+%step-keyword {
+  width: 48px;
+  font-weight: 600;
+  text-align: right;
+  display: inline-block;
+}
+
+.step-keyword-given {
+  @extend %step-keyword;
+  color: $step_keyword_given;
+}
+
+.step-keyword-when {
+  @extend %step-keyword;
+  color: $step_keyword_when;
+}
+
+.step-keyword-then {
+  @extend %step-keyword;
+  color: $step_keyword_then;
+}
+
+.step-block-first {
+  margin-top: 24px;
+}
+
+.step-block-first:first-child {
+  margin-top: 0px;
+}
+
+.step-variable {
+  color: $step_variable;
+}
+
+
+.step-datatable {
+  margin-left: 48px;
+  color: $step_datatable;
+
+  tr {
+    padding: 0px 3px;
+  }
+
+  tr:nth-child(odd) {
+    background-color: $step_datatable_light;
+  }
+
+  td {
+    padding: 0px 6px;
+    border-left: 1px solid;
+    border-color: $step_datatable;
+  }
+
+  td:last-child {
+    border-right: 1px solid;
+    border-color: $step_datatable;
+  }
+}
+
+.scenario-enterresult {
+  background-color: $enterresult_bg;
+  border: 1px solid $enterresult_border;
+  border-radius: 0px 6px 6px 6px;
+  clear:both;
+  padding: 12px 24px;
+  margin: 6px 12px;
+  overflow: auto;
+  min-width: 326px;
+}
+
+.scenario-enterresult textarea {
+  float: left;
+  min-width: 318px;
+  width: 75%;
+}
+
+.scenario-enterresult button {
+  float: left;
+  width: 100px;
+  margin: 3px 0 3px 6px;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 6px;
+  padding: 3px 0px;
+
+}
+
+.scenario-enterresult .button-pass {
+  background-color: $status_pass;
+}
+
+.scenario-enterresult .button-fail {
+  background-color: $status_fail;
+}
+
+.scenario-enterresult .button-norun {
+  background-color: $status_norun;
+}

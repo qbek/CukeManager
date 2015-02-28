@@ -1,0 +1,69 @@
+
+.feature-label {
+  @extend %label;
+  border-color: $feature_color;
+  margin: 18px 6px 6px 6px;
+}
+
+.feature-tags {
+  @extend %tags;
+}
+
+.feature-keyword {
+  @extend %label-keyword;
+  background-color: $feature_color;
+}
+
+.feature-name {
+  @extend %label-name;
+}
+
+%stats-badge {
+  color: white;
+  padding: 0 4px;
+  border-radius: 5px;
+  margin: 0px 1px;
+}
+
+.feature-stats {
+  margin: 0px;
+  padding: 2px 6px;
+  font-size: 1em;
+  float: right;
+
+  span:nth-child(1) {
+    @extend %stats-badge;
+    background-color: $status_pass;
+  }
+
+  span:nth-child(2) {
+    @extend %stats-badge;
+    background-color: $status_fail;
+  }
+
+  span:nth-child(3) {
+    @extend %stats-badge;
+    background-color: $status_norun;
+  }
+
+  span:nth-child(4) {
+    @extend %stats-badge;
+    color: black;
+    background-color: $status_undef;
+  }
+}
+
+.feature-details-off {
+  display: none;
+}
+
+.feature-scenarios {
+  margin: 0px;
+  height: auto;
+}
+
+.feature-scenario {
+  margin: 0 12px;
+  list-style: none;
+  font-size: 0.8em;
+}
