@@ -5,10 +5,19 @@ define(['modules/GherkinRender'], function () {
   function _toggleDetails ($render) {
     var $details = $('section', $render);
 
-    if ($details.hasClass('feature-details-off')) {
-      $details.removeClass('feature-details-off');
+    if ($details.hasClass('display-none')) {
+      $details.removeClass('display-none');
     } else {
-      $details.addClass('feature-details-off');
+      $details.addClass('display-none');
+    }
+  }
+
+  function _renderSingleStat(value, $element) {
+    if (value > 0) {
+      $element.removeClass('display-none');
+      $element.html(value);
+    } else {
+      $element.addClass('display-none');
     }
   }
 
@@ -18,11 +27,10 @@ define(['modules/GherkinRender'], function () {
     var $status_norun = $('[data="feat-stat-norun"]', $render);
     var $status_undef = $('[data="feat-stat-undef"]', $render);
 
-    $status_pass.html(stats.pass);
-    $status_fail.html(stats.fail);
-    $status_norun.html(stats.norun);
-    $status_undef.html(stats.undef);
-
+    _renderSingleStat(stats.pass, $status_pass);
+    _renderSingleStat(stats.fail, $status_fail);
+    _renderSingleStat(stats.norun, $status_norun);
+    _renderSingleStat(stats.undef, $status_undef);
   }
 
   function FeatureView (feature, $template) {
