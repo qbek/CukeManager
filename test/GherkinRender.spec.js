@@ -33,10 +33,36 @@ function () {
         expect($('[data-gr="scn-tags"]', $render)).toContainText(scenario.tags.join(' '));
       });
 
-      it('fills data-gr="scn-description" with scenario description', function () {
-        var scenario = featuresSet[0].scenarios[0];
-        var $render = GherkinRender.renderScenario(scenario, null, $scenarioTmpl);
-        expect($('[data-gr="scn-description"]', $render)).toContainText(scenario.description);
+      // it('fills data-gr="scn-description" with scenario description', function () {
+      //   var scenario = featuresSet[0].scenarios[0];
+      //   var $render = GherkinRender.renderScenario(scenario, null, $scenarioTmpl);
+      //   expect($('[data-gr="scn-description"]', $render)).toContainText(scenario.description);
+      // });
+
+      it('fills data-gr="feat-overview" with feature overview', function () {
+        //scenario with full set of description elements
+        var scenario_fullDesc = featuresSet[0].scenarios[0];
+        var $render_fullDesc = GherkinRender.renderScenario(scenario_fullDesc, null, $scenarioTmpl);
+        //scenario without description elements
+        var scenario_noDesc = featuresSet[1].scenarios[0];
+        var $render_noDesc = GherkinRender.renderScenario(scenario_noDesc, null, $scenarioTmpl);
+
+        expect($('[data-gr="scn-overview"]', $render_fullDesc).html()).toEqual(scenario_fullDesc.overview.replace(/\n/g, '<br>'));
+        //element is removed when overview is null
+        expect($render_noDesc).not.toContainElement('div.scenario-overview');
+      });
+
+      it('fills data-gr="feat-preconditions" with feature preconditions', function () {
+        //scenario with full set of description elements
+        var scenario_fullDesc = featuresSet[0].scenarios[0];
+        var $render_fullDesc = GherkinRender.renderScenario(scenario_fullDesc, null, $scenarioTmpl);
+        //scenario without description elements
+        var scenario_noDesc = featuresSet[1].scenarios[0];
+        var $render_noDesc = GherkinRender.renderScenario(scenario_noDesc, null, $scenarioTmpl);
+
+        expect($('[data-gr="scn-preconditions"]', $render_fullDesc).html()).toEqual(scenario_fullDesc.preconditions.replace(/\n/g, '<br>'));
+        //element is removed when preconditions is null
+        expect($render_noDesc).not.toContainElement('div.scenario-preconditions');
       });
 
       it('fills data-gr="scn-steps" with scenario steps', function () {

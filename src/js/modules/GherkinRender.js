@@ -21,10 +21,17 @@ define(function () {
       .replace(/>/g, '&gt;');
   }
 
+    //converts all '\n' chars into HTML <br/> for given element gr selector
+  function _convertLineBreaksToHTML(content) {
+    return content.replace(/\n/g, '<br>');
+  }
+
+
   function _updateGrElement (selector, data, $render) {
     var $element = _getGrElement(selector, $render);
     if(data != null) {
       var escapedData = _htmlEscape(data);
+      escapedData = _convertLineBreaksToHTML(escapedData);
       $element.html(escapedData);
     } else {
       $element.parent().detach();
@@ -38,8 +45,10 @@ define(function () {
 
     //fill scenario name
     _updateGrElement('scn-name', scenario.name, $render);
-    //fill scenario description
-    _updateGrElement('scn-description', scenario.description, $render);
+    _updateGrElement('scn-overview', scenario.overview, $render);
+    _updateGrElement('scn-preconditions', scenario.preconditions, $render);
+    _updateGrElement('scn-passcriteria', scenario.passcriteria, $render);
+
     //not all scenarios have tags
     if (scenario.tags) {
       _updateGrElement('scn-tags', scenario.tags.join(' '), $render);
@@ -119,13 +128,6 @@ define(function () {
       .replace(/"$/g, '"</span>');
   }
 
-  //converts all '\n' chars into HTML <br/> for given element gr selector
-  function _convertLineBreaksToHTML(selector, $render) {
-    var $element = _getGrElement(selector, $render);
-    var content = $element.html();
-    content = content.replace(/\n/g, '<br>');
-    $element.html(content);
-  }
 
   function renderScenario (scenario, background, $template) {
     var $render = $template.clone();
@@ -143,13 +145,6 @@ define(function () {
     _updateGrElement('feat-reviewer', feature.reviewer, $render);
     _updateGrElement('feat-overview', feature.overview, $render);
     _updateGrElement('feat-preconditions', feature.preconditions, $render);
-    // _updateGrElement('feat-description', feature.description, $render);
-    if(feature.overview) {
-      _convertLineBreaksToHTML('feat-overview', $render);
-    }
-    if(feature.preconditions) {
-      _convertLineBreaksToHTML('feat-preconditions', $render);
-    }
 
     return $render;
   }

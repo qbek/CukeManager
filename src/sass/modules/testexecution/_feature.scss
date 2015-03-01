@@ -1,6 +1,7 @@
+$feature_descriptions: $grey;
+
 $overview_border: $violet;
 // $overview_bg: white;
-
 $preconditions_border: $green_light;
 // $preconditions_bg: white;
 
@@ -74,7 +75,7 @@ $preconditions_border: $green_light;
   font-size: 0.8em;
 }
 
-%description-panel {
+%feature-desc-panel {
   margin: 6px 12px 6px 52px;
   border-radius: 0px 6px 6px 6px;
   border: 1px solid;
@@ -82,38 +83,39 @@ $preconditions_border: $green_light;
   p {
     margin: 2px 6px;
     font-size: 0.8em;
+    color: $feature_descriptions;
   }
 }
 
-%description-panel-keyword {
+%feature-desc-panel-keyword {
   display: block;
-  font-size: 0.8em;
   margin: 0;
-  padding: 3px 6px;
+  padding: 1px 6px;
   color: white;
-  border-bottom: 1px solid;
+  font-size: 0.8em;
+  font-weight: 800;
 }
 
 .feature-overview {
-  @extend %description-panel;
+  @extend %feature-desc-panel;
   // background-color: $overview_bg;
   border-color: $overview_border;
 }
 
 .feature-overview-keyword {
-  @extend %description-panel-keyword;
+  @extend %feature-desc-panel-keyword;
   color: $overview_border;
   border-color: $overview_border;
 }
 
 .feature-preconditions {
-  @extend %description-panel;
+  @extend %feature-desc-panel;
   // background-color: $preconditions_bg;
   border-color: $preconditions_border;
 }
 
 .feature-preconditions-keyword {
-  @extend %description-panel-keyword;
+  @extend %feature-desc-panel-keyword;
   color: $preconditions_border;
   border-color: $preconditions_border;
 }
@@ -123,5 +125,5 @@ $preconditions_border: $green_light;
   // display: inline-block;
   font-size: 0.8em;
   margin: 0px 0px 0px 52px;
-  color: $grey
+  color: $feature_descriptions
 }
