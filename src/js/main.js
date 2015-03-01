@@ -92,7 +92,7 @@ define(['modules/DataCompile', 'modules/ExportToCVS', 'TestExecutionCtrl', 'mode
   }
 
   function handleScenarioDetailRoute(featureId, scenarioId) {
-    if(features) {
+    if(features.length) {
       //first to prepare section to show - filing with data
       TestExecutionCtrl.showScenario(featureId, scenarioId);
 
