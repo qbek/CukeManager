@@ -108,7 +108,6 @@ function (ScenarioModel, DataCompile, json) {
             dataTable: testDataTable});
       });
 
-
       it('setStatus(status, comment) - sets scenario.status and triggers "change.status" event', function () {
         scenario.setStatus('pass', 'no comment');
         expect(scenario.status.result).toBe('pass');
@@ -125,19 +124,27 @@ function (ScenarioModel, DataCompile, json) {
       });
     });
 
+    describe('properties', function () {
 
+      it('overview - contains scenario overview', function () {
+        var scenario = ScenarioModel.create('Testing scenario description');
+        expect(scenario.overview).toBe(null);
+        scenario.description = '!Overview:\n An overview of scenario\nSecond line of overview\n!Preconditions:\n  - set of preconditions\n\n!Pass Criteria:\n  - some pass criteria';
+        expect(scenario.overview).toEqual('An overview of scenario\nSecond line of overview');
+      });
+      it('preconditions - contains scenario overview', function () {
+        var scenario = ScenarioModel.create('Testing scenario description');
+        expect(scenario.preconditions).toBe(null);
+        scenario.description = '!Overview: An overview of scenario\n\n!Preconditions:\n  - set of preconditions\n - second precondition\n!Pass Criteria:\n  - some pass criteria';
+        expect(scenario.preconditions).toEqual('- set of preconditions\n - second precondition');
 
-    //to remove
-    xit('has "setSteps()" function which sets "steps" property', function () {
-      var steps = [{ name: 'Name 1', keyword: 'Given', result: 'undefined'},
-                   { name: 'Name 2', keyword: 'When', result: 'undefined'}];
-      scenario.setSteps(steps);
-      expect(scenario.steps).toEqual(steps);
-    });
-
-
-
-    xdescribe('setStatus(status, comment)', function () {
+      });
+      it('passcriteria - contains scenario overview', function () {
+        var scenario = ScenarioModel.create('Testing scenario description');
+        expect(scenario.passcriteria).toBe(null);
+        scenario.description = '!Overview: An overview of scenario\n\n!Preconditions:\n  - set of preconditions\n\n!Pass Criteria:\n  - some pass criteria\n  - and more pass criteria';
+        expect(scenario.passcriteria).toEqual('- some pass criteria\n  - and more pass criteria');
+      });
     });
   });
 

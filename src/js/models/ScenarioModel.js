@@ -19,6 +19,36 @@ define([], function () {
       this.status = data.status;
     } else throw 'Scenario model constructor invoked with invalid data type';
 
+    Object.defineProperty(this, 'overview', {
+      get: function () {
+        var overview = null;
+        if(this.description) {
+          overview = this.description.getDescriptionElement('!Overview:');
+        }
+        return overview;
+      }
+    });
+
+    Object.defineProperty(this, 'preconditions', {
+      get: function () {
+        var preconditions = null;
+        if(this.description) {
+          preconditions = this.description.getDescriptionElement('!Preconditions:');
+        }
+        return preconditions;
+      }
+    });
+
+    Object.defineProperty(this, 'passcriteria', {
+      get: function () {
+        var preconditions = null;
+        if(this.description) {
+          preconditions = this.description.getDescriptionElement('!Pass Criteria:');
+        }
+        return preconditions;
+      }
+    });
+
   }
 
   $.extend(Scenario.prototype, {

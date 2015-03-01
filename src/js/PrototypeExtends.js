@@ -7,7 +7,7 @@ define(function () {
 
     startIndex += label.length;
     var element = this.substr(startIndex);
-    var endIndex = element.search('!\\w+:');
+    var endIndex = element.search('(!\\w+:)|(!\\w+\\s\\w+:)');
     if(endIndex != -1) {
       element = element.slice(0, endIndex);
     }
