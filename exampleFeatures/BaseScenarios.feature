@@ -13,13 +13,17 @@ Feature: Base Scenario features with "quote" and <tag>
 
   @base @scenarioTag1
   Scenario: Steps display with "quote" and <tag>
-    !Overview: An overview of scenario
+    !Overview:
+      An overview of scenario
+      with multi line text
 
     !Preconditions:
       - set of preconditions
+      - required for scenario
 
     !Pass Criteria:
-      - some pass criteria
+      - pass criteria
+      - extra pass criteria
 
     Given First given step with "quote" and <tag>
     And Second given step

@@ -61,7 +61,7 @@ define(['modules/DataCompile', 'text!testdata/example.json'], function (DataComp
 
       it('reads scenario description', function () {
         var scenario = featureOne.scenarios[0];
-        expect(scenario.description).toEqual('!Overview: An overview of scenario\n\n!Preconditions:\n  - set of preconditions\n\n!Pass Criteria:\n  - some pass criteria');
+        expect(scenario.description).toEqual(testData[0].elements[0].description);
       });
 
       it('reads scenario step key word, step name and step result', function () {
