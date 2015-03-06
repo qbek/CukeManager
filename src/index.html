@@ -17,31 +17,47 @@
   </div>
 
   <div id="test-execution-view" style="display:none">
-
     <div class="leftside-menu">
-      <ul>
-        <li>
-          <input type="file" name="file">
-        </li>
-        <li>
-          <a id="loadProgress" href="#">Load progress</a>
-        </li>
-        <li>
-          <a id="downloadCVS" href="">Download CVS report</a>
-        </li>
-        <li>
-          <a id="storeProgress" href="">Store progress</a>
-        </li>
-      </ul>
+      <div class="menu-icon">
+        <img src="icon/menu-32.png" alt="">
+      </div>
+      <div class="menu-section">
+        <p>Test set</p>
+        <ul>
+          <li>
+            <a id="loadTestSet" href="#">Load</a>
+            <input id="loadTestSetInput" type="file" name="file" hidden>
+          </li>
+        </ul>
+      </div>
+      <div class="menu-section">
+        <p>Execution</p>
+        <ul>
+          <li>
+            <a id="loadProgress" href="#">Load progress</a>
+          </li>
+          <li>
+            <a id="storeProgress" href="">Store progress</a>
+          </li>
+        </ul>
+      </div>
+      <div class="menu-section">
+        <p>Reports</p>
+        <ul>
+          <li>
+            <a id="downloadCVS" href="">Download CVS</a>
+          </li>
+        </ul>
+      </div>
     </div>
 
     <div class="content">
       <section id="feature-list">
-      Features and Scenarios
+      <p class="introduction">Features and Scenarios</p>
       </section>
 
       <section id="scenario-view">
-      Scenario details
+      <p class="introduction">Scenario details</p>
       </section>
     </div>
   </div>

@@ -1,0 +1,97 @@
+//colors
+
+$menu_background: $grey_light;
+
+$menu_width: 160px;
+$menu_closed_width: 44px;
+
+.leftside-menu {
+  background-color: $menu_background;
+  height: 100%;
+  width: $menu_width;
+  position: absolute;
+  top: 0;
+  left: 0 - $menu_width + $menu_closed_width;
+  z-index: 100;
+  transition-duration: 0.3s;
+
+  .menu-icon {
+    float: right;
+    margin-top: 10px;
+    margin-right: 6px;
+    transition-duration: 0.3s;
+  }
+
+  .menu-section {
+    margin: 6px;
+    opacity: 0;
+  }
+
+  p {
+    text-transform: uppercase;
+    font-weight: 800;
+    font-size: 1em;
+    color: $grey;
+    margin: 12px 0 0 0;
+  }
+
+  ul {
+    margin: 0 12px;
+    padding: 0px;
+  }
+
+  li {
+    display: block;
+  }
+
+  a {
+    color: $grey;
+    font-size: 0.9em;
+    display: block;
+    text-decoration: none;
+    padding: 3px;
+    border-radius: 3px;
+  }
+
+  a:visited {
+    color: $grey;
+  }
+
+  a:hover {
+    color: $grey_light;
+    background-color: $grey;
+  }
+
+
+
+}
+
+.leftside-menu:hover {
+  transition-duration: 0.3s;
+  left: 0px;
+
+  .menu-icon {
+    opacity: 0;
+  }
+
+  .menu-section {
+    opacity: 100;
+  }
+}
+
+
+
+.content {
+  margin: 0 0 0 $menu_closed_width;
+  height: 100%
+}
+
+.content .introduction {
+  color: white;
+  font-size: 2.5em;
+  font-weight: 900;
+  margin-top: 60px;
+  text-align: center;
+  text-shadow: 1px 1px 2px $grey;
+  opacity: 0.25;
+}
