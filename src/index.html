@@ -1,26 +1,54 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Cucumber Manager</title>
+	<title>CukeManager</title>
   <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,300italic,400italic,600,600italic|Source+Code+Pro&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Fascinate' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-  <section id="load-file" style="display:none">
-  	<form>
-  		<input type="file" name="file">
-  	</form>
-    <a id="loadProgress" href="#">Load progress</a>
-  </section>
-  <section id="feature-list" style="display:none">
-    <a id="downloadCVS" href="">Download CVS report</a>
-    <a id="storeProgress" href="">Store progress</a>
-  </section>
+  <div id="welcome-view" style="display:none">
+    <div class="title">CukeManager</div>
+    <ul class="main-manu">
+      <li><a href="#/testexecutor">Test Executor</a></li>
+      <li><a href="#/testdeveloper">Test Developer</a></li>
+    </ul>
+  </div>
 
-  <section id="scenario-view" style="display:none">
+  <div id="test-execution-view" style="display:none">
 
-  </section>
+    <div class="leftside-menu">
+      <ul>
+        <li>
+          <input type="file" name="file">
+        </li>
+        <li>
+          <a id="loadProgress" href="#">Load progress</a>
+        </li>
+        <li>
+          <a id="downloadCVS" href="">Download CVS report</a>
+        </li>
+        <li>
+          <a id="storeProgress" href="">Store progress</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <section id="feature-list">
+      Features and Scenarios
+      </section>
+
+      <section id="scenario-view">
+      Scenario details
+      </section>
+    </div>
+  </div>
+
+  <div id="test-developer-view" style="display:none">
+  </div>
+
 
   <script type="text/javascript" src="js/vendor/jquery-2.1.1.js"></script>
   <script type="text/javascript" src="js/vendor/storageapi.min.js"></script>

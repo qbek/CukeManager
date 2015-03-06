@@ -20,6 +20,13 @@ pre {
   display: none;
 }
 
+
+#welcome-view,
+#test-execution-view,
+#test-developer-view {
+  height: 100%;
+}
+
 // <-- COLORS DEFINITIONS -->
 $blue_light: rgb(50,140,231);
 $blue_dark: #0A63B7;
@@ -31,7 +38,7 @@ $grey_light: rgb(232, 235, 239);
 // <-- END COLORS DEFINITION -->
 
 
-
+@import 'modules/menu_and_content';
 @import 'modules/testexecution';
 
 

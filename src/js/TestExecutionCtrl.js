@@ -1,13 +1,36 @@
 define(['views/TestExecutionView', 'modules/ExportToCVS'], function () {
   'use strict';
-  var views = [];
-  var _features;
-  var scnDetailsView;
 
+  var _features;
   var _TestExecutionView = require('views/TestExecutionView');
 
 
-  function _enableMainEvents () {
+  function _readFile (file) {
+    var promise = $.Deferred();
+    var fileReader = new FileReader();
+    fileReader.onloadend = function (e) {
+      var result = e.target.result;
+      promise.resolve(result);
+    };
+    fileReader.readAsText(file);
+    return promise;
+  }
+
+  function _enableOpenScenarioDetailsEvent () {
+    var $featureList = $('#feature-list');
+    $('[data-gr="scenario"]', $featureList).on('click', function (event) {
+      var featureId = $(this).attr('data-featureid');
+      var scenarioId = $(this).attr('data-scenarioid');
+      window.location.hash = String.concat('#/testexecutor/scenario/', featureId, '/', scenarioId);
+    });
+  }
+
+  function _showFeatures() {
+    _TestExecutionView.showFeatureList(_features);
+    _enableOpenScenarioDetailsEvent();
+  }
+
+  function _enableMenuHandlers () {
     var $downloadCVS = $('#downloadCVS');
     var $storeProgress = $('#storeProgress');
 
@@ -28,40 +51,61 @@ define(['views/TestExecutionView', 'modules/ExportToCVS'], function () {
       var storage = $.localStorage;
       storage.set('features', _features);
     });
-  }
 
-  function _enableOpenScenarioDetailsEvent () {
-    var $featureList = $('#feature-list');
-    $('[data-gr="scenario"]', $featureList).on('click', function (event) {
-      var featureId = $(this).attr('data-featureid');
-      var scenarioId = $(this).attr('data-scenarioid');
-      window.location.hash = String.concat('#/features/scenario/', featureId, '/', scenarioId);
+    //attach handler to Browse button
+    $('input').on('change', function (e) {
+      var file = e.target.files[0];
+      _readFile(file)
+        .done (function (filecontent) {
+          _features = DataCompile.compile(filecontent);
+          _showFeatures();
+        });
+    });
+
+    //attach handler to Load progress button
+    $('#loadProgress').on('click', function (e) {
+      e.preventDefault();
+      var storage = $.localStorage;
+      if(storage.isSet('features')) {
+        var data = storage.get('features');
+        var FeatureModel = require('models/FeatureModel');
+        _features = [];
+        data.forEach(function (featureObj) {
+          var feature = FeatureModel.create(featureObj);
+          _features.push(feature);
+        });
+        _showFeatures();
+      } else {
+        alert('There is nothing to load');
+      }
     });
   }
 
-  function initCtrl (featuresData) {
-    _features = featuresData;
-    _TestExecutionView.showFeatureList(_features);
-    _enableOpenScenarioDetailsEvent();
-    _enableMainEvents();
+
+  function initCtrl () {
+    _enableMenuHandlers();
   }
 
   function showScenario (featureID, scenarioID) {
-    var scenario = _features[featureID].scenarios[scenarioID];
-    var background = _features[featureID].background;
-    _TestExecutionView.showScenario (scenario, background);
+    if(_features) {
+      var scenario = _features[featureID].scenarios[scenarioID];
+      var background = _features[featureID].background;
+      _TestExecutionView.showScenario (scenario, background);
 
-    var $scenarioEnterResult = $('[data-eventBind="enter-scenario-status"]');
-    $scenarioEnterResult.off('click');
-    $scenarioEnterResult.on('click', 'button', function (e) {
-      var status = $(this).val();
-      var comment = $('textarea', $scenarioEnterResult).val();
-      if (status === 'fail' && !comment) {
-        alert('Please provide reason of fail in comment');
-      } else {
-        scenario.setStatus(status, comment);
-      }
-    });
+      var $scenarioEnterResult = $('[data-eventBind="enter-scenario-status"]');
+      $scenarioEnterResult.off('click');
+      $scenarioEnterResult.on('click', 'button', function (e) {
+        var status = $(this).val();
+        var comment = $('textarea', $scenarioEnterResult).val();
+        if (status === 'fail' && !comment) {
+          alert('Please provide reason of fail in comment');
+        } else {
+          scenario.setStatus(status, comment);
+        }
+      });
+    } else {
+      throw "Please first load a test set to execute";
+    }
   }
 
   return {

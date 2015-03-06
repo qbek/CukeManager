@@ -1,29 +1,25 @@
-#feature-list {
-  margin: 10px;
-}
-
 #feature-list,
 #scenario-view
 {
   float: left;
-  margin: 10px 0px;
+  margin: 0px;
   padding: 0px 0px 0px 10px;
   box-sizing: border-box;
-  overflow: scroll;
-  height: inherit;
-}
-#feature-list.wide {
-  width: 100%;
-}
-
-#feature-list.narrow {
+  overflow-y: scroll;
+  height: 100%;
   width: 50%;
 }
+// #feature-list.wide {
+//   width: 100%;
+// }
+
+// #feature-list.narrow {
+// }
 
 
-#scenario-view {
-  width: 50%;
-}
+// #scenario-view {
+//   width: 50%;
+// }
 
 // <--- GLOBAL COLOR DEFINITIONS FOR TEST EXECUTION VIEW --->
 $feature_color: $violet;
