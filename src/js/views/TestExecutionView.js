@@ -11,6 +11,7 @@ function () {
   function showFeatureList (features) {
     var $tmplFeature = $(require('text!tmpl/TestFeature.tmpl.html'));
     var $tmplScenario = $('[data-gr="scenario"]', $tmplFeature).detach();
+    $featureList.empty();
 
     features.forEach(function (feature, featureID) {
       var featureView = new FeatureView(feature, $tmplFeature);
@@ -24,11 +25,7 @@ function () {
         var $scenarioList = $('[data-gr="scenarios"]', featureView.$render);
         scenarioView.$render.appendTo($scenarioList);
       });
-      featureView.$render.appendTo($featureList);
-    });
-
-    $(features).on('change.scenario.status', function (e) {
-
+      $featureList.append(featureView.$render);
     });
   }
 

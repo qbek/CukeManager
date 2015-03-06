@@ -1,4 +1,4 @@
-define(['views/TestExecutionView', 'modules/ExportToCVS'], function () {
+define(['views/TestExecutionView', 'modules/ExportToCVS', 'modules/DataCompile'], function () {
   'use strict';
 
   var _features;
@@ -31,8 +31,13 @@ define(['views/TestExecutionView', 'modules/ExportToCVS'], function () {
   }
 
   function _enableMenuHandlers () {
-    var $downloadCVS = $('#downloadCVS');
+    var $loadTestSet = $('#loadTestSet');
+    var $loadTestSetInput = $('#loadTestSetInput');
+
     var $storeProgress = $('#storeProgress');
+    var $loadProgress = $('#loadProgress');
+    var $downloadCVS = $('#downloadCVS');
+
 
     $downloadCVS.on('click', function () {
       var ExportCVS = require('modules/ExportToCVS');
@@ -52,8 +57,14 @@ define(['views/TestExecutionView', 'modules/ExportToCVS'], function () {
       storage.set('features', _features);
     });
 
+    $loadTestSet.on('click', function (e) {
+      e.preventDefault();
+      $('#loadTestSetInput').click();
+    });
+
     //attach handler to Browse button
-    $('input').on('change', function (e) {
+    $loadTestSetInput.on('change', function (e) {
+      var DataCompile = require('modules/DataCompile');
       var file = e.target.files[0];
       _readFile(file)
         .done (function (filecontent) {
@@ -63,7 +74,7 @@ define(['views/TestExecutionView', 'modules/ExportToCVS'], function () {
     });
 
     //attach handler to Load progress button
-    $('#loadProgress').on('click', function (e) {
+    $loadProgress.on('click', function (e) {
       e.preventDefault();
       var storage = $.localStorage;
       if(storage.isSet('features')) {
