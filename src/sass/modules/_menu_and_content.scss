@@ -61,9 +61,6 @@ $menu_closed_width: 44px;
     color: $grey_light;
     background-color: $grey;
   }
-
-
-
 }
 
 .leftside-menu:hover {
@@ -79,19 +76,65 @@ $menu_closed_width: 44px;
   }
 }
 
-
-
 .content {
   margin: 0 0 0 $menu_closed_width;
   height: 100%
 }
 
-.content .introduction {
-  color: white;
-  font-size: 2.5em;
-  font-weight: 900;
-  margin-top: 60px;
+#welcome-view {
+  background: linear-gradient(to bottom,  $grey 0%, $grey_light 100%);
+}
+
+#welcome-view .title {
+  background: linear-gradient(to bottom,  $violet 0%, $orange 100%);
+  padding: 150px 0;
+  font-family: 'Fascinate';
+  font-size: 5em;
   text-align: center;
+  box-shadow: 0px 2px 2px $grey;
+  color: $grey_light;
   text-shadow: 1px 1px 2px $grey;
-  opacity: 0.25;
+}
+
+$menu_item_width: 100px;
+$menu_item_height: 100px;
+$menu_item_spacing: 10px;
+
+.welcome-menu {
+  display: block;
+  margin: 30px auto;
+  padding: 0;
+  width: 2*$menu_item_width + 4*$menu_item_spacing;
+
+
+  ul {
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  li {
+    display: inline-block;
+    margin-left: $menu_item_spacing;
+    width: $menu_item_width;
+    height: $menu_item_height;
+    background-color: $blue_dark;
+    text-align: center;
+    border-radius: 6px;
+    box-shadow: 0 0 7px white;
+
+    a,
+    a:visited {
+      color: white;
+      text-decoration: none;
+      font-weight: 800;
+      display: block;
+      height: $menu_item_height;
+      padding: 25px 10px;
+
+    }
+  }
+
+  li:last-child {
+    margin-right: $menu_item_spacing;
+  }
 }

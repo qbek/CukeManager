@@ -1,3 +1,13 @@
+// <--- GLOBAL COLOR DEFINITIONS FOR TEST EXECUTION VIEW --->
+$feature_color: $violet;
+$scenario_color: $blue_light;
+
+$status_pass: $green_light;
+$status_fail: $orange;
+$status_norun: $blue_light;
+$status_undef: $grey_light;
+// <--- END OF COLOR DEFINITIONS --->
+
 #feature-list,
 #scenario-view
 {
@@ -8,29 +18,24 @@
   overflow-y: scroll;
   height: 100%;
   width: 50%;
+
+  .introduction {
+    color: white;
+    font-size: 2.5em;
+    font-weight: 900;
+    margin-top: 60px;
+    text-align: center;
+    opacity: 0.35;
+  }
 }
-// #feature-list.wide {
-//   width: 100%;
-// }
 
-// #feature-list.narrow {
-// }
+#feature-list .introduction {
+  text-shadow: 1px 1px 2px $feature_color;
+}
 
-
-// #scenario-view {
-//   width: 50%;
-// }
-
-// <--- GLOBAL COLOR DEFINITIONS FOR TEST EXECUTION VIEW --->
-$feature_color: $violet;
-$scenario_color: $blue_light;
-
-$status_pass: $green_light;
-$status_fail: $orange;
-$status_norun: $blue_light;
-$status_undef: $grey_light;
-
-// <--- END OF COLOR DEFINITIONS --->
+#scenario-view .introduction {
+  text-shadow: 1px 1px 2px $scenario_color;
+}
 
 %label {
   border: 1px solid;
