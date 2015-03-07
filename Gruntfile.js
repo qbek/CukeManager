@@ -10,7 +10,7 @@ module.exports = function(grunt) {
       deploy: {
         expand: 'false',
         cwd: 'src',
-        src: ['index.html', 'css/*', 'js/vendor/*.js'],
+        src: ['index.html', 'css/normalize.css', 'js/vendor/*.js'],
         dest: 'deploy'
       }
     },
@@ -45,16 +45,29 @@ module.exports = function(grunt) {
                 'src/js/vendor/jquery-2.1.1.js',
                 'test/jasmine-jquery.js',
         				'test/test-main.js'],
-
-        browsers: ['Firefox'],
-        // browsers: ['PhantomJS'],
-        // proxies: {'/': '/base/'}
       },
-      watch: {
-        basePath: './',
-        singleRun: false,
-        autoWatch: true,
-      }
+      all: {
+        options: {
+          browsers: ['Firefox', 'Chrome'],
+          singleRun: true
+        }
+      },
+      firefox: {
+        options: {
+          browsers: ['Firefox'],
+          basePath: './',
+          singleRun: false,
+          autoWatch: true,
+        }
+      },
+      phantom: {
+        options: {
+          browsers: ['PhantomJS'],
+          basePath: './',
+          singleRun: false,
+          autoWatch: true,
+        }
+      },
     },
 
     sass: {
@@ -63,9 +76,19 @@ module.exports = function(grunt) {
           update: true,
         },
 
-
         files: {
           'src/css/main.css': 'src/sass/main.scss'
+        }
+      },
+
+      deploy: {
+        options: {
+          sourcemap: 'none',
+          style: 'compresed'
+
+        },
+        files: {
+          'deploy/css/main.css': 'src/sass/main.scss'
         }
       }
     },
@@ -87,5 +110,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
-  grunt.registerTask('deploy',['clean:deploy', 'copy:deploy', 'requirejs:deploy']);
+  grunt.registerTask('deploy',['clean:deploy', 'copy:deploy', 'requirejs:deploy', 'sass:deploy']);
 };
