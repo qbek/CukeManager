@@ -21,7 +21,7 @@ define(['views/TestExecutionView', 'modules/ExportToCVS', 'modules/DataCompile']
     $('[data-gr="scenario"]', $featureList).on('click', function (event) {
       var featureId = $(this).attr('data-featureid');
       var scenarioId = $(this).attr('data-scenarioid');
-      window.location.hash = String.concat('#/testexecutor/scenario/', featureId, '/', scenarioId);
+      window.location.hash = '#/testexecutor/scenario/' + featureId + '/' + scenarioId;
     });
   }
 

@@ -8,7 +8,7 @@ define(function () {
 
   //returns jQuery object with data-gr=value in $render
   function _getGrElement (selector, $render) {
-    var jquery = String.concat('[data-gr="', selector, '"]');
+    var jquery = '[data-gr="' + selector + '"]';
     return $(jquery, $render);
   }
 
