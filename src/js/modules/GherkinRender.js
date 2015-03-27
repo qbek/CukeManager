@@ -83,7 +83,7 @@ define(function () {
   //renders and returns new step jQuery object, based on delivered $step template
   function _renderScenarioStep (step, $step) {
     var $newStep = $step.clone();
-    var $dataTable = _getGrElement('step-datatable', $step);
+    var $dataTable = _getGrElement('step-datatable', $newStep);
     var $keyword = _getGrElement('step-keyword', $newStep);
     $keyword.html(step.keyword);
     switch (step.keyword) {
