@@ -7,7 +7,6 @@ function () {
   var FeatureView = require('views/components/FeatureView');
   var ScenarioView = require('views/components/ScenarioView');
 
-
   function showFeatureList (features) {
     var $tmplFeature = $(require('text!tmpl/TestFeature.tmpl.html'));
     var $tmplScenario = $('[data-gr="scenario"]', $tmplFeature).detach();
@@ -37,10 +36,19 @@ function () {
     scenarioView.$render.appendTo($scenarioDetails);
   }
 
+  function highlightScenario (featureID, scenarioID) {
+    var toAddSelector = '[data-featureid='+ featureID +'][data-scenarioid='+ scenarioID +'] .scenario-label';
+    var $toRemove = $('.scenario-label.highlight', $featureList);
+    var $toAdd = $(toAddSelector, $featureList);
+
+    $toRemove.toggleClass('highlight');
+    $toAdd.toggleClass('highlight');
+  }
 
   return {
     showFeatureList: showFeatureList,
-    showScenario: showScenario
+    showScenario: showScenario,
+    highlightScenario: highlightScenario
   };
 
 });

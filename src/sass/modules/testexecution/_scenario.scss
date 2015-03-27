@@ -25,6 +25,13 @@ $enterresult_bg: $grey_light;
   @extend %label;
   border-color: $scenario_color;
   margin-bottom: 3px;
+
+
+}
+
+.scenario-label.highlight {
+  background-color: $scenario_color;
+  color: white;
 }
 
 .scenario-tags {

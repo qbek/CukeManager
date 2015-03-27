@@ -101,6 +101,7 @@ define(['views/TestExecutionView', 'modules/ExportToCVS', 'modules/DataCompile']
     if(_features) {
       var scenario = _features[featureID].scenarios[scenarioID];
       var background = _features[featureID].background;
+      _TestExecutionView.highlightScenario(featureID, scenarioID);
       _TestExecutionView.showScenario (scenario, background);
 
       var $scenarioEnterResult = $('[data-eventBind="enter-scenario-status"]');
