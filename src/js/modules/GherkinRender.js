@@ -107,7 +107,8 @@ define(function () {
       step.dataTable.forEach(function (row) {
         var rowHtml = '<tr>';
         row.forEach(function (cell) {
-          rowHtml = rowHtml.concat('<td>', cell, '</td>');
+          var dataCell = _htmlEscape(cell);
+          rowHtml = rowHtml.concat('<td>', dataCell, '</td>');
         });
         rowHtml = rowHtml.concat('</tr>');
         // console.log(rowHtml);
