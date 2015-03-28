@@ -108,20 +108,29 @@ function (ScenarioModel, DataCompile, json) {
             dataTable: testDataTable});
       });
 
-      it('setStatus(status, comment) - sets scenario.status and triggers "change.status" event', function () {
-        scenario.setStatus('pass', 'no comment');
+      it('setStatus(status) - sets scenario.status.result and triggers "change.status" event', function () {
+        scenario.setStatus('pass');
         expect(scenario.status.result).toBe('pass');
-        expect(scenario.status.comment).toBe('no comment');
 
         scenario.setStatus('norun');
         expect(scenario.status.result).toBe('norun');
-        expect(scenario.status.comment).toBe(null);
 
         // it('triggers "change.status" event', function () {
         var spyEvent = spyOnEvent(scenario, 'change.status');
         scenario.setStatus('pass');
         expect('change.status').toHaveBeenTriggeredOn(scenario);
       });
+
+      it('setComment(comment) - sets scenario.status.comment', function () {
+        var comment = 'test comment';
+        scenario.setComment(comment);
+        expect(scenario.status.comment).toBe(comment);
+
+        comment = 'updated comment';
+        scenario.setComment(comment);
+        expect(scenario.status.comment).toBe(comment);
+      });
+
     });
 
     describe('properties', function () {

@@ -112,8 +112,13 @@ define(['views/TestExecutionView', 'modules/ExportToCVS', 'modules/DataCompile']
         if (status === 'fail' && !comment) {
           alert('Please provide reason of fail in comment');
         } else {
-          scenario.setStatus(status, comment);
+          scenario.setStatus(status);
         }
+      });
+      $($scenarioEnterResult).off('focusout');
+      $($scenarioEnterResult).on('focusout', 'textarea', function (e) {
+        var comment = $('textarea', $scenarioEnterResult).val();
+        scenario.setComment(comment);
       });
     } else {
       throw "Please first load a test set to execute";

@@ -71,15 +71,17 @@ define([], function () {
       this.steps.push(step);
     },
 
-    setStatus: function(stat, comment) {
+    setStatus: function(stat) {
       this.status.result = stat;
+      $(this).trigger('change.status');
+    },
+
+    setComment: function(comment) {
       if(comment) {
         this.status.comment = comment;
       } else {
         this.status.comment = null;
       }
-
-      $(this).trigger('change.status');
     }
   });
 
