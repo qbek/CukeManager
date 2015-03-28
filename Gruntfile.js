@@ -10,7 +10,7 @@ module.exports = function(grunt) {
       deploy: {
         expand: 'false',
         cwd: 'src',
-        src: ['index.html', 'css/normalize.css', 'js/vendor/*.js'],
+        src: ['index.html', 'css/normalize.css', 'js/vendor/*.js', 'icon/*'],
         dest: 'deploy'
       }
     },
