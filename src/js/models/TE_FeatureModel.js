@@ -1,9 +1,21 @@
-define(['models/ScenarioModel', 'PrototypeExtends'], function (Scenario) {
+/**
+* TestExecution FeatureModel
+* @module TE_FeatureModel
+*/
+
+define(['models/TE_ScenarioModel', 'PrototypeExtends'], function (Scenario) {
   'use strict';
 
   if(String.getDescriptionElement === undefined) {
     require('PrototypeExtends');
   }
+
+  /**
+  * TestExecution FeatureModel
+  * @constructs Feature
+  * @alias module:TE_FeatureModel
+  * @param {String | Object} data - name of the feature, or plain object with feature details
+  */
 
   function Feature (data) {
     if($.type(data) == 'string') {
@@ -90,24 +102,6 @@ define(['models/ScenarioModel', 'PrototypeExtends'], function (Scenario) {
       this.description = desc;
     },
 
-    //scenario related functions
-    addScenario: function (name, desc, tagsArray) {
-      var feature = this;
-      var scenario = Scenario.create(name);
-      scenario.setDescription(desc);
-      scenario.setTags(tagsArray);
-      var scnCount = this.scenarios.push(scenario);
-      return scnCount - 1;
-    },
-
-    // setScenarioSteps: function (id, stepsArray) {
-    //   this.scenarios[id].setSteps(stepsArray);
-    // },
-
-    addScenarioStep: function (id, key, name, status, datatable) {
-      this.scenarios[id].addStep(key, name, status, datatable);
-    },
-
     addBackgroundStep: function (keyword, name, datatable) {
       var step = {
         keyword: keyword,
@@ -121,6 +115,23 @@ define(['models/ScenarioModel', 'PrototypeExtends'], function (Scenario) {
       }
 
       this.background.push(step);
+    },
+
+    /**
+    * Creates new Scenario object
+    * @return Scenario object
+    * @param {String|Object} data - name of new scenario, or plain object with Scenario details
+    */
+    createNewScenario: function (data) {
+      return Scenario.create(data);
+    },
+
+    /**
+    * Adds scenario to Feature's scenarios table
+    * @param {Object} scenario - Scenario object
+    */
+    addScenario: function (scenario) {
+      this.scenarios.push(scenario);
     }
   });
 

@@ -1,4 +1,4 @@
-define(['modules/ExportToCVS', 'TestExecutionCtrl', 'models/FeatureModel'], function (ExportCVS, TestExecutionCtrl) {
+define(['modules/ExportToCVS', 'TestExecutionCtrl', 'models/TE_FeatureModel'], function (ExportCVS, TestExecutionCtrl) {
   'use strict';
 
   //definition of all divs for views in CukeManager

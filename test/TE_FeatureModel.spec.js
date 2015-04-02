@@ -1,4 +1,4 @@
-define(['models/FeatureModel'],
+define(['models/TE_FeatureModel'],
 function (FeatureModel) {
 
   describe('Feature Model', function () {
@@ -14,7 +14,7 @@ function (FeatureModel) {
       expect(feature.scenarios).toEqual([]);
     });
 
-    it('factory FeatureModel.create(fatureObj) create new feature', function () {
+    it('factory FeatureModel.create(fatureObj) creates new feature', function () {
       var testFeatureObj = {
         "name": "Data type examples",
         "description": "",
@@ -124,11 +124,14 @@ function (FeatureModel) {
         var feature = FeatureModel.create('Testing feature statistics');
         expect(feature.stats).toEqual({pass: 0, norun: 0, fail: 0, undef: 0});
 
-        feature.addScenario('Test Scenario 1');
+        var scenario = feature.createNewScenario('Test Scenario 1');
+        feature.addScenario(scenario);
         expect(feature.stats).toEqual({pass: 0, norun: 0, fail: 0, undef: 1});
-        feature.addScenario('Test Scenario 2');
+        scenario = feature.createNewScenario('Test Scenario 2');
+        feature.addScenario(scenario);
         expect(feature.stats).toEqual({pass: 0, norun: 0, fail: 0, undef: 2});
-        feature.addScenario('Test Scenario 3');
+        scenario = feature.createNewScenario('Test Scenario 3');
+        feature.addScenario(scenario);
         expect(feature.stats).toEqual({pass: 0, norun: 0, fail: 0, undef: 3});
 
         feature.scenarios[0].setStatus('pass');
@@ -209,74 +212,21 @@ function (FeatureModel) {
                                                datatable: testDataTable});
       });
 
-      it('addScenario(name, description, tags[]) - adds new scenario and returns it\'s id', function() {
-        var testScenarioName1 = 'Test Scenario 1';
-        var testScenarioDesc1 = 'Test Description 1';
-        var testScenarioTags1 = ['tag11', 'tag12'];
-        expect(feature.addScenario(testScenarioName1, testScenarioDesc1, testScenarioTags1)).toBe(0);
-        expect(feature.scenarios.length).toBe(1);
-        expect(feature.scenarios[0].name).toEqual(testScenarioName1);
-        expect(feature.scenarios[0].description).toEqual(testScenarioDesc1);
-        expect(feature.scenarios[0].tags).toEqual(testScenarioTags1);
-        // expect(feature.stats.undef).toBe(1);
-
-        var testScenarioName2 = 'Test Scenario 2';
-        var testScenarioDesc2 = 'Test Description 2';
-        var testScenarioTags2 = ['tag21', 'tag22'];
-        expect(feature.addScenario(testScenarioName2, testScenarioDesc2, testScenarioTags2)).toBe(1);
-        expect(feature.scenarios.length).toBe(2);
-        expect(feature.scenarios[1].name).toEqual('Test Scenario 2');
-        expect(feature.scenarios[1].description).toEqual(testScenarioDesc2);
-        expect(feature.scenarios[1].tags).toEqual(testScenarioTags2);
-        // expect(feature.stats.undef).toBe(1);
+      it('createNewScenario(name) - creates and returns new scenario model to fill with data', function () {
+        var newScenario_1 = feature.createNewScenario('Test scenario 1');
+        expect(newScenario_1.name).toEqual('Test scenario 1');
       });
 
-      it('addScenarioStep(id, keyword, name, datatable, result) - adds step to scenario', function () {
-        var testScenarioName1 = 'Test Scenario 1';
-        var testScenarioDesc1 = 'Test Description 1';
-        var testScenarioTags1 = ['tag11', 'tag12'];
-        feature.addScenario(testScenarioName1, testScenarioDesc1, testScenarioTags1);
-        var testScenarioName2 = 'Test Scenario 2';
-        var testScenarioDesc2 = 'Test Description 2';
-        var testScenarioTags2 = ['tag21', 'tag22'];
-        feature.addScenario(testScenarioName2, testScenarioDesc2, testScenarioTags2);
+      it('addScenario(scenario) - adds scenario to feature\'s scenarios list', function () {
+        var scenario = feature.createNewScenario('Test scenario 1');
+        feature.addScenario(scenario);
+        expect(feature.scenarios[0].name).toEqual('Test scenario 1');
 
-        var testId = 1;
-        var testStepKeyword1 = 'Given';
-        var testStepnName1 = 'Test step one';
-        var testStepResult1 = 'undefined';
-
-        var testStepKeyword2 = 'When';
-        var testStepnName2 = 'Test step two';
-        var testStepResult2 = 'undefined';
-
-        var testStepKeyword3 = 'Then';
-        var testStepnName3 = 'Test step three';
-        var testStepResult3 = 'undefined';
-        var testStepDatatable3 = [['key1', 'value1'], ['key2', 'value2']];
-
-        // var testStepG = {keyword: 'Given',   name: 'Test', result: 'undefined'};
-        // var testStepW = {keyword: 'When',   name: 'Test 2', result: 'undefined'};
-        // var testStepT = {keyword: 'Then',   name: 'Test 3', result: 'undefined', dataTable:[['key1', 'value1'], ['key2', 'value2']]};
-        feature.addScenarioStep(testId, testStepKeyword1, testStepnName1, testStepResult1);
-        feature.addScenarioStep(testId, testStepKeyword2, testStepnName2, testStepResult2);
-        feature.addScenarioStep(testId, testStepKeyword3, testStepnName3, testStepResult3, testStepDatatable3);
-
-        expect(feature.scenarios[testId].steps.length).toBe(3);
-        expect(feature.scenarios[testId].steps[0]).toEqual({keyword: testStepKeyword1,
-                                                       name: testStepnName1,
-                                                       result: testStepResult1});
-        expect(feature.scenarios[testId].steps[1]).toEqual({keyword: testStepKeyword2,
-                                                       name: testStepnName2,
-                                                       result: testStepResult2});
-        expect(feature.scenarios[testId].steps[2]).toEqual({keyword: testStepKeyword3,
-                                                       name: testStepnName3,
-                                                       result: testStepResult3,
-                                                       dataTable: testStepDatatable3});
+        scenario = feature.createNewScenario('Test scenario 2');
+        feature.addScenario(scenario);
+        expect(feature.scenarios[1].name).toEqual('Test scenario 2');
       });
     });
-
-
 
   });
    // xdescribe('FeatureListView module', function () {

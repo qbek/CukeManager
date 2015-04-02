@@ -39,6 +39,7 @@ module.exports = function(grunt) {
                 {pattern: 'src/js/modules/*.js', included: false},
                 {pattern: 'src/js/*.js', included: false},
                 {pattern: 'src/js/vendor/text.js', included: false},
+                {pattern: 'test/*/*.spec.js', included: false},
                 {pattern: 'test/*.spec.js', included: false},
                 {pattern: 'test/testdata/*.*', included: false},
                 {pattern: 'src/tmpl/**', included: false},

@@ -1,4 +1,4 @@
-define(['models/ScenarioModel', 'modules/DataCompile', 'text!testdata/example.json'],
+define(['models/TE_ScenarioModel', 'modules/DataCompile', 'text!testdata/example.json'],
 function (ScenarioModel, DataCompile, json) {
 
   describe('Scenario Model', function() {

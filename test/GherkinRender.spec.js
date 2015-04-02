@@ -1,4 +1,4 @@
-define(['text!tmpl/TestScenario.tmpl.html', 'text!tmpl/TestFeature.tmpl.html', 'modules/GherkinRender', 'models/ScenarioModel', 'modules/DataCompile', 'text!testdata/example.json'],
+define(['text!tmpl/TestScenario.tmpl.html', 'text!tmpl/TestFeature.tmpl.html', 'modules/GherkinRender', 'models/TE_ScenarioModel', 'modules/DataCompile', 'text!testdata/example.json'],
 function () {
 
   describe('GherkinRender Module definition', function () {

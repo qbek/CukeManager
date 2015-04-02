@@ -1,4 +1,4 @@
-define(['models/FeatureModel'], function (Feature) {
+define(['models/TE_FeatureModel'], function (Feature) {
   'use strict';
 
   function compileData (jsonString) {
