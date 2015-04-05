@@ -42,7 +42,7 @@ define(['views/TestExecutionView', 'modules/ExportToCVS', 'modules/DataCompile',
 
     $downloadCVS.on('click', function () {
       var ExportCVS = require('modules/ExportToCVS');
-      var cvsString = ExportCVS.getCVS(testSet.features);
+      var cvsString = ExportCVS.getCVS(testSet);
       var base64 = btoa(cvsString);
       var filename = "TestReport-".concat(testSet.desc.verUnderTest, '_', testSet.desc.moduleUnderTest, '-', testSet.desc.testType, '.cvs');
 
