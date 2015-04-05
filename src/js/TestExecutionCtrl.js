@@ -1,7 +1,8 @@
-define(['views/TestExecutionView', 'modules/ExportToCVS', 'modules/DataCompile'], function () {
+define(['views/TestExecutionView', 'modules/ExportToCVS', 'modules/DataCompile', 'models/TestSetModel'], function () {
   'use strict';
 
-  var _features;
+  var TestSetModel = require('models/TestSetModel');
+  var testSet = TestSetModel.create({});
   var _TestExecutionView = require('views/TestExecutionView');
 
 
@@ -26,7 +27,7 @@ define(['views/TestExecutionView', 'modules/ExportToCVS', 'modules/DataCompile']
   }
 
   function _showFeatures() {
-    _TestExecutionView.showFeatureList(_features);
+    _TestExecutionView.showFeatureList(testSet.features);
     _enableOpenScenarioDetailsEvent();
   }
 
@@ -41,12 +42,13 @@ define(['views/TestExecutionView', 'modules/ExportToCVS', 'modules/DataCompile']
 
     $downloadCVS.on('click', function () {
       var ExportCVS = require('modules/ExportToCVS');
-      var cvsString = ExportCVS.getCVS(_features);
+      var cvsString = ExportCVS.getCVS(testSet.features);
       var base64 = btoa(cvsString);
+      var filename = "TestReport-".concat(testSet.desc.verUnderTest, '_', testSet.desc.moduleUnderTest, '-', testSet.desc.testType, '.cvs');
 
       $downloadCVS.prop('href', 'data:text;base64,' + base64);
       $downloadCVS.prop('target', '_blank');
-      $downloadCVS.prop('download', 'TestReport.csv');
+      $downloadCVS.prop('download', filename);
 
       $downloadCVS.show();
     });
@@ -54,7 +56,7 @@ define(['views/TestExecutionView', 'modules/ExportToCVS', 'modules/DataCompile']
     $storeProgress.on('click', function (e) {
       e.preventDefault();
       var storage = $.localStorage;
-      storage.set('features', _features);
+      storage.set('testSetProgress', testSet);
     });
 
     $loadTestSet.on('click', function (e) {
@@ -68,7 +70,13 @@ define(['views/TestExecutionView', 'modules/ExportToCVS', 'modules/DataCompile']
       var file = e.target.files[0];
       _readFile(file)
         .done (function (filecontent) {
-          _features = DataCompile.compile(filecontent);
+          var features = DataCompile.compile(filecontent);
+          testSet = TestSetModel.create(features);
+          var name = prompt('Name of engineer');
+          var module = prompt('System/Module under test');
+          var version = prompt('Version under test');
+          var type = prompt('Test type');
+          testSet.setDescription(name, module, version, type);
           _showFeatures();
         });
     });
@@ -77,14 +85,16 @@ define(['views/TestExecutionView', 'modules/ExportToCVS', 'modules/DataCompile']
     $loadProgress.on('click', function (e) {
       e.preventDefault();
       var storage = $.localStorage;
-      if(storage.isSet('features')) {
-        var data = storage.get('features');
+      if(storage.isSet('testSetProgress')) {
+        var data = storage.get('testSetProgress');
         var FeatureModel = require('models/FeatureModel');
-        _features = [];
-        data.forEach(function (featureObj) {
+        var features = [];
+        data.features.forEach(function (featureObj) {
           var feature = FeatureModel.create(featureObj);
-          _features.push(feature);
+          features.push(feature);
         });
+        testSet = TestSetModel.create(features);
+        testSet.setDescription(data.desc);
         _showFeatures();
       } else {
         alert('There is nothing to load');
@@ -92,37 +102,38 @@ define(['views/TestExecutionView', 'modules/ExportToCVS', 'modules/DataCompile']
     });
   }
 
-
   function initCtrl () {
     _enableMenuHandlers();
   }
 
   function showScenario (featureID, scenarioID) {
-    if(_features) {
-      var scenario = _features[featureID].scenarios[scenarioID];
-      var background = _features[featureID].background;
-      _TestExecutionView.highlightScenario(featureID, scenarioID);
-      _TestExecutionView.showScenario (scenario, background);
-
-      var $scenarioEnterResult = $('[data-eventBind="enter-scenario-status"]');
-      $scenarioEnterResult.off('click');
-      $scenarioEnterResult.on('click', 'button', function (e) {
-        var status = $(this).val();
-        var comment = $('textarea', $scenarioEnterResult).val();
-        if (status === 'fail' && !comment) {
-          alert('Please provide reason of fail in comment');
-        } else {
-          scenario.setStatus(status);
-        }
-      });
-      $($scenarioEnterResult).off('focusout');
-      $($scenarioEnterResult).on('focusout', 'textarea', function (e) {
-        var comment = $('textarea', $scenarioEnterResult).val();
-        scenario.setComment(comment);
-      });
-    } else {
+    var scenario, background;
+    try {
+      scenario = testSet.features[featureID].scenarios[scenarioID];
+      background = testSet.features[featureID].background;
+    } catch (e) {
       throw "Please first load a test set to execute";
     }
+
+    _TestExecutionView.highlightScenario(featureID, scenarioID);
+    _TestExecutionView.showScenario (scenario, background);
+
+    var $scenarioEnterResult = $('[data-eventBind="enter-scenario-status"]');
+    $scenarioEnterResult.off('click');
+    $scenarioEnterResult.on('click', 'button', function (e) {
+      var status = $(this).val();
+      var comment = $('textarea', $scenarioEnterResult).val();
+      if (status === 'fail' && !comment) {
+        alert('Please provide reason of fail in comment');
+      } else {
+        scenario.setStatus(status);
+      }
+    });
+    $($scenarioEnterResult).off('focusout');
+    $($scenarioEnterResult).on('focusout', 'textarea', function (e) {
+      var comment = $('textarea', $scenarioEnterResult).val();
+      scenario.setComment(comment);
+    });
   }
 
   return {
