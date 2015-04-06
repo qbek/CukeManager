@@ -17,30 +17,31 @@ define(['views/TestExecutionView', 'modules/ExportToCVS', 'modules/DataCompile',
     return promise;
   }
 
-  function _enableOpenScenarioDetailsEvent () {
+  function _openScenarioDetailsEventOn () {
     var $featureList = $('#feature-list');
-    $('[data-gr="scenario"]', $featureList).on('click', function (event) {
+    var handleScenarioClick = function (event) {
       var featureId = $(this).attr('data-featureid');
       var scenarioId = $(this).attr('data-scenarioid');
       window.location.hash = '#/testexecutor/scenario/' + featureId + '/' + scenarioId;
-    });
+    };
+
+    $('[data-gr="scenario"]', $featureList).on('click', handleScenarioClick);
   }
 
   function _showFeatures() {
     _TestExecutionView.showFeatureList(testSet.features);
-    _enableOpenScenarioDetailsEvent();
+    _openScenarioDetailsEventOn();
   }
 
-  function _enableMenuHandlers () {
+  function _menuClickEventsOn () {
     var $loadTestSet = $('#loadTestSet');
     var $loadTestSetInput = $('#loadTestSetInput');
 
+    var $downloadCVS = $('#downloadCVS');
     var $storeProgress = $('#storeProgress');
     var $loadProgress = $('#loadProgress');
-    var $downloadCVS = $('#downloadCVS');
 
-
-    $downloadCVS.on('click', function () {
+    var handleDownloadCvsClick = function (event) {
       var ExportCVS = require('modules/ExportToCVS');
       var cvsString = ExportCVS.getCVS(testSet);
       var base64 = btoa(cvsString);
@@ -49,41 +50,17 @@ define(['views/TestExecutionView', 'modules/ExportToCVS', 'modules/DataCompile',
       $downloadCVS.prop('href', 'data:text;base64,' + base64);
       $downloadCVS.prop('target', '_blank');
       $downloadCVS.prop('download', filename);
-
       $downloadCVS.show();
-    });
+    };
 
-    $storeProgress.on('click', function (e) {
-      e.preventDefault();
+    var handleStoreProgressClick = function (event) {
+      event.preventDefault();
       var storage = $.localStorage;
       storage.set('testSetProgress', testSet);
-    });
+    };
 
-    $loadTestSet.on('click', function (e) {
-      e.preventDefault();
-      $('#loadTestSetInput').click();
-    });
-
-    //attach handler to Browse button
-    $loadTestSetInput.on('change', function (e) {
-      var DataCompile = require('modules/DataCompile');
-      var file = e.target.files[0];
-      _readFile(file)
-        .done (function (filecontent) {
-          var features = DataCompile.compile(filecontent);
-          testSet = TestSetModel.create(features);
-          var name = prompt('Name of engineer');
-          var module = prompt('System/Module under test');
-          var version = prompt('Version under test');
-          var type = prompt('Test type');
-          testSet.setDescription(name, module, version, type);
-          _showFeatures();
-        });
-    });
-
-    //attach handler to Load progress button
-    $loadProgress.on('click', function (e) {
-      e.preventDefault();
+    var handleLoadProgressClick = function (event) {
+      event.preventDefault();
       var storage = $.localStorage;
       if(storage.isSet('testSetProgress')) {
         var data = storage.get('testSetProgress');
@@ -99,15 +76,65 @@ define(['views/TestExecutionView', 'modules/ExportToCVS', 'modules/DataCompile',
       } else {
         alert('There is nothing to load');
       }
-    });
+    };
+
+    var handleLoadTestSetClick = function (event) {
+      event.preventDefault();
+      $('#loadTestSetInput').click();
+    };
+
+    var handleLoadTestSetChange = function (event) {
+      var DataCompile = require('modules/DataCompile');
+      var file = event.target.files[0];
+      _readFile(file)
+        .done (function (filecontent) {
+          var features = DataCompile.compile(filecontent);
+          testSet = TestSetModel.create(features);
+          var name = prompt('Name of engineer');
+          var module = prompt('System/Module under test');
+          var version = prompt('Version under test');
+          var type = prompt('Test type');
+          testSet.setDescription(name, module, version, type);
+          _showFeatures();
+        });
+    };
+
+    //attach handler function to events on menu items
+    $downloadCVS.on('click', handleDownloadCvsClick);
+    $storeProgress.on('click', handleStoreProgressClick);
+    $loadProgress.on('click', handleLoadProgressClick);
+    $loadTestSet.on('click', handleLoadTestSetClick);
+    //attach handler to Browse button
+    $loadTestSetInput.on('change', handleLoadTestSetChange);
   }
 
-  function initCtrl () {
-    _enableMenuHandlers();
+  function init () {
+    _menuClickEventsOn();
   }
 
   function showScenario (featureID, scenarioID) {
     var scenario, background;
+    var $scenarioEnterResult;
+
+    var getComment = function () {
+      return $('textarea', $scenarioEnterResult).val();
+    };
+
+    var handleResultFormButtonClick = function () {
+      var status = $(this).val();
+      var comment = getComment();
+      if (status === 'fail' && !comment) {
+        alert('Please provide reason of fail in comment');
+      } else {
+        scenario.setStatus(status);
+      }
+    };
+
+    var handleCommentFocusout = function () {
+      var comment = getComment();
+      scenario.setComment(comment);
+    };
+
     try {
       scenario = testSet.features[featureID].scenarios[scenarioID];
       background = testSet.features[featureID].background;
@@ -118,26 +145,15 @@ define(['views/TestExecutionView', 'modules/ExportToCVS', 'modules/DataCompile',
     _TestExecutionView.highlightScenario(featureID, scenarioID);
     _TestExecutionView.showScenario (scenario, background);
 
-    var $scenarioEnterResult = $('[data-eventBind="enter-scenario-status"]');
+    $scenarioEnterResult = $('[data-eventBind="enter-scenario-status"]');
     $scenarioEnterResult.off('click');
-    $scenarioEnterResult.on('click', 'button', function (e) {
-      var status = $(this).val();
-      var comment = $('textarea', $scenarioEnterResult).val();
-      if (status === 'fail' && !comment) {
-        alert('Please provide reason of fail in comment');
-      } else {
-        scenario.setStatus(status);
-      }
-    });
-    $($scenarioEnterResult).off('focusout');
-    $($scenarioEnterResult).on('focusout', 'textarea', function (e) {
-      var comment = $('textarea', $scenarioEnterResult).val();
-      scenario.setComment(comment);
-    });
+    $scenarioEnterResult.on('click', 'button', handleResultFormButtonClick);
+    $scenarioEnterResult.off('focusout');
+    $scenarioEnterResult.on('focusout', 'textarea', handleCommentFocusout);
   }
 
   return {
-    init: initCtrl,
+    init: init,
     showScenario: showScenario
   };
 
