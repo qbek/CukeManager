@@ -60,11 +60,10 @@ define([], function () {
       this.description = desc;
     },
 
-    addStep: function(key, name, result, datatable) {
+    addStep: function(key, name, datatable) {
       var step = {
         keyword: key,
         name: name,
-        result: result,
       };
 
       if(datatable) { step.dataTable = datatable; }

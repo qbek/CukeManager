@@ -86,25 +86,22 @@ function (ScenarioModel, DataCompile, json) {
         expect(scenario.description).toEqual(testDescription);
       });
 
-      it('addStep(keyword, name, result [, datatable]) - adds step to scenario.steps', function () {
+      it('addStep(keyword, name, [, datatable]) - adds step to scenario.steps', function () {
         var testStepNameStr1 = 'Given';
         var testStepStr1 = 'Test step one';
-        var testStepResult = 'undefined';
         //check if can be added step without dataTable
-        scenario.addStep(testStepNameStr1, testStepStr1, testStepResult);
+        scenario.addStep(testStepNameStr1, testStepStr1);
         expect(scenario.steps[0]).toEqual(
           { keyword: testStepNameStr1,
-            name: testStepStr1,
-            result: testStepResult});
+            name: testStepStr1});
         //check if can be added full step
         var testStepNameStr2 = 'When';
         var testStepStr2 = 'Test step two';
         var testDataTable = [[1,2 ], [3,4]];
-        scenario.addStep(testStepNameStr2, testStepStr2, testStepResult, testDataTable);
+        scenario.addStep(testStepNameStr2, testStepStr2, testDataTable);
         expect(scenario.steps[1]).toEqual(
           { keyword: testStepNameStr2,
             name: testStepStr2,
-            result: testStepResult,
             dataTable: testDataTable});
       });
 
