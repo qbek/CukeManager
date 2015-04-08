@@ -1,19 +1,20 @@
-define(['modules/DataCompile', 'text!testdata/example.json'], function (DataCompile, json) {
+define(['modules/DataCompile', 'models/TestSetModel', 'text!testdata/example.json'], function (DataCompile, TestSet, json) {
   'use strict';
   describe('DataCompile Module', function () {
 
-    describe('has "compile()" function - it returns array of "FeatureModel\'s"', function () {
+    describe('has "compile(content, TestSet)" function - it returns Test Set with features read from content', function () {
       var testData = JSON.parse(json);
-      var result = DataCompile.compile(json);
-      var featureOne = result[0];
-      var featureTwo = result[1];
+      var testSet = TestSet.create();
+      testSet = DataCompile.compile(json, testSet);
+      var featureOne = testSet.features[0];
+      var featureTwo = testSet.features[1];
 
       it('reads feature names', function () {
         //check if all Features were compiled
-        expect(result.length).toBe(2);
+        expect(testSet.features.length).toBe(2);
         //check names of compiled Features
-        expect(result[0].name).toEqual(testData[0].name);
-        expect(result[1].name).toEqual(testData[1].name);
+        expect(featureOne.name).toEqual(testData[0].name);
+        expect(featureTwo.name).toEqual(testData[1].name);
       });
 
       it('reads feature tags', function () {
@@ -40,8 +41,8 @@ define(['modules/DataCompile', 'text!testdata/example.json'], function (DataComp
 
       it('reads scenario names', function () {
         //check if all Scenarios were compiled
-        expect(result[0].scenarios.length).toBe(2);
-        expect(result[1].scenarios.length).toBe(2);
+        expect(featureOne.scenarios.length).toBe(2);
+        expect(featureTwo.scenarios.length).toBe(2);
         //check scenario names
         var scenarios = featureOne.scenarios;
         expect(scenarios[0].name).toEqual(testData[0].elements[0].name);
@@ -70,15 +71,12 @@ define(['modules/DataCompile', 'text!testdata/example.json'], function (DataComp
         expect(scenario.steps.length).toBe(6);
         expect(scenario.steps[0].name).toEqual(testData[0].elements[0].steps[0].name);
         expect(scenario.steps[0].keyword).toEqual(testData[0].elements[0].steps[0].keyword.trim());
-        expect(scenario.steps[0].result).toEqual('undefined');
 
         expect(scenario.steps[2].name).toEqual(testData[0].elements[0].steps[2].name);
         expect(scenario.steps[2].keyword).toEqual(testData[0].elements[0].steps[2].keyword.trim());
-        expect(scenario.steps[2].result).toEqual('undefined');
 
         expect(scenario.steps[5].name).toEqual(testData[0].elements[0].steps[5].name);
         expect(scenario.steps[5].keyword).toEqual(testData[0].elements[0].steps[5].keyword.trim());
-        expect(scenario.steps[5].result).toEqual('undefined');
 
         //check steps of 'Scenario: Scenario without steps'
         scenario = featureOne.scenarios[1];

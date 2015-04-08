@@ -3,7 +3,7 @@
   *
   * @module TestSetModel
   */
-define(function () {
+define(['models/TE_FeatureModel'], function (FeatureModel) {
 
 
   /**
@@ -12,9 +12,9 @@ define(function () {
   * @alias module:TestSetModel
   * @param {} features - table of features for TestSet
   */
-  function TestSet (features) {
+  function TestSet () {
     /** feature list of this TestSet */
-    this.features = features;
+    this.features = [];
 
     /** description */
     this.desc = {
@@ -61,7 +61,23 @@ define(function () {
         desc.verUnderTest = arguments[2];
         desc.testType = arguments[3];
       }
+    },
 
+    /**
+    * Creates new Feature object
+    * @param {String | Object} data - name of new feature, or plain object with feature details
+    * @returns {Feature}  - new feature object
+    */
+    createNewFeature: function (data) {
+      return FeatureModel.create(data);
+    },
+
+    /**
+    * Addes feature to Test Set
+    * @param {Feature} feature - feature object
+    */
+    addFeature: function (feature) {
+      this.features.push(feature);
     }
   });
 

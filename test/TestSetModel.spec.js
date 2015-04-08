@@ -2,10 +2,10 @@ define(['models/TestSetModel'], function (TestSetModel) {
 
   describe('TestSet Model', function () {
 
-    it('factory TesSetModel.create(features) create new TestSet', function () {
-      var features = {test1:1};
-      var testModel = TestSetModel.create(features);
-      expect(testModel.features).toBe(features);
+    it('factory TesSetModel.create() create new TestSet', function () {
+      // var features = {test1:1};
+      var testModel = TestSetModel.create();
+      expect(testModel.features).toEqual([]);
       expect(testModel.desc.executorName).toBe(null);
       expect(testModel.desc.moduleUnderTest).toBe(null);
       expect(testModel.desc.verUnderTest).toBe(null);
@@ -29,7 +29,7 @@ define(['models/TestSetModel'], function (TestSetModel) {
       });
 
       it('setDescription(descObj) - sets description details', function () {
-        var testModel = TestSetModel.create({});
+        var testModel = TestSetModel.create();
         var description = {
           executorName: 'Jan Kowalski',
           moduleUnderTest: 'Module under test',
@@ -40,6 +40,27 @@ define(['models/TestSetModel'], function (TestSetModel) {
         testModel.setDescription(description);
         expect(testModel.desc).toEqual(description);
       });
+
+      it('createNewFeature(name|obj) - creates and returns new feature object', function () {
+        var testModel = TestSetModel.create();
+        var feature = testModel.createNewFeature('Test feature');
+        expect(feature.name).toEqual('Test feature');
+      });
+
+      it('addFeature(feature) - adds feature to TestSet\'s feature table', function () {
+        var testModel = TestSetModel.create();
+        var feature = testModel.createNewFeature('Test feature 1');
+        testModel.addFeature(feature);
+        feature = testModel.createNewFeature('Test feature 2');
+        testModel.addFeature(feature);
+        feature = testModel.createNewFeature('Test feature 3');
+        testModel.addFeature(feature);
+
+        expect(testModel.features.length).toEqual(3);
+        expect(testModel.features[0].name).toEqual('Test feature 1');
+        expect(testModel.features[1].name).toEqual('Test feature 2');
+        expect(testModel.features[2].name).toEqual('Test feature 3');
+      });
     });
 
     describe('properties', function () {
@@ -49,17 +70,12 @@ define(['models/TestSetModel'], function (TestSetModel) {
         var feat_2 = {stats: {pass: 1, fail: 2, norun: 3, undef: 4}};
         var feat_3 = {stats: {pass: 3, fail: 1, norun: 0, undef: 0}};
 
-        var features = [];
-        features.push(feat_1);
-        var testModel = TestSetModel.create(features);
+        var testModel = TestSetModel.create();
+        testModel.addFeature(feat_1);
         expect(testModel.stats).toEqual({pass: 0, fail: 3, norun: 4, undef: 0});
-
-        features.push(feat_2);
-        testModel = TestSetModel.create(features);
+        testModel.addFeature(feat_2);
         expect(testModel.stats).toEqual({pass: 1, fail: 5, norun: 7, undef: 4});
-
-        features.push(feat_3);
-        testModel = TestSetModel.create(features);
+        testModel.addFeature(feat_3);
         expect(testModel.stats).toEqual({pass: 4, fail: 6, norun: 7, undef: 4});
       });
     });

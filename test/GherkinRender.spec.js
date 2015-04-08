@@ -1,9 +1,11 @@
-define(['text!tmpl/TestScenario.tmpl.html', 'text!tmpl/TestFeature.tmpl.html', 'modules/GherkinRender', 'models/TE_ScenarioModel', 'modules/DataCompile', 'text!testdata/example.json'],
+define(['text!tmpl/TestScenario.tmpl.html', 'text!tmpl/TestFeature.tmpl.html', 'modules/GherkinRender', 'modules/DataCompile', 'models/TestSetModel', 'text!testdata/example.json'],
 function () {
 
   describe('GherkinRender Module definition', function () {
+    var testSet = require('models/TestSetModel').create();
     var DataCompile = require('modules/DataCompile');
-    var featuresSet = DataCompile.compile(require('text!testdata/example.json'));
+    testSet = DataCompile.compile(require('text!testdata/example.json'), testSet);
+    var featuresSet = testSet.features;
     var GherkinRender = require('modules/GherkinRender');
 
     describe('renderScenario(scenario, background, $template) function', function () {

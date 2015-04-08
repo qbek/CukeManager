@@ -65,7 +65,6 @@ define([], function () {
         keyword: key,
         name: name,
       };
-
       if(datatable) { step.dataTable = datatable; }
       this.steps.push(step);
     },

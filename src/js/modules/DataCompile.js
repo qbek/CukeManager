@@ -1,80 +1,20 @@
-define(['models/TE_FeatureModel'], function (Feature) {
+define(function () {
   'use strict';
 
-  function compileData (jsonString) {
-    var features = [];
-    var data = $.parseJSON(jsonString);
-    //loop through features
-    data.forEach(function (featureData) {
-      var backgroundSteps = 0;
-      //read feature data
-      var feature = compileFeatureBaseData(featureData);
-      //loop through scenarios
-      featureData.elements.forEach(function (scenarioData) {
-        if(scenarioData.type === 'background') {
-          if(scenarioData.steps) {
-            backgroundSteps = scenarioData.steps.length;
-            scenarioData.steps.forEach(function (step) {
-              var key = step.keyword.trim();
-              var name = step.name;
-              var rowsDataTable = step.rows;
-              if(rowsDataTable) {
-                var datatable = compileDataTable(rowsDataTable);
-                feature.addBackgroundStep(key, name, datatable);
-              } else {
-                feature.addBackgroundStep(key, name);
-              }
-            });
-          }
-        } else if (scenarioData.type === 'scenario') {
-          var scenarioId = compileScenarioBaseData(feature, scenarioData);
-          //read steps and add to scenario
-          if(scenarioData.steps) {
-            scenarioData.steps.forEach(function (step, index) {
-              //check if step isn't part of backgroud
-              if (index >= backgroundSteps) {
-                var key = step.keyword.trim();
-                var name = step.name;
-                var status = step.result.status;
-                var rowsDataTable = step.rows;
-                if(rowsDataTable) {
-                  var datatable = compileDataTable(rowsDataTable);
-                  feature.addScenarioStep(scenarioId, key, name, status, datatable);
-                } else {
-                  feature.addScenarioStep(scenarioId, key, name, status);
-                }
-              }
-            });
-          }
-        }
+  function _getDataTable(step) {
+    var dataTable = step.rows;
+    var outputDataTable = null;
+    if(dataTable) {
+      outputDataTable = [];
+      dataTable.forEach(function(row) {
+        outputDataTable.push(row.cells);
       });
-      features.push(feature);
-    });
-    return features;
+    }
+    return outputDataTable;
   }
 
-  function compileFeatureBaseData (featureData) {
-    var name = featureData.name;
-    var description = featureData.description;
-    var tags = compileTags(featureData.tags);
-    //create new feature and fill with read data
-    var feature = Feature.create(name);
-    feature.setTags(tags);
-    feature.setDescription(description);
-    return feature;
-  }
-
-  function compileScenarioBaseData(feature, scenarioData) {
-    //read scenario data
-    var name = scenarioData.name;
-    var tags = compileTags(scenarioData.tags);
-    var description = scenarioData.description;
-    //create new scenario and fill with read data
-    var scnId = feature.addScenario(name, description, tags);
-    return scnId;
-  }
-
-  function compileTags (tags) {
+  function _getTags (data) {
+    var tags = data.tags;
     var output = null;
     if (tags) {
       output = [];
@@ -85,23 +25,69 @@ define(['models/TE_FeatureModel'], function (Feature) {
     return output;
   }
 
-  function compileDataTable(data) {
-    var datatable = [];
-    data.forEach(function(row) {
-      datatable.push(row.cells);
-    });
-
-    return datatable;
+  function _getNewFeature (data, testSet) {
+    var feature = testSet.createNewFeature(data.name);
+    feature.setDescription(data.description);
+    feature.setTags(_getTags(data));
+    return feature;
   }
 
+  function _getNewScenario (data, feature) {
+    var scenario = feature.createNewScenario(data.name);
+    scenario.setDescription(data.description);
+    scenario.setTags(_getTags(data));
+    return scenario;
+  }
+
+  function _addStep(stepData, model) {
+    var key = stepData.keyword.trim();
+    var name = stepData.name;
+    var datatable = _getDataTable(stepData);
+    model.addBackgroundStep ?
+      model.addBackgroundStep(key, name, datatable) : model.addStep(key, name, datatable);
+  }
+
+  function _addSteps(stepsData, model, startFromStep) {
+    var count = 0;
+    if(stepsData) {
+      count = stepsData.length;
+      stepsData.forEach(function (stepData, index) {
+        if (index >= startFromStep) {
+            _addStep(stepData, model);
+          }
+      });
+    }
+    return count;
+  }
+
+  function _addScenarios (scenariosData, feature) {
+    var backgroundSteps = 0;
+    scenariosData.forEach(function (scenarioData) {
+      if(scenarioData.type === 'background') {
+        backgroundSteps = _addSteps(scenarioData.steps, feature, 0);
+      } else if (scenarioData.type === 'scenario') {
+        var scenario = _getNewScenario(scenarioData, feature);
+        _addSteps(scenarioData.steps, scenario, backgroundSteps);
+        feature.addScenario(scenario);
+      }
+    });
+  }
+
+  function compileToTestSet (json, testSet) {
+    var featuresData = $.parseJSON(json);
+    //loop through features
+    featuresData.forEach(function (featureData) {
+      var feature = _getNewFeature(featureData, testSet);
+      var scenariosData = featureData.elements;
+      _addScenarios(scenariosData, feature);
+      testSet.addFeature(feature);
+    });
+
+    return testSet;
+  }
 
   return {
-
-    compile: function (filecontent) {
-      var features = compileData(filecontent);
-
-      return features;
-    }
+    compile: compileToTestSet
   };
 
 

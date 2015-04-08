@@ -2,7 +2,7 @@ define(['views/TestExecutionView', 'modules/ExportToCVS', 'modules/DataCompile',
   'use strict';
 
   var TestSetModel = require('models/TestSetModel');
-  var testSet = TestSetModel.create({});
+  var testSet = TestSetModel.create();
   var _TestExecutionView = require('views/TestExecutionView');
 
 
@@ -64,14 +64,12 @@ define(['views/TestExecutionView', 'modules/ExportToCVS', 'modules/DataCompile',
       var storage = $.localStorage;
       if(storage.isSet('testSetProgress')) {
         var data = storage.get('testSetProgress');
-        var FeatureModel = require('models/FeatureModel');
-        var features = [];
-        data.features.forEach(function (featureObj) {
-          var feature = FeatureModel.create(featureObj);
-          features.push(feature);
-        });
-        testSet = TestSetModel.create(features);
+        testSet = TestSetModel.create();
         testSet.setDescription(data.desc);
+        data.features.forEach(function (featureObj) {
+          var feature = testSet.createNewFeature(featureObj);
+          testSet.addFeature(feature);
+        });
         _showFeatures();
       } else {
         alert('There is nothing to load');
@@ -88,8 +86,9 @@ define(['views/TestExecutionView', 'modules/ExportToCVS', 'modules/DataCompile',
       var file = event.target.files[0];
       _readFile(file)
         .done (function (filecontent) {
-          var features = DataCompile.compile(filecontent);
-          testSet = TestSetModel.create(features);
+          testSet = TestSetModel.create();
+          testSet = DataCompile.compile(filecontent, testSet);
+
           var name = prompt('Name of engineer');
           var module = prompt('System/Module under test');
           var version = prompt('Version under test');
