@@ -55,8 +55,13 @@ define(['views/TestExecutionView', 'modules/ExportToCVS', 'modules/DataCompile',
 
     var handleStoreProgressClick = function (event) {
       event.preventDefault();
-      var storage = $.localStorage;
-      storage.set('testSetProgress', testSet);
+      //check if there are features in testSet
+      if(testSet.features.length) {
+        var storage = $.localStorage;
+        storage.set('testSetProgress', testSet);
+      } else {
+        alert('There is nothing to store');
+      }
     };
 
     var handleLoadProgressClick = function (event) {
