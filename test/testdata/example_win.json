@@ -1,0 +1,297 @@
+[
+  {
+    "keyword": "Feature",
+    "name": "Base Scenario features with \"quote\" and <tag>",
+    "line": 2,
+    "description": "!Author: Jakub Szewczyk\n!Reviewer: Jan Kowalski\n\n!Overview:\nThis is short description of feature\nThis short description is multi line\n\n!Preconditions:\n- Global precondition for all scenarios\n- Another global precondition",
+    "tags": [
+      {
+        "name": "@featureTag1",
+        "line": 1
+      },
+      {
+        "name": "@featureTag2",
+        "line": 1
+      }
+    ],
+    "id": "base-scenario-features-with-\"quote\"-and-<tag>",
+    "uri": "exampleFeatures/BaseScenarios.feature",
+    "elements": [
+      {
+        "keyword": "Scenario",
+        "name": "Steps display with \"quote\" and <tag>",
+        "line": 15,
+        "description": "!Overview:\n  An overview of scenario\n  with multi line text\n\n!Preconditions:\n  - set of preconditions\n  - required for scenario\n\n!Pass Criteria:\n  - pass criteria\n  - extra pass criteria",
+        "tags": [
+          {
+            "name": "@base",
+            "line": 14
+          },
+          {
+            "name": "@scenarioTag1",
+            "line": 14
+          }
+        ],
+        "id": "base-scenario-features-with-\"quote\"-and-<tag>;steps-display-with-\"quote\"-and-<tag>",
+        "type": "scenario",
+        "steps": [
+          {
+            "keyword": "Given ",
+            "name": "First given step with \"quote\" and <tag>",
+            "line": 28,
+            "match": {
+              "location": "exampleFeatures/BaseScenarios.feature:28"
+            },
+            "result": {
+              "status": "undefined",
+              "duration": 413879
+            }
+          },
+          {
+            "keyword": "And ",
+            "name": "Second given step",
+            "line": 29,
+            "match": {
+              "location": "exampleFeatures/BaseScenarios.feature:29"
+            },
+            "result": {
+              "status": "undefined",
+              "duration": 294869
+            }
+          },
+          {
+            "keyword": "When ",
+            "name": "First when step",
+            "line": 30,
+            "match": {
+              "location": "exampleFeatures/BaseScenarios.feature:30"
+            },
+            "result": {
+              "status": "undefined",
+              "duration": 295080
+            }
+          },
+          {
+            "keyword": "And ",
+            "name": "Second when step",
+            "line": 31,
+            "match": {
+              "location": "exampleFeatures/BaseScenarios.feature:31"
+            },
+            "result": {
+              "status": "undefined",
+              "duration": 319104
+            }
+          },
+          {
+            "keyword": "Then ",
+            "name": "First then step",
+            "line": 32,
+            "match": {
+              "location": "exampleFeatures/BaseScenarios.feature:32"
+            },
+            "result": {
+              "status": "undefined",
+              "duration": 292006
+            }
+          },
+          {
+            "keyword": "And ",
+            "name": "Second then step",
+            "line": 33,
+            "match": {
+              "location": "exampleFeatures/BaseScenarios.feature:33"
+            },
+            "result": {
+              "status": "undefined",
+              "duration": 289213
+            }
+          }
+        ]
+      },
+      {
+        "keyword": "Scenario",
+        "name": "Scenario without steps",
+        "line": 36,
+        "description": "!Overview: An overview of second scenario\n\n!Preconditions:\n  - set of preconditions for second scenario\n\n!Pass Criteria:\n  - some pass criteria",
+        "tags": [
+          {
+            "name": "@base",
+            "line": 35
+          },
+          {
+            "name": "@scenarioTag2",
+            "line": 35
+          }
+        ],
+        "id": "base-scenario-features-with-\"quote\"-and-<tag>;scenario-without-steps",
+        "type": "scenario"
+      }
+    ]
+  },
+  {
+    "keyword": "Feature",
+    "name": "Data type examples",
+    "line": 1,
+    "description": "",
+    "id": "data-type-examples",
+    "uri": "exampleFeatures/DataTypeExamples.feature",
+    "elements": [
+      {
+        "keyword": "Background",
+        "name": "",
+        "line": 3,
+        "description": "",
+        "type": "background",
+        "steps": [
+          {
+            "keyword": "Given ",
+            "name": "First background step",
+            "line": 5,
+            "match": {
+              "location": "exampleFeatures/DataTypeExamples.feature:5"
+            },
+            "result": {
+              "status": "undefined",
+              "duration": 274476
+            }
+          },
+          {
+            "keyword": "And ",
+            "name": "Last background step",
+            "line": 6,
+            "match": {
+              "location": "exampleFeatures/DataTypeExamples.feature:6"
+            },
+            "result": {
+              "status": "undefined",
+              "duration": 245422
+            }
+          }
+        ]
+      },
+      {
+        "keyword": "Scenario",
+        "name": "Inline variables",
+        "line": 8,
+        "description": "",
+        "id": "data-type-examples;inline-variables",
+        "type": "scenario",
+        "steps": [
+          {
+            "keyword": "Given ",
+            "name": "When define \"inline\" variable",
+            "line": 10,
+            "match": {
+              "location": "exampleFeatures/DataTypeExamples.feature:10"
+            },
+            "result": {
+              "status": "undefined",
+              "duration": 264209
+            }
+          },
+          {
+            "keyword": "When ",
+            "name": "Define \"one\", \"two\" inline variables and even \"three\"",
+            "line": 11,
+            "match": {
+              "location": "exampleFeatures/DataTypeExamples.feature:11"
+            },
+            "result": {
+              "status": "undefined",
+              "duration": 299549
+            }
+          },
+          {
+            "keyword": "Then ",
+            "name": "Test is ok",
+            "line": 12,
+            "match": {
+              "location": "exampleFeatures/DataTypeExamples.feature:12"
+            },
+            "result": {
+              "status": "undefined",
+              "duration": 260019
+            }
+          }
+        ]
+      },
+      {
+        "keyword": "Scenario",
+        "name": "Data tables",
+        "line": 14,
+        "description": "",
+        "id": "data-type-examples;data-tables",
+        "type": "scenario",
+        "steps": [
+          {
+            "keyword": "Given ",
+            "name": "Data table",
+            "line": 16,
+            "rows": [
+              {
+                "cells": [
+                  "datakey",
+                  "datavalue"
+                ],
+                "line": 17
+              },
+              {
+                "cells": [
+                  "key1",
+                  "value1"
+                ],
+                "line": 18
+              },
+              {
+                "cells": [
+                  "key2",
+                  "value2"
+                ],
+                "line": 19
+              },
+              {
+                "cells": [
+                  "key3",
+                  "<value3>"
+                ],
+                "line": 20
+              }
+            ],
+            "match": {
+              "location": "exampleFeatures/DataTypeExamples.feature:16"
+            },
+            "result": {
+              "status": "undefined",
+              "duration": 1846044
+            }
+          },
+          {
+            "keyword": "When ",
+            "name": "User reads this scenario",
+            "line": 22,
+            "match": {
+              "location": "exampleFeatures/DataTypeExamples.feature:22"
+            },
+            "result": {
+              "status": "undefined",
+              "duration": 281600
+            }
+          },
+          {
+            "keyword": "Then ",
+            "name": "Data table is correctly rendered",
+            "line": 23,
+            "match": {
+              "location": "exampleFeatures/DataTypeExamples.feature:23"
+            },
+            "result": {
+              "status": "undefined",
+              "duration": 280204
+            }
+          }
+        ]
+      }
+    ]
+  }
+]
