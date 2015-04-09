@@ -39,6 +39,10 @@ define(function () {
     return scenario;
   }
 
+  function _getFirstStepName (scenarioData) {
+    return scenarioData.steps ? scenarioData.steps[0].name : null;
+  }
+
   function _addStep(stepData, model) {
     var key = stepData.keyword.trim();
     var name = stepData.name;
@@ -62,12 +66,20 @@ define(function () {
 
   function _addScenarios (scenariosData, feature) {
     var backgroundSteps = 0;
+    //to store first background step - there is difference in generating json file on Windows na Linux
+    var firstBackgroundStepName = null;
     scenariosData.forEach(function (scenarioData) {
       if(scenarioData.type === 'background') {
         backgroundSteps = _addSteps(scenarioData.steps, feature, 0);
+        firstBackgroundStepName = _getFirstStepName(scenarioData);
       } else if (scenarioData.type === 'scenario') {
         var scenario = _getNewScenario(scenarioData, feature);
-        _addSteps(scenarioData.steps, scenario, backgroundSteps);
+        var firstStepName = _getFirstStepName(scenarioData);
+        if(firstStepName == firstBackgroundStepName) {
+          _addSteps(scenarioData.steps, scenario, backgroundSteps);
+        } else {
+          _addSteps(scenarioData.steps, scenario, 0);
+        }
         feature.addScenario(scenario);
       }
     });
