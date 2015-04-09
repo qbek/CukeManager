@@ -1,4 +1,4 @@
-define(['modules/DataCompile', 'models/TestSetModel', 'text!testdata/example.json'], function (DataCompile, TestSet, json) {
+define(['modules/DataCompile', 'models/TestSetModel', 'text!testdata/example.json', 'text!testdata/example_win.json'], function (DataCompile, TestSet, json, json_win) {
   'use strict';
   describe('DataCompile Module', function () {
 
@@ -36,8 +36,22 @@ define(['modules/DataCompile', 'models/TestSetModel', 'text!testdata/example.jso
 
         //from scenarios background steps are cut out
         expect(featureTwo.scenarios[0].steps.length).toBe(3);
-
       });
+
+      it('reads feature background steps - Windows case (no repeat in scenario)', function () {
+        var testSet_win = TestSet.create();
+        testSet_win = DataCompile.compile(json_win, testSet_win);
+        var featureTwo_win = testSet_win.features[1];
+
+        expect(featureTwo_win.background.length).toBe(2);
+        expect(featureTwo_win.background[0]).toEqual({keyword: 'Given', name: 'First background step'});
+        expect(featureTwo_win.background[1]).toEqual({keyword: 'And', name: 'Last background step'});
+
+        //from scenarios background steps are cut out
+        expect(featureTwo_win.scenarios[0].steps.length).toBe(3);
+      });
+
+
 
       it('reads scenario names', function () {
         //check if all Scenarios were compiled
