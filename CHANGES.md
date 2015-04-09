@@ -1,5 +1,23 @@
 # CukeManager - Release notes
 
+## version 0.1.3
+
+**New features:**
+
+- 'Store progress' doesn't work when nothing is loaded
+- On 'Load' json user is prompted for:
+	- Executing engineer name
+	- Version under test
+	- Module under test
+	- Test type (@smoke, @base, @performance...)
+- Exported CVS has file name generated on above data (TestResutls-version_module-type.cvs)
+- Exported CVS contains above data
+- Exported CVS contains statistics (Pass/Fail/No run counts)
+
+**Fixed errors:**
+
+- Fix issue #5: json generated on Windows doesn't merge scenario steps with background steps
+
 ## version 0.1.2
 
 **New features:**
