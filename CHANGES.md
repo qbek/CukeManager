@@ -1,5 +1,11 @@
 # CukeManager - Release notes
 
+## version 0.1.4
+
+**Fixed errors:**
+
+- Fix issue #8: No data table in Background section
+
 ## version 0.1.3
 
 **New features:**
