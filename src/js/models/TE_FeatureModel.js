@@ -108,7 +108,7 @@ define(['models/TE_ScenarioModel', 'PrototypeExtends'], function (Scenario) {
         name: name
       };
       if(datatable) {
-        step.datatable = datatable;
+        step.dataTable = datatable;
       }
       if(this.background === null) {
         this.background = [];
