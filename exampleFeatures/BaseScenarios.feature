@@ -41,3 +41,17 @@ Feature: Base Scenario features with "quote" and <tag>
 
     !Pass Criteria:
       - some pass criteria
+
+    Given test
+
+  Scenario Outline: Scenario outline example
+  
+    Given Given with <inline>
+    When When with "<quoted>"
+    Then Then with datatable
+      | <table> |
+  
+    Examples:
+      | inline | quoted | table | description |
+      | 1      | 2      | 3     | numbers     |
+      | one    | two    | three | strings     |

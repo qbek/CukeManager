@@ -1,9 +1,11 @@
 [
   {
+    "uri": "exampleFeatures/BaseScenarios.feature",
+    "id": "base-scenario-features-with-\"quote\"-and-<tag>",
     "keyword": "Feature",
     "name": "Base Scenario features with \"quote\" and <tag>",
+    "description": "  !Author: Jakub Szewczyk\n  !Reviewer: Jan Kowalski\n\n  !Overview:\n  This is short description of feature\n  This short description is multi line\n\n  !Preconditions:\n  - Global precondition for all scenarios\n  - Another global precondition",
     "line": 2,
-    "description": "!Author: Jakub Szewczyk\n!Reviewer: Jan Kowalski\n\n!Overview:\nThis is short description of feature\nThis short description is multi line\n\n!Preconditions:\n- Global precondition for all scenarios\n- Another global precondition",
     "tags": [
       {
         "name": "@featureTag1",
@@ -14,15 +16,23 @@
         "line": 1
       }
     ],
-    "id": "base-scenario-features-with-\"quote\"-and-<tag>",
-    "uri": "exampleFeatures/BaseScenarios.feature",
     "elements": [
       {
+        "id": "base-scenario-features-with-\"quote\"-and-<tag>;steps-display-with-\"quote\"-and-<tag>",
         "keyword": "Scenario",
         "name": "Steps display with \"quote\" and <tag>",
+        "description": "    !Overview:\n      An overview of scenario\n      with multi line text\n\n    !Preconditions:\n      - set of preconditions\n      - required for scenario\n\n    !Pass Criteria:\n      - pass criteria\n      - extra pass criteria",
         "line": 15,
-        "description": "!Overview:\n  An overview of scenario\n  with multi line text\n\n!Preconditions:\n  - set of preconditions\n  - required for scenario\n\n!Pass Criteria:\n  - pass criteria\n  - extra pass criteria",
+        "type": "scenario",
         "tags": [
+          {
+            "name": "@featureTag1",
+            "line": 1
+          },
+          {
+            "name": "@featureTag2",
+            "line": 1
+          },
           {
             "name": "@base",
             "line": 14
@@ -32,8 +42,6 @@
             "line": 14
           }
         ],
-        "id": "base-scenario-features-with-\"quote\"-and-<tag>;steps-display-with-\"quote\"-and-<tag>",
-        "type": "scenario",
         "steps": [
           {
             "keyword": "Given ",
@@ -43,8 +51,7 @@
               "location": "exampleFeatures/BaseScenarios.feature:28"
             },
             "result": {
-              "status": "undefined",
-              "duration": 413879
+              "status": "undefined"
             }
           },
           {
@@ -55,8 +62,7 @@
               "location": "exampleFeatures/BaseScenarios.feature:29"
             },
             "result": {
-              "status": "undefined",
-              "duration": 294869
+              "status": "undefined"
             }
           },
           {
@@ -67,8 +73,7 @@
               "location": "exampleFeatures/BaseScenarios.feature:30"
             },
             "result": {
-              "status": "undefined",
-              "duration": 295080
+              "status": "undefined"
             }
           },
           {
@@ -79,8 +84,7 @@
               "location": "exampleFeatures/BaseScenarios.feature:31"
             },
             "result": {
-              "status": "undefined",
-              "duration": 319104
+              "status": "undefined"
             }
           },
           {
@@ -91,8 +95,7 @@
               "location": "exampleFeatures/BaseScenarios.feature:32"
             },
             "result": {
-              "status": "undefined",
-              "duration": 292006
+              "status": "undefined"
             }
           },
           {
@@ -103,18 +106,27 @@
               "location": "exampleFeatures/BaseScenarios.feature:33"
             },
             "result": {
-              "status": "undefined",
-              "duration": 289213
+              "status": "undefined"
             }
           }
         ]
       },
       {
+        "id": "base-scenario-features-with-\"quote\"-and-<tag>;scenario-without-steps",
         "keyword": "Scenario",
         "name": "Scenario without steps",
+        "description": "    !Overview: An overview of second scenario\n\n    !Preconditions:\n      - set of preconditions for second scenario\n\n    !Pass Criteria:\n      - some pass criteria",
         "line": 36,
-        "description": "!Overview: An overview of second scenario\n\n!Preconditions:\n  - set of preconditions for second scenario\n\n!Pass Criteria:\n  - some pass criteria",
+        "type": "scenario",
         "tags": [
+          {
+            "name": "@featureTag1",
+            "line": 1
+          },
+          {
+            "name": "@featureTag2",
+            "line": 1
+          },
           {
             "name": "@base",
             "line": 35
@@ -124,218 +136,348 @@
             "line": 35
           }
         ],
-        "id": "base-scenario-features-with-\"quote\"-and-<tag>;scenario-without-steps",
-        "type": "scenario"
-      }
-    ]
-  },
-  {
-    "keyword": "Feature",
-    "name": "Data type examples",
-    "line": 1,
-    "description": "",
-    "id": "data-type-examples",
-    "uri": "exampleFeatures/DataTypeExamples.feature",
-    "elements": [
-      {
-        "keyword": "Background",
-        "name": "",
-        "line": 3,
-        "description": "",
-        "type": "background",
         "steps": [
           {
             "keyword": "Given ",
-            "name": "First background step",
-            "line": 5,
+            "name": "test",
+            "line": 45,
             "match": {
-              "location": "exampleFeatures/DataTypeExamples.feature:5"
+              "location": "exampleFeatures/BaseScenarios.feature:45"
             },
             "result": {
-              "status": "undefined",
-              "duration": 274476
-            }
-          },
-          {
-            "keyword": "And ",
-            "name": "Last background step",
-            "line": 6,
-            "match": {
-              "location": "exampleFeatures/DataTypeExamples.feature:6"
-            },
-            "result": {
-              "status": "undefined",
-              "duration": 245422
+              "status": "undefined"
             }
           }
         ]
       },
       {
-        "keyword": "Scenario",
-        "name": "Inline variables",
-        "line": 8,
+        "id": "base-scenario-features-with-\"quote\"-and-<tag>;scenario-outline-example;;2",
+        "keyword": "Scenario Outline",
+        "name": "Scenario outline example",
         "description": "",
-        "id": "data-type-examples;inline-variables",
+        "line": 56,
         "type": "scenario",
+        "tags": [
+          {
+            "name": "@featureTag1",
+            "line": 1
+          },
+          {
+            "name": "@featureTag2",
+            "line": 1
+          }
+        ],
         "steps": [
           {
             "keyword": "Given ",
-            "name": "First background step",
+            "name": "Given with 1",
+            "line": 56,
+            "match": {
+              "location": "exampleFeatures/BaseScenarios.feature:56"
+            },
+            "result": {
+              "status": "undefined"
+            }
+          },
+          {
+            "keyword": "When ",
+            "name": "When with \"2\"",
+            "line": 56,
+            "match": {
+              "location": "exampleFeatures/BaseScenarios.feature:56"
+            },
+            "result": {
+              "status": "undefined"
+            }
+          },
+          {
+            "keyword": "Then ",
+            "name": "Then with datatable",
+            "line": 56,
+            "rows": [
+              {
+                "cells": [
+                  "3"
+                ]
+              }
+            ],
+            "match": {
+              "location": "exampleFeatures/BaseScenarios.feature:56"
+            },
+            "result": {
+              "status": "undefined"
+            }
+          }
+        ]
+      },
+      {
+        "id": "base-scenario-features-with-\"quote\"-and-<tag>;scenario-outline-example;;3",
+        "keyword": "Scenario Outline",
+        "name": "Scenario outline example",
+        "description": "",
+        "line": 57,
+        "type": "scenario",
+        "tags": [
+          {
+            "name": "@featureTag1",
+            "line": 1
+          },
+          {
+            "name": "@featureTag2",
+            "line": 1
+          }
+        ],
+        "steps": [
+          {
+            "keyword": "Given ",
+            "name": "Given with one",
+            "line": 57,
+            "match": {
+              "location": "exampleFeatures/BaseScenarios.feature:57"
+            },
+            "result": {
+              "status": "undefined"
+            }
+          },
+          {
+            "keyword": "When ",
+            "name": "When with \"two\"",
+            "line": 57,
+            "match": {
+              "location": "exampleFeatures/BaseScenarios.feature:57"
+            },
+            "result": {
+              "status": "undefined"
+            }
+          },
+          {
+            "keyword": "Then ",
+            "name": "Then with datatable",
+            "line": 57,
+            "rows": [
+              {
+                "cells": [
+                  "three"
+                ]
+              }
+            ],
+            "match": {
+              "location": "exampleFeatures/BaseScenarios.feature:57"
+            },
+            "result": {
+              "status": "undefined"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "uri": "exampleFeatures/DataTypeExamples.feature",
+    "id": "data-type-examples",
+    "keyword": "Feature",
+    "name": "Data type examples",
+    "description": "",
+    "line": 1,
+    "elements": [
+      {
+        "keyword": "Background",
+        "name": "",
+        "description": "",
+        "line": 3,
+        "type": "background",
+        "steps": [
+          {
+            "keyword": "Given ",
+            "name": "First background step with datatable",
             "line": 5,
+            "rows": [
+              {
+                "cells": [
+                  "data",
+                  "table"
+                ]
+              },
+              {
+                "cells": [
+                  "in",
+                  "background"
+                ]
+              }
+            ],
             "match": {
               "location": "exampleFeatures/DataTypeExamples.feature:5"
             },
             "result": {
-              "status": "undefined",
-              "duration": 165943
+              "status": "undefined"
             }
           },
           {
             "keyword": "And ",
             "name": "Last background step",
-            "line": 6,
+            "line": 8,
             "match": {
-              "location": "exampleFeatures/DataTypeExamples.feature:6"
+              "location": "exampleFeatures/DataTypeExamples.feature:8"
             },
             "result": {
-              "status": "undefined",
-              "duration": 200514
+              "status": "undefined"
             }
-          },
+          }
+        ]
+      },
+      {
+        "id": "data-type-examples;inline-variables",
+        "keyword": "Scenario",
+        "name": "Inline variables",
+        "description": "",
+        "line": 10,
+        "type": "scenario",
+        "steps": [
           {
             "keyword": "Given ",
             "name": "When define \"inline\" variable",
-            "line": 10,
-            "match": {
-              "location": "exampleFeatures/DataTypeExamples.feature:10"
-            },
-            "result": {
-              "status": "undefined",
-              "duration": 264209
-            }
-          },
-          {
-            "keyword": "When ",
-            "name": "Define \"one\", \"two\" inline variables and even \"three\"",
-            "line": 11,
-            "match": {
-              "location": "exampleFeatures/DataTypeExamples.feature:11"
-            },
-            "result": {
-              "status": "undefined",
-              "duration": 299549
-            }
-          },
-          {
-            "keyword": "Then ",
-            "name": "Test is ok",
             "line": 12,
             "match": {
               "location": "exampleFeatures/DataTypeExamples.feature:12"
             },
             "result": {
-              "status": "undefined",
-              "duration": 260019
+              "status": "undefined"
+            }
+          },
+          {
+            "keyword": "When ",
+            "name": "Define \"one\", \"two\" inline variables and even \"three\"",
+            "line": 13,
+            "match": {
+              "location": "exampleFeatures/DataTypeExamples.feature:13"
+            },
+            "result": {
+              "status": "undefined"
+            }
+          },
+          {
+            "keyword": "Then ",
+            "name": "Test is ok",
+            "line": 14,
+            "match": {
+              "location": "exampleFeatures/DataTypeExamples.feature:14"
+            },
+            "result": {
+              "status": "undefined"
             }
           }
         ]
       },
       {
-        "keyword": "Scenario",
-        "name": "Data tables",
-        "line": 14,
+        "keyword": "Background",
+        "name": "",
         "description": "",
-        "id": "data-type-examples;data-tables",
-        "type": "scenario",
+        "line": 3,
+        "type": "background",
         "steps": [
           {
             "keyword": "Given ",
-            "name": "First background step",
+            "name": "First background step with datatable",
             "line": 5,
+            "rows": [
+              {
+                "cells": [
+                  "data",
+                  "table"
+                ]
+              },
+              {
+                "cells": [
+                  "in",
+                  "background"
+                ]
+              }
+            ],
             "match": {
               "location": "exampleFeatures/DataTypeExamples.feature:5"
             },
             "result": {
-              "status": "undefined",
-              "duration": 266375
+              "status": "undefined"
             }
           },
           {
             "keyword": "And ",
             "name": "Last background step",
-            "line": 6,
+            "line": 8,
             "match": {
-              "location": "exampleFeatures/DataTypeExamples.feature:6"
+              "location": "exampleFeatures/DataTypeExamples.feature:8"
             },
             "result": {
-              "status": "undefined",
-              "duration": 290819
+              "status": "undefined"
             }
-          },
+          }
+        ]
+      },
+      {
+        "id": "data-type-examples;data-tables",
+        "keyword": "Scenario",
+        "name": "Data tables",
+        "description": "",
+        "line": 16,
+        "type": "scenario",
+        "steps": [
           {
             "keyword": "Given ",
             "name": "Data table",
-            "line": 16,
+            "line": 18,
             "rows": [
               {
                 "cells": [
                   "datakey",
                   "datavalue"
-                ],
-                "line": 17
+                ]
               },
               {
                 "cells": [
                   "key1",
                   "value1"
-                ],
-                "line": 18
+                ]
               },
               {
                 "cells": [
                   "key2",
                   "value2"
-                ],
-                "line": 19
+                ]
               },
               {
                 "cells": [
                   "key3",
                   "<value3>"
-                ],
-                "line": 20
+                ]
               }
             ],
             "match": {
-              "location": "exampleFeatures/DataTypeExamples.feature:16"
+              "location": "exampleFeatures/DataTypeExamples.feature:18"
             },
             "result": {
-              "status": "undefined",
-              "duration": 1846044
+              "status": "undefined"
             }
           },
           {
             "keyword": "When ",
             "name": "User reads this scenario",
-            "line": 22,
+            "line": 24,
             "match": {
-              "location": "exampleFeatures/DataTypeExamples.feature:22"
+              "location": "exampleFeatures/DataTypeExamples.feature:24"
             },
             "result": {
-              "status": "undefined",
-              "duration": 281600
+              "status": "undefined"
             }
           },
           {
             "keyword": "Then ",
             "name": "Data table is correctly rendered",
-            "line": 23,
+            "line": 25,
             "match": {
-              "location": "exampleFeatures/DataTypeExamples.feature:23"
+              "location": "exampleFeatures/DataTypeExamples.feature:25"
             },
             "result": {
-              "status": "undefined",
-              "duration": 280204
+              "status": "undefined"
             }
           }
         ]

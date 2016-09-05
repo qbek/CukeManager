@@ -31,7 +31,7 @@ define(['modules/DataCompile', 'models/TestSetModel', 'text!testdata/example.jso
 
       it('reads feature background steps', function () {
         expect(featureTwo.background.length).toBe(2);
-        expect(featureTwo.background[0]).toEqual({keyword: 'Given', name: 'First background step'});
+        expect(featureTwo.background[0]).toEqual({ keyword : 'Given', name : 'First background step with datatable', dataTable : [ [ 'data', 'table' ], [ 'in', 'background' ] ] });
         expect(featureTwo.background[1]).toEqual({keyword: 'And', name: 'Last background step'});
 
         //from scenarios background steps are cut out
@@ -55,7 +55,7 @@ define(['modules/DataCompile', 'models/TestSetModel', 'text!testdata/example.jso
 
       it('reads scenario names', function () {
         //check if all Scenarios were compiled
-        expect(featureOne.scenarios.length).toBe(2);
+        expect(featureOne.scenarios.length).toBe(4);
         expect(featureTwo.scenarios.length).toBe(2);
         //check scenario names
         var scenarios = featureOne.scenarios;
@@ -66,8 +66,8 @@ define(['modules/DataCompile', 'models/TestSetModel', 'text!testdata/example.jso
       it('reads scenario tags', function () {
         //check tags of scenarioOne of featureOne
         var scenario = featureOne.scenarios[0];
-        expect(scenario.tags.length).toBe(2);
-        expect(scenario.tags).toEqual(['@base', '@scenarioTag1']);
+        expect(scenario.tags.length).toBe(4);
+        expect(scenario.tags).toEqual([ '@featureTag1', '@featureTag2', '@base', '@scenarioTag1' ]);
 
         //check tags of scenarioTwo of featureTwo
         scenario = featureTwo.scenarios[1];
@@ -92,9 +92,6 @@ define(['modules/DataCompile', 'models/TestSetModel', 'text!testdata/example.jso
         expect(scenario.steps[5].name).toEqual(testData[0].elements[0].steps[5].name);
         expect(scenario.steps[5].keyword).toEqual(testData[0].elements[0].steps[5].keyword.trim());
 
-        //check steps of 'Scenario: Scenario without steps'
-        scenario = featureOne.scenarios[1];
-        expect(scenario.steps).toEqual([]);
       });
 
       it('reads data tables attached to steps', function () {

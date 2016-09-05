@@ -2,7 +2,9 @@ Feature: Data type examples
 
   Background:
 
-    Given First background step
+    Given First background step with datatable
+     | data | table      |
+     | in   | background |
     And Last background step
 
   Scenario: Inline variables

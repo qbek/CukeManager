@@ -209,7 +209,7 @@ function (FeatureModel) {
         feature.addBackgroundStep(testStepNameStr2, testStepStr2, testDataTable);
         expect(feature.background[1]).toEqual({keyword:testStepNameStr2,
                                                name:testStepStr2,
-                                               datatable: testDataTable});
+                                               dataTable: testDataTable});
       });
 
       it('createNewScenario(name) - creates and returns new scenario model to fill with data', function () {

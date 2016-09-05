@@ -21,7 +21,7 @@ function () {
         var scenario = featuresSet[0].scenarios[0];
         var $render = GherkinRender.renderScenario(scenario, null, $scenarioTmpl);
         expect($('[data-gr="scn-name"]', $render)).toContainText(scenario.name);
-      });
+      }); 
 
       // it('fills data-gr="scn-status" with scenario status', function () {
       //   var scenario = featuresSet[0].scenarios[0];
