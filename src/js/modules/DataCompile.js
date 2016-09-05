@@ -70,8 +70,10 @@ define(function () {
     var firstBackgroundStepName = null;
     scenariosData.forEach(function (scenarioData) {
       if(scenarioData.type === 'background') {
-        backgroundSteps = _addSteps(scenarioData.steps, feature, 0);
-        firstBackgroundStepName = _getFirstStepName(scenarioData);
+        if(feature.background == null) {
+          backgroundSteps = _addSteps(scenarioData.steps, feature, 0);
+          firstBackgroundStepName = _getFirstStepName(scenarioData);
+        }
       } else if (scenarioData.type === 'scenario') {
         var scenario = _getNewScenario(scenarioData, feature);
         var firstStepName = _getFirstStepName(scenarioData);
